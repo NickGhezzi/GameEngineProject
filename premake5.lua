@@ -32,6 +32,15 @@ project "Game"
         ".gitignore",
     }
 
+	vpaths{
+		[""] = {
+			"*.*",
+		},
+		["Source*"] = {
+			"Game/Source",
+		}, 
+	}
+
     links {
         "Framework",
         "opengl32",
@@ -51,6 +60,8 @@ project "Framework"
 
     includedirs {
         "Libraries/Framework/Source",
+		"Libraries/Framework/Libraries/Box2D/include",
+		"Libraries/Framework/Libraries/Box2D/src",
     }
 
     files {
@@ -60,6 +71,8 @@ project "Framework"
         "Libraries/Framework/Libraries/imgui/*.h",
         "Libraries/Framework/Libraries/LodePNG/lodepng.cpp",
         "Libraries/Framework/Libraries/LodePNG/lodepng.h",
+		"Libraries/Framework/Libraries/Box2D/**.cpp",
+		"Libraries/Framework/Libraries/Box2D/**.h",
     }
 
    filter "configurations:Debug"

@@ -5,11 +5,14 @@
 
 class Mesh;
 class PlayerController;
+class PhysicsBody;
 
 class Player : public GameObject
 {
 protected:
     PlayerController* m_pController;
+    fw::PhysicsBody* m_pPhysicsBody;
+
     int m_PlayerNumber;
 
 public:

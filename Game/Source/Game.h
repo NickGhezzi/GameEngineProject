@@ -8,6 +8,7 @@ class ImGuiManager;
 class Mesh;
 class Player;
 class PlayerController;
+class PhysicsWorld;
 
 class Game : public fw::GameCore
 {
@@ -23,6 +24,8 @@ protected:
 
     PlayerController* m_pController;
 
+    fw::PhysicsWorld* m_pPhysicsWorld;
+
 public:
     Game(fw::Framework* pFramework);
     virtual ~Game();
@@ -31,6 +34,8 @@ public:
     virtual void OnEvent(fw::Event* pEvent) override;
     virtual void Update(float deltaTime) override;
     virtual void Draw() override;
+
+    fw::PhysicsWorld* GetPhysicsWorld();
 };
 
 #endif //__Game_H__

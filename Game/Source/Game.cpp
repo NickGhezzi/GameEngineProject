@@ -22,6 +22,8 @@ Game::Game(Framework* pFramework)
     m_pCamera = nullptr;
 
     m_pController = new PlayerController();
+
+    m_pPhysicsWorld = nullptr;
 }
 
 Game::~Game()
@@ -38,6 +40,8 @@ Game::~Game()
     delete m_pShaderTexture;
 
     delete m_pImGuiManager;
+
+    delete m_pPhysicsWorld;
 }
 
 void Game::Init()
@@ -57,6 +61,9 @@ void Game::Init()
 
     // Load our textures.
     m_pTexture = new Texture( "Data/Textures/Megaman.png" );
+
+    //Create physics world
+    m_pPhysicsWorld = new fw::PhysicsWorld2D;
 
     // Create our GameObjects.
     m_pPlayer = new Player( this, m_pMeshBox, m_pShaderTexture, m_pTexture, vec2( 0, 0 ), 0, m_pController );
@@ -78,9 +85,14 @@ void Game::Update(float deltaTime)
     if( m_pFramework->IsKeyDown( VK_F2 ) )
         wglSwapInterval( 1 );
 
+    //update physicsworld
+    m_pPhysicsWorld->Update(deltaTime);
+
     // Update objects.
     m_pPlayer->Update( deltaTime );
     m_pCamera->Update( deltaTime );
+
+   
 }
 
 void Game::Draw()
@@ -97,4 +109,9 @@ void Game::Draw()
     m_pPlayer->Draw( m_pCamera );
 
     m_pImGuiManager->EndFrame();
+}
+
+fw::PhysicsWorld* Game::GetPhysicsWorld()
+{
+    return m_pPhysicsWorld;
 }

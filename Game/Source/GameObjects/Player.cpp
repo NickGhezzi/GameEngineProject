@@ -13,10 +13,13 @@ Player::Player(Game* pGame, Mesh* pMesh, fw::ShaderProgram* pShader, fw::Texture
 , m_PlayerNumber( playerNum )
 , m_pController( pController )
 {
+    //void CreateBody(Vector2 pos, float angle, bool isDynamic, void* pUserData);
+    m_pPhysicsBody = pGame->GetPhysicsWorld()->CreateBody(position, 0, true, this);
 }
     
 Player::~Player()
 {
+    delete m_pPhysicsBody;
 }
 
 void Player::Update(float deltaTime)
