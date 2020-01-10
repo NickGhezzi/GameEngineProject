@@ -1,5 +1,4 @@
 #pragma once
-#include "PhysicsWorld.h"
 
 class b2World;
 
@@ -14,8 +13,6 @@ namespace fw
         virtual ~PhysicsWorld2D();
 
         virtual void Update(float deltaTime) override;
-        
-
 
         // Inherited via PhysicsWorld
         virtual PhysicsBody* CreateBody(Vector2 pos, float angle, bool isDynamic, void* pUserData) override;

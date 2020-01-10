@@ -5,7 +5,6 @@
 
 class Mesh;
 class PlayerController;
-class PhysicsBody;
 
 class Player : public GameObject
 {
