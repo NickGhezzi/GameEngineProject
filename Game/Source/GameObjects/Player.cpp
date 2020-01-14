@@ -8,18 +8,18 @@
 
 using namespace fw;
 
-Player::Player(Game* pGame, Mesh* pMesh, fw::ShaderProgram* pShader, fw::Texture* pTexture, vec2 position, int playerNum, PlayerController* pController)
-: GameObject( pGame, pMesh, pShader, pTexture, position )
+Player::Player(BaseScene* m_pScene, Mesh* pMesh, fw::ShaderProgram* pShader, fw::Texture* pTexture, vec2 position, int playerNum, PlayerController* pController)
+: GameObject(m_pScene, pMesh, pShader, pTexture, position )
 , m_PlayerNumber( playerNum )
 , m_pController( pController )
 {
     //void CreateBody(Vector2 pos, float angle, bool isDynamic, void* pUserData);
-    m_pPhysicsBody = pGame->GetPhysicsWorld()->CreateBody(position, 0, true, this);
+    //m_pPhysicsBody = pGame->GetPhysicsWorld()->CreateBody(position, 0, true, this);
 }
     
 Player::~Player()
 {
-    delete m_pPhysicsBody;
+    //delete m_pPhysicsBody;
 }
 
 void Player::Update(float deltaTime)

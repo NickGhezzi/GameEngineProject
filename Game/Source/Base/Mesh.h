@@ -6,6 +6,8 @@
 class fw::ShaderProgram;
 class Camera;
 
+//TODO have draw take in a material
+
 class Mesh
 {
 protected:

@@ -9,20 +9,24 @@ class Mesh;
 class Player;
 class PlayerController;
 class PhysicsWorld;
+class BaseScene;
+class ResourceManager;
 
 class Game : public fw::GameCore
 {
 protected:
     ImGuiManager* m_pImGuiManager;
 
-    fw::ShaderProgram* m_pShaderTexture;
-    Mesh* m_pMeshBox;
-    fw::Texture* m_pTexture;
+    BaseScene* m_pScenes;
+
+    ResourceManager* m_pResourceManager;
 
     Player* m_pPlayer;
     Camera* m_pCamera;
 
-    PlayerController* m_pController;
+    fw::ShaderProgram* m_pShaderTexture;
+    Mesh* m_pMeshBox;
+    fw::Texture* m_pTexture;
 
     fw::PhysicsWorld* m_pPhysicsWorld;
 
@@ -35,7 +39,11 @@ public:
     virtual void Update(float deltaTime) override;
     virtual void Draw() override;
 
+    ResourceManager* GetResourceManager();
+
     fw::PhysicsWorld* GetPhysicsWorld();
+
+    PlayerController* m_pController;
 };
 
 #endif //__Game_H__

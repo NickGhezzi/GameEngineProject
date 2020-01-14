@@ -6,6 +6,9 @@
 #include "GameObjects/Camera.h"
 #include "GameObjects/Player.h"
 #include "GameObjects/PlayerController.h"
+#include "BaseScene.h"
+#include "SceneCube.h"
+#include "ResourceManager.h"
 
 using namespace fw;
 
@@ -24,6 +27,9 @@ Game::Game(Framework* pFramework)
     m_pController = new PlayerController();
 
     m_pPhysicsWorld = nullptr;
+
+    m_pScenes = nullptr;
+    m_pResourceManager = nullptr;
 }
 
 Game::~Game()
@@ -40,6 +46,10 @@ Game::~Game()
     delete m_pShaderTexture;
 
     delete m_pImGuiManager;
+
+    delete m_pScenes;
+
+    delete m_pResourceManager;
 
     delete m_pPhysicsWorld;
 }
@@ -62,12 +72,19 @@ void Game::Init()
     // Load our textures.
     m_pTexture = new Texture( "Data/Textures/Megaman.png" );
 
+    m_pResourceManager = new ResourceManager();
+    m_pResourceManager->AddTexture("MegaMan", m_pTexture);
+    m_pResourceManager->AddShader("TextureShader", m_pShaderTexture);
+
     //Create physics world
     m_pPhysicsWorld = new fw::PhysicsWorld2D;
 
+    m_pScenes = new SceneCube(this);
+    m_pScenes->Init();
+
     // Create our GameObjects.
-    m_pPlayer = new Player( this, m_pMeshBox, m_pShaderTexture, m_pTexture, vec2( 0, 0 ), 0, m_pController );
-    m_pCamera = new Camera( this, vec2( 0, 0 ), vec2( 1/5.0f, 1/5.0f ) );
+    m_pPlayer = new Player( m_pScenes, m_pMeshBox, m_pResourceManager->GetShader("TextureShader"), m_pResourceManager->GetTexture("MegaMan"), vec2( 0, 0 ), 0, m_pController );
+    m_pCamera = new Camera( m_pScenes, vec2( 0, 0 ), vec2( 1/5.0f, 1/5.0f ) );
 }
 
 void Game::OnEvent(Event* pEvent)
@@ -89,9 +106,9 @@ void Game::Update(float deltaTime)
     m_pPhysicsWorld->Update(deltaTime);
 
     // Update objects.
-    m_pPlayer->Update( deltaTime );
-    m_pCamera->Update( deltaTime );
-
+   // m_pPlayer->Update( deltaTime );
+   // m_pCamera->Update( deltaTime );
+    m_pScenes->Update(deltaTime);
    
 }
 
@@ -106,9 +123,15 @@ void Game::Draw()
     glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 
     // Draw our game objects.
-    m_pPlayer->Draw( m_pCamera );
+    //m_pPlayer->Draw( m_pCamera );
+    m_pScenes->Draw();
 
     m_pImGuiManager->EndFrame();
+}
+
+ResourceManager* Game::GetResourceManager()
+{
+    return m_pResourceManager;
 }
 
 fw::PhysicsWorld* Game::GetPhysicsWorld()

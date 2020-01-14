@@ -2,12 +2,13 @@
 #define __GameObject_H__
 
 class Game;
+class BaseScene;
 class Mesh;
-
 class GameObject
 {
 protected:
-    Game* m_pGame;
+    //Game* m_pGame;
+    BaseScene* m_pScene;
     Mesh* m_pMesh;
     fw::ShaderProgram* m_pShader;
     fw::Texture* m_pTexture;
@@ -15,7 +16,9 @@ protected:
     float m_Radius;
 
 public:
-    GameObject(Game* pGame, Mesh* pMesh, fw::ShaderProgram* pShader, fw::Texture* pTexture, vec2 position);
+    //GameObject(Game* pGame, Mesh* pMesh, fw::ShaderProgram* pShader, fw::Texture* pTexture, vec2 position);
+    GameObject(BaseScene* m_pScene, Mesh* pMesh, fw::ShaderProgram* pShader, fw::Texture* pTexture, vec2 position);
+
     ~GameObject();
 
     vec2 GetPosition() { return m_Position; }

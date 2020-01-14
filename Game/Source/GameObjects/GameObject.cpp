@@ -6,8 +6,8 @@
 
 using namespace fw;
 
-GameObject::GameObject(Game* pGame, Mesh* pMesh, ShaderProgram* pShader, fw::Texture* pTexture, vec2 position)
-: m_pGame( pGame )
+GameObject::GameObject(BaseScene* m_pScene, Mesh* pMesh, ShaderProgram* pShader, fw::Texture* pTexture, vec2 position)
+: m_pScene(m_pScene)
 , m_pMesh( pMesh )
 , m_pShader( pShader )
 , m_pTexture( pTexture )
