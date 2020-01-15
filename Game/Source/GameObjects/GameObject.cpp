@@ -1,16 +1,16 @@
 #include "GamePCH.h"
 
 #include "Base/Mesh.h"
+#include "Base/Material.h"
 #include "GameObjects/Camera.h"
 #include "GameObjects/GameObject.h"
 
 using namespace fw;
 
-GameObject::GameObject(BaseScene* m_pScene, Mesh* pMesh, ShaderProgram* pShader, fw::Texture* pTexture, vec2 position)
+GameObject::GameObject(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec2 position)
 : m_pScene(m_pScene)
 , m_pMesh( pMesh )
-, m_pShader( pShader )
-, m_pTexture( pTexture )
+, m_pMaterial(pMat)
 , m_Position( position )
 , m_Radius( 2 )
 {
@@ -27,7 +27,7 @@ void GameObject::Update(float deltaTime)
 void GameObject::Draw(Camera* pCamera)
 {
 	if( m_pMesh != 0 )
-        m_pMesh->Draw( pCamera, m_pShader, m_Position, m_pTexture );
+        m_pMesh->Draw( pCamera, m_pMaterial, m_Position );
 }
 
 bool GameObject::IsColliding(GameObject* pOtherGameObject)

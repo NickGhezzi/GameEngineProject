@@ -5,16 +5,19 @@
 #include "GameObjects/GameObject.h"
 #include "GameObjects/Player.h"
 #include "GameObjects/PlayerController.h"
+#include "BaseScene.h"
 
 using namespace fw;
 
-Player::Player(BaseScene* m_pScene, Mesh* pMesh, fw::ShaderProgram* pShader, fw::Texture* pTexture, vec2 position, int playerNum, PlayerController* pController)
-: GameObject(m_pScene, pMesh, pShader, pTexture, position )
+Player::Player(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec2 position, int playerNum, PlayerController* pController)
+: GameObject(m_pScene, pMesh, pMat, position )
 , m_PlayerNumber( playerNum )
 , m_pController( pController )
 {
     //void CreateBody(Vector2 pos, float angle, bool isDynamic, void* pUserData);
-    //m_pPhysicsBody = pGame->GetPhysicsWorld()->CreateBody(position, 0, true, this);
+
+    m_pPhysicsBody = m_pScene->GetGame()->GetPhysicsWorld()->CreateBody(position, 0, true, this);
+   
 }
     
 Player::~Player()

@@ -4,20 +4,24 @@
 class Game;
 class BaseScene;
 class Mesh;
+class Material;
+
 class GameObject
 {
 protected:
-    //Game* m_pGame;
     BaseScene* m_pScene;
     Mesh* m_pMesh;
-    fw::ShaderProgram* m_pShader;
-    fw::Texture* m_pTexture;
+   // fw::ShaderProgram* m_pShader;
+    //fw::Texture* m_pTexture;
+    Material* m_pMaterial;
     vec2 m_Position;
     float m_Radius;
 
 public:
     //GameObject(Game* pGame, Mesh* pMesh, fw::ShaderProgram* pShader, fw::Texture* pTexture, vec2 position);
-    GameObject(BaseScene* m_pScene, Mesh* pMesh, fw::ShaderProgram* pShader, fw::Texture* pTexture, vec2 position);
+    //GameObject(BaseScene* m_pScene, Mesh* pMesh, fw::ShaderProgram* pShader, fw::Texture* pTexture, vec2 position);
+    GameObject(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec2 position);
+
 
     ~GameObject();
 

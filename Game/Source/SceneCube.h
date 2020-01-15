@@ -4,6 +4,7 @@
 class Player;
 class Camera;
 class Game;
+class ResourceManager;
 
 class SceneCube : public BaseScene
 {
@@ -15,8 +16,9 @@ public:
     virtual void Update(float deltaTime) override;
     virtual void Draw() override;
 
-
+    
 private:
     Player* m_pPlayer;
     Camera* m_pCamera;
+    ResourceManager* m_pResources;
 };

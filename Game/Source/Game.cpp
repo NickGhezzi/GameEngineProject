@@ -9,6 +9,7 @@
 #include "BaseScene.h"
 #include "SceneCube.h"
 #include "ResourceManager.h"
+#include "Base/Material.h"
 
 using namespace fw;
 
@@ -17,8 +18,9 @@ Game::Game(Framework* pFramework)
 {
     m_pImGuiManager = nullptr;
 
-    m_pShaderTexture = nullptr;
+    m_pPlayerMaterial = nullptr;
     m_pMeshBox = nullptr;
+    m_pShaderTexture = nullptr;
     m_pTexture = 0;
 
     m_pPlayer = nullptr;
@@ -30,6 +32,7 @@ Game::Game(Framework* pFramework)
 
     m_pScenes = nullptr;
     m_pResourceManager = nullptr;
+
 }
 
 Game::~Game()
@@ -48,6 +51,8 @@ Game::~Game()
     delete m_pImGuiManager;
 
     delete m_pScenes;
+
+    delete m_pPlayerMaterial;
 
     delete m_pResourceManager;
 
@@ -72,9 +77,15 @@ void Game::Init()
     // Load our textures.
     m_pTexture = new Texture( "Data/Textures/Megaman.png" );
 
+    // Create and setup materials
+    m_pPlayerMaterial = new Material(m_pShaderTexture, m_pTexture);
+
+    // populate resource manager
     m_pResourceManager = new ResourceManager();
     m_pResourceManager->AddTexture("MegaMan", m_pTexture);
     m_pResourceManager->AddShader("TextureShader", m_pShaderTexture);
+    m_pResourceManager->AddMesh("PlayerMesh", m_pMeshBox);
+    m_pResourceManager->AddMaterial("PlayerMaterial", m_pPlayerMaterial);
 
     //Create physics world
     m_pPhysicsWorld = new fw::PhysicsWorld2D;
@@ -83,7 +94,7 @@ void Game::Init()
     m_pScenes->Init();
 
     // Create our GameObjects.
-    m_pPlayer = new Player( m_pScenes, m_pMeshBox, m_pResourceManager->GetShader("TextureShader"), m_pResourceManager->GetTexture("MegaMan"), vec2( 0, 0 ), 0, m_pController );
+    //m_pPlayer = new Player( m_pScenes, m_pMeshBox, m_pResourceManager->GetShader("TextureShader"), m_pResourceManager->GetTexture("MegaMan"), vec2( 0, 0 ), 0, m_pController );
     m_pCamera = new Camera( m_pScenes, vec2( 0, 0 ), vec2( 1/5.0f, 1/5.0f ) );
 }
 

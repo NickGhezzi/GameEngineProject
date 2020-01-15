@@ -15,7 +15,7 @@ protected:
     int m_PlayerNumber;
 
 public:
-    Player(BaseScene* m_pScene, Mesh* pMesh, fw::ShaderProgram* pShader, fw::Texture* pTexture, vec2 position, int playerNum, PlayerController* pController);
+    Player(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec2 position, int playerNum, PlayerController* pController);
     ~Player();
 
     virtual void Update(float deltaTime);

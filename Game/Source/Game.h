@@ -11,6 +11,7 @@ class PlayerController;
 class PhysicsWorld;
 class BaseScene;
 class ResourceManager;
+class Material;
 
 class Game : public fw::GameCore
 {
@@ -24,8 +25,9 @@ protected:
     Player* m_pPlayer;
     Camera* m_pCamera;
 
-    fw::ShaderProgram* m_pShaderTexture;
+    Material* m_pPlayerMaterial;
     Mesh* m_pMeshBox;
+    fw::ShaderProgram* m_pShaderTexture;
     fw::Texture* m_pTexture;
 
     fw::PhysicsWorld* m_pPhysicsWorld;

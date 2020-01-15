@@ -2,6 +2,8 @@
 
 #include "Base/Mesh.h"
 #include "Base/VertexFormat.h"
+#include "Base/Material.h"
+
 #include "GameObjects/Camera.h"
 #include "GameObjects/GameObject.h"
 
@@ -45,7 +47,7 @@ void Mesh::Init(VertexFormat* pVerts, unsigned int numVerts, GLenum primitiveTyp
     Init( pVerts, numVerts, nullptr, 0, primitiveType, GL_STATIC_DRAW );
 }
 
-void Mesh::Draw(Camera* pCamera, ShaderProgram* pShader, vec2 pos, fw::Texture* pTexture)
+void Mesh::Draw(Camera* pCamera, Material* pMat, vec2 pos)
 {
     assert( m_PrimitiveType != -1 );
     assert( m_NumVerts != 0 );
@@ -54,21 +56,21 @@ void Mesh::Draw(Camera* pCamera, ShaderProgram* pShader, vec2 pos, fw::Texture* 
     glBindBuffer( GL_ARRAY_BUFFER, m_VBO );
     glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, m_IBO );
 
-    GLint locPosition = glGetAttribLocation( pShader->GetProgram(), "a_Position" );
+    GLint locPosition = glGetAttribLocation( pMat->m_pShader->GetProgram(), "a_Position" );
     if( locPosition != -1 )
     {
         glVertexAttribPointer( locPosition, 2, GL_FLOAT, GL_FALSE, 20, (void*)0 );
         glEnableVertexAttribArray( locPosition );
     }
 
-    GLint locColor = glGetAttribLocation( pShader->GetProgram(), "a_Color" );
+    GLint locColor = glGetAttribLocation(pMat->m_pShader->GetProgram(), "a_Color" );
     if( locColor != -1 )
     {
         glVertexAttribPointer( locColor, 4, GL_UNSIGNED_BYTE, GL_TRUE, 20, (void*)8 );
         glEnableVertexAttribArray( locColor );
     }
 
-    GLint locUV = glGetAttribLocation( pShader->GetProgram(), "a_UV" );
+    GLint locUV = glGetAttribLocation(pMat->m_pShader->GetProgram(), "a_UV" );
     if( locUV != -1 )
     {
         glVertexAttribPointer( locUV, 2, GL_FLOAT, GL_FALSE, 20, (void*)12 );
@@ -76,9 +78,9 @@ void Mesh::Draw(Camera* pCamera, ShaderProgram* pShader, vec2 pos, fw::Texture* 
     }
 
     // Enable shader and setup uniforms.
-    glUseProgram( pShader->GetProgram() );
+    glUseProgram(pMat->m_pShader->GetProgram());
 
-    GLint uWorldMatrix = glGetUniformLocation( pShader->GetProgram(), "u_WorldMatrix" );
+    GLint uWorldMatrix = glGetUniformLocation(pMat->m_pShader->GetProgram(), "u_WorldMatrix" );
     if (uWorldMatrix != -1)
     {
    /*     float mat[16] =
@@ -99,13 +101,13 @@ void Mesh::Draw(Camera* pCamera, ShaderProgram* pShader, vec2 pos, fw::Texture* 
 
 
 
-    GLint uCameraTranslation = glGetUniformLocation( pShader->GetProgram(), "u_CameraTranslation" );
+    GLint uCameraTranslation = glGetUniformLocation(pMat->m_pShader->GetProgram(), "u_CameraTranslation" );
     if( uCameraTranslation != -1 )
     {
         glUniform2f( uCameraTranslation, -pCamera->GetPosition().x, -pCamera->GetPosition().y );
     }
 
-    GLint uProjectionScale = glGetUniformLocation( pShader->GetProgram(), "u_ProjectionScale" );
+    GLint uProjectionScale = glGetUniformLocation(pMat->m_pShader->GetProgram(), "u_ProjectionScale" );
     if( uProjectionScale != -1 )
     {
         glUniform2f( uProjectionScale, pCamera->GetProjectionScale().x, pCamera->GetProjectionScale().y );
@@ -114,8 +116,8 @@ void Mesh::Draw(Camera* pCamera, ShaderProgram* pShader, vec2 pos, fw::Texture* 
     // Setup the texture.
     int textureUnit = 0;
     glActiveTexture( GL_TEXTURE0 + textureUnit );
-    glBindTexture( GL_TEXTURE_2D, pTexture->GetTextureID() );
-    GLint uTexture = glGetUniformLocation( pShader->GetProgram(), "u_Texture" );
+    glBindTexture( GL_TEXTURE_2D, pMat->m_pTexture->GetTextureID() );
+    GLint uTexture = glGetUniformLocation(pMat->m_pShader->GetProgram(), "u_Texture" );
     if( uTexture != -1 )
     {
         glUniform1i( uTexture, textureUnit );

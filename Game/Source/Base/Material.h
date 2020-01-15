@@ -1,12 +1,11 @@
 #pragma once
 
-//TODO MAKE CLASS
 
 class Material
 {
 public:
-    Material();
-    ~Material();
+    Material(fw::ShaderProgram* pshader, fw::Texture* ptexture);
 
-
+    fw::ShaderProgram* m_pShader;
+    fw::Texture* m_pTexture;
 };

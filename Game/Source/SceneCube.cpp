@@ -3,8 +3,8 @@
 #include "Game.h"
 #include "GameObjects/Player.h"
 #include "GameObjects/Camera.h"
+#include "ResourceManager.h"
 
-//TODO integrate resource manager
 
 SceneCube::SceneCube(Game* game):
     BaseScene(game)
@@ -21,7 +21,8 @@ SceneCube::~SceneCube()
 
 void SceneCube::Init()
 {
-    m_pPlayer = new Player(this, m_pGame->m_pMeshBox, m_pGame->m_pShaderTexture, m_pGame->m_pTexture, vec2(0, 0), 0, m_pGame->m_pController);
+    m_pResources = m_pGame->GetResourceManager();
+    m_pPlayer = new Player(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("PlayerMaterial"), vec2(0, 0), 0, m_pGame->m_pController);
     m_pCamera = new Camera(this, vec2(0, 0), vec2(1 / 5.0f, 1 / 5.0f));
 }
 
