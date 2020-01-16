@@ -10,15 +10,14 @@ class Player : public GameObject
 {
 protected:
     PlayerController* m_pController;
-    fw::PhysicsBody* m_pPhysicsBody;
-
+    
     int m_PlayerNumber;
 
 public:
-    Player(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec2 position, int playerNum, PlayerController* pController);
+    Player(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec3 position, int playerNum, PlayerController* pController);
     ~Player();
 
-    virtual void Update(float deltaTime);
+    virtual void Update(float deltaTime) override;
 };
 
 #endif //__Player_H__

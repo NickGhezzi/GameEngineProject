@@ -15,7 +15,7 @@ namespace fw
         virtual void Update(float deltaTime) override;
 
         // Inherited via PhysicsWorld
-        virtual PhysicsBody* CreateBody(Vector2 pos, float angle, bool isDynamic, void* pUserData) override;
+        virtual PhysicsBody* CreateBody(Vector3 pos, float angle, bool isDynamic, void* pUserData) override;
 
     };
 }

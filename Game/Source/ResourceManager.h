@@ -19,7 +19,7 @@ public:
     void AddShader(std::string name, fw::ShaderProgram* pShader); // init shaders in game
     fw::ShaderProgram* GetShader(std::string name);
 
-    void AddMesh(std::string name, Mesh* pmesh); // init meshes in game
+    Mesh* AddMesh(std::string name, Mesh* pmesh); // init meshes in game
     Mesh* GetMesh(std::string name);
 
 

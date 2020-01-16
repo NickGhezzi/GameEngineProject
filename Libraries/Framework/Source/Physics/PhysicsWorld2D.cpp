@@ -22,7 +22,7 @@ namespace fw
         m_pWorld->Step(timeStep, velocityIterations, positionIterations);
     }
 
-    PhysicsBody* PhysicsWorld2D::CreateBody(Vector2 pos, float angle, bool isDynamic, void* pUserData)
+    PhysicsBody* PhysicsWorld2D::CreateBody(Vector3 pos, float angle, bool isDynamic, void* pUserData)
     {
         b2BodyDef bodydef;
         bodydef.position = b2Vec2(pos.x, pos.y);

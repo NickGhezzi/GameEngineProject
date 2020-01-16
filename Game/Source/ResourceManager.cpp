@@ -8,28 +8,28 @@ ResourceManager::ResourceManager()
 
 ResourceManager::~ResourceManager()
 {
+    for (auto g : m_Shaders)
+    {
+        if (g.second != nullptr)
+        delete g.second; 
+    }
+
     for (auto g : m_Textures)
     {
         if(g.second != nullptr)
         delete g.second; 
     }
 
-    for (auto h : m_Shaders)
+    for (auto g : m_Meshes)
     {
-        if (h.second != nullptr)
-        delete h.second; 
+        if (g.second != nullptr)
+            delete g.second; 
     }
 
-    for (auto h : m_Meshes)
+    for (auto g : m_Materials)
     {
-        if (h.second != nullptr)
-            delete h.second; 
-    }
-
-    for (auto h : m_Materials)
-    {
-        if (h.second != nullptr)
-            delete h.second;
+        if (g.second != nullptr)
+            delete g.second;
     }
 
     m_Textures.clear();
@@ -68,9 +68,10 @@ fw::ShaderProgram* ResourceManager::GetShader(std::string name)
     assert(m_Shaders.find(name) == m_Shaders.end());
 }
 
-void ResourceManager::AddMesh(std::string name, Mesh* pmesh)
+Mesh* ResourceManager::AddMesh(std::string name, Mesh* pmesh)
 {
     m_Meshes[name] = pmesh;
+    return pmesh;
 }
 
 Mesh* ResourceManager::GetMesh(std::string name)

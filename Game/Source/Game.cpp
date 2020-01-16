@@ -68,7 +68,7 @@ void Game::Init()
     wglSwapInterval( 1 );
 
     // Create our shaders.
-    m_pShaderTexture = new ShaderProgram( "Data/Shaders/texture.vert", "Data/Shaders/texture.frag" );
+   m_pShaderTexture = new ShaderProgram( "Data/Shaders/texture.vert", "Data/Shaders/texture.frag" );
 
     // Create our meshes.
     m_pMeshBox = new Mesh();
@@ -82,10 +82,13 @@ void Game::Init()
 
     // populate resource manager
     m_pResourceManager = new ResourceManager();
-    m_pResourceManager->AddTexture("MegaMan", m_pTexture);
-    m_pResourceManager->AddShader("TextureShader", m_pShaderTexture);
-    m_pResourceManager->AddMesh("PlayerMesh", m_pMeshBox);
-    m_pResourceManager->AddMaterial("PlayerMaterial", m_pPlayerMaterial);
+    m_pResourceManager->AddTexture("MegaMan", new Texture("Data/Textures/Megaman.png"));
+    m_pResourceManager->AddShader("TextureShader", new ShaderProgram("Data/Shaders/texture.vert", "Data/Shaders/texture.frag"));
+    m_pResourceManager->AddMaterial("PlayerMaterial", new Material(m_pShaderTexture, m_pTexture));
+
+    //remember
+    m_pResourceManager->AddMesh("PlayerMesh", new Mesh())->CreateBox(vec2(1, 1), vec2(0, 0));
+
 
     //Create physics world
     m_pPhysicsWorld = new fw::PhysicsWorld2D;

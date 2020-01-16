@@ -11,24 +11,27 @@ class GameObject
 protected:
     BaseScene* m_pScene;
     Mesh* m_pMesh;
-   // fw::ShaderProgram* m_pShader;
-    //fw::Texture* m_pTexture;
     Material* m_pMaterial;
-    vec2 m_Position;
+    vec3 m_Position;
     float m_Radius;
 
-public:
-    //GameObject(Game* pGame, Mesh* pMesh, fw::ShaderProgram* pShader, fw::Texture* pTexture, vec2 position);
-    //GameObject(BaseScene* m_pScene, Mesh* pMesh, fw::ShaderProgram* pShader, fw::Texture* pTexture, vec2 position);
-    GameObject(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec2 position);
+    //create physics body
+    fw::PhysicsBody* m_pPhysicsBody;
 
+public:
+    //swap all vec2 to vec3
+    GameObject(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec3 position);
 
     ~GameObject();
 
-    vec2 GetPosition() { return m_Position; }
+    vec3 GetPosition() { return m_Position; }
     float GetRadius() { return m_Radius; }
 
-    void SetPosition(vec2 pos) { m_Position = pos; }
+    void SetPosition(vec3 pos) { m_Position = pos; }
+
+    void CreateBody(bool isDynamic);
+    void AddCircle(float radius);
+    void AddBox(vec3 size);
 
     virtual void Update(float deltaTime);
     virtual void Draw(Camera* pCamera);

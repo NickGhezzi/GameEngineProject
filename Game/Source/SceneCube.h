@@ -19,6 +19,7 @@ public:
     
 private:
     Player* m_pPlayer;
+    Player* m_pDummy;
     Camera* m_pCamera;
     ResourceManager* m_pResources;
 };
