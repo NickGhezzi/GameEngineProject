@@ -83,20 +83,10 @@ void Mesh::Draw(Camera* pCamera, Material* pMat, vec2 pos)
     GLint uWorldMatrix = glGetUniformLocation(pMat->m_pShader->GetProgram(), "u_WorldMatrix" );
     if (uWorldMatrix != -1)
     {
-   /*     float mat[16] =
-        {
-            cos(pos.x), sin(pos.y), 0, 0,
-            -sin(pos.y), cos(pos.x), 0, 0,
-            0, 0, 1, 0,
-            pos.x, pos.y, 0, 1
-        };*/
-
         mat4 mat;
-        mat.CreateSRT(vec3(1, 1, 1), vec3(pos.x * 30, pos.y * 30, 45), vec3(pos.x, pos.y, 0));
+        mat.CreateSRT(vec3(1, 1, 1), vec3(pos.x * 30, pos.y * 30, 0), vec3(0, 0, 0));
 
         glUniformMatrix4fv(uWorldMatrix, 1, false, &mat.m11);
-
-        //glUniform2f(uWorldMatrix, pos.x, pos.y );
     }
 
 
