@@ -3,18 +3,18 @@
 
 struct VertexFormat
 {
-    vec2 pos;
+    vec3 pos;
     ColorByte color;
     vec2 uv;
 
     VertexFormat()
     {
-        pos.Set( 0, 0 );
+        pos.Set( 0, 0, 0 );
         color.Set( 255, 255, 255, 255 );
         uv.Set( 0, 0 );
     }
 
-    VertexFormat(vec2 npos, ColorByte ncolor, vec2 nuv)
+    VertexFormat(vec3 npos, ColorByte ncolor, vec2 nuv)
     {
         pos = npos;
         color = ncolor;

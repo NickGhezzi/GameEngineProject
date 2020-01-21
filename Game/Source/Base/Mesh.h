@@ -29,6 +29,7 @@ public:
     void Draw(Camera* pCamera, Material* pMat, vec2 pos);
 
     void CreateBox(vec2 size, vec2 offset);
+    void CreateCube(vec3 size, vec3 offset);
 };
 
 #endif //__Mesh_H__

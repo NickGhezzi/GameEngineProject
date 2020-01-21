@@ -50,6 +50,7 @@ namespace fw
         b2Vec2 temp = b2Vec2(force.x, force.y);
         m_pBody->ApplyForce(temp, m_pBody->GetWorldCenter(), true);
     }
+
     Vector3 PhysicsBody2D::GetPosition()
     {
         return Vector3(m_pBody->GetPosition().x, m_pBody->GetPosition().y, 0);

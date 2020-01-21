@@ -26,18 +26,19 @@ void Player::Update(float deltaTime)
 {
     GameObject::Update( deltaTime);
 
-    //float speed = 30;
-    //vec2 dir( 0, 0 );
+    float speed = 12;
+    vec3 dir( 0, 0,0 );
 
-    //if( m_pController->m_Up )
-    //    dir.y = 1;
-    //if( m_pController->m_Down )
-    //    dir.y = -1;
-    //if( m_pController->m_Left )
-    //    dir.x = -1;
-    //if( m_pController->m_Right )
-    //    dir.x = 1;
+    if( m_pController->m_Up )
+        dir.y = 1 * speed;
+    if( m_pController->m_Down )
+        dir.y = -1 * speed;
+    if( m_pController->m_Left )
+        dir.x = -1 * speed;
+    if( m_pController->m_Right )
+        dir.x = 1 * speed;
 
+    m_pPhysicsBody->ApplyForce(dir);
     //m_Position += dir * speed * deltaTime;
 
     //ImGui::Text("%f", m_pPhysicsBody->GetPosition().y);
