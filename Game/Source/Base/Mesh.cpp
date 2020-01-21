@@ -92,7 +92,7 @@ void Mesh::Draw(Camera* pCamera, Material* pMat, vec2 pos)
         };*/
 
         mat4 mat;
-        mat.CreateSRT(vec3(1, 1, 1), vec3(0, 0, 0), vec3(pos.x, pos.y, 0));
+        mat.CreateSRT(vec3(1, 1, 1), vec3(pos.x * 30, pos.y * 30, 45), vec3(pos.x, pos.y, 0));
 
         glUniformMatrix4fv(uWorldMatrix, 1, false, &mat.m11);
 
@@ -106,21 +106,16 @@ void Mesh::Draw(Camera* pCamera, Material* pMat, vec2 pos)
     {
         mat4 mat;
         mat.CreateLookAtViewLeftHanded(vec3(0, 0, -15), vec3(0, 1, 0), vec3(0, 0, 0));
-       // mat.CreateSRT(vec3(1, 1, 1), vec3(0, 0, 0), vec3(-pCamera->GetPosition().x, -pCamera->GetPosition().y, 0));
-
+       
         glUniformMatrix4fv(uViewMatrix, 1, false, &mat.m11);
-        //glUniform2f( uCameraTranslation, -pCamera->GetPosition().x, -pCamera->GetPosition().y );
     }
 
     GLint uProjectionMat = glGetUniformLocation(pMat->m_pShader->GetProgram(), "u_ProjectionMatrix" );
     if(uProjectionMat != -1 )
     {
         mat4 projMatrix;
-        //projMatrix.CreateOrtho(-5, -5, -5, 5, 0, 100);
         projMatrix.CreatePerspectiveVFoV(45, 1, 0.01, 100);
-
         glUniformMatrix4fv(uProjectionMat, 1, false, &projMatrix.m11);
-        //glUniform2f( uProjectionScale, pCamera->GetProjectionScale().x, pCamera->GetProjectionScale().y );
     }
 
     // Setup the texture.
@@ -185,41 +180,53 @@ void Mesh::CreateCube(vec3 size, vec3 offset)
 
     VertexFormat vertexAttributes[] =
     {
-        //front face
-        VertexFormat(vec3(-size.x / 2, -size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)), //bottom left
-        VertexFormat(vec3(-size.x / 2, size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)), //top left
-        VertexFormat(vec3( size.x / 2, size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)), //top right
-        VertexFormat(vec3( size.x / 2, -size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)), //bottom right 
+        //front face 0
+        VertexFormat(vec3(-size.x / 2, -size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 1.0f/2.0f)), //bottom left
+        VertexFormat(vec3(-size.x / 2, size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 1.0f)), //top left
+        VertexFormat(vec3( size.x / 2, size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255), vec2(1.0f/3.0f, 1.0f)), //top right
+        VertexFormat(vec3( size.x / 2, -size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255), vec2(1.0f/3.0f, 1.0f/2.0f)), //bottom right 
 
-        //right face
-        VertexFormat(vec3(size.x / 2, -size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)),
-        VertexFormat(vec3(size.x / 2, size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)),
-        VertexFormat(vec3(size.x / 2, size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)),
-        VertexFormat(vec3(size.x / 2, -size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)),
+        //right face 4
+        VertexFormat(vec3(size.x / 2, -size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255), vec2(1.0f / 3.0f, 1.0f / 2.0f)), //bottom left 4
+        VertexFormat(vec3(size.x / 2, size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255), vec2(1.0f / 3.0f, 1.0f)), //top left 5 
+        VertexFormat(vec3(size.x / 2, size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255), vec2(2.0f / 3.0f, 1.0f)), // top right 6 
+        VertexFormat(vec3(size.x / 2, -size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255),  vec2(2.0f / 3.0f,  1.0f / 2.0f)),//bottom right 7
 
-        //back face
-        VertexFormat(vec3(-size.x / 2, -size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)),
-        VertexFormat(vec3(-size.x / 2, size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)),
-        VertexFormat(vec3(size.x / 2, size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)),
-        VertexFormat(vec3(size.x / 2, -size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)),
+        //back face 8
+        VertexFormat(vec3(size.x / 2, -size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255), vec2(2.0f / 3.0f, 1.0f / 2.0f)), //bottom left
+        VertexFormat(vec3(size.x / 2, size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255), vec2(2.0f / 3.0f, 1.0f)), //top left
+        VertexFormat(vec3(-size.x / 2, size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255),vec2(1.0f, 1.0f)),  //top right
+        VertexFormat(vec3(-size.x / 2, -size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255), vec2(1.0f, 1.0f / 2.0f)), //bottom right
 
-        //top face
-        VertexFormat(vec3(-size.x / 2, size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)),
-        VertexFormat(vec3(-size.x / 2, size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)),
-        VertexFormat(vec3(size.x / 2, size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)),
-        VertexFormat(vec3(size.x / 2, size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)),
+        //top face 12
+        VertexFormat(vec3(-size.x / 2, size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)), //bottom left
+        VertexFormat(vec3(-size.x / 2, size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255),vec2(0.0f, 1.0f / 2.0f)), //top left
+        VertexFormat(vec3(size.x / 2, size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255), vec2(1.0f / 3.0f, 1.0f / 2.0f)), // top right
+        VertexFormat(vec3(size.x / 2, size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255), vec2(1.0f / 3.0f, 0.0f)),//bottom right
 
-        //left face
-        VertexFormat(vec3(-size.x / 2, -size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)),
-        VertexFormat(vec3(-size.x / 2, size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)),
-        VertexFormat(vec3(-size.x / 2, size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)),
-        VertexFormat(vec3(-size.x / 2, -size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)),
+        //left face 16
+        VertexFormat(vec3(-size.x / 2, -size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255), vec2(1.0f / 3.0f, 0.0f )), //bottom left
+        VertexFormat(vec3(-size.x / 2, size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255), vec2(1.0f / 3.0f, 1.0f / 2.0f)), //top left
+        VertexFormat(vec3(-size.x / 2, size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255),vec2(2.0f / 3.0f, 1.0f / 2.0f)),  //top right
+        VertexFormat(vec3(-size.x / 2, -size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255), vec2(2.0f / 3.0f, 0.0f)), //bottom right
 
-        //bottom face
-        VertexFormat(vec3(-size.x / 2, -size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)),
-        VertexFormat(vec3(-size.x / 2, -size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)),
-        VertexFormat(vec3(size.x / 2, -size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)),
-        VertexFormat(vec3(size.x / 2, -size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255), vec2(0.0f, 0.0f)),
+        //bottom face 20
+        VertexFormat(vec3(-size.x / 2, -size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255), vec2(2.0f / 3.0f, 0.0f)), //bottom left
+        VertexFormat(vec3(-size.x / 2, -size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255), vec2(2.0f / 3.0f, 1.0f / 2.0f)), //top left
+        VertexFormat(vec3(size.x / 2, -size.y / 2, size.z / 2) + offset, ColorByte(255,255,255,255), vec2(1.0f, 1.0f / 2.0f)), // top right
+        VertexFormat(vec3(size.x / 2, -size.y / 2, -size.z / 2) + offset, ColorByte(255,255,255,255), vec2(1.0f, 0.0f)),//bottom right
     };
+  
+    unsigned int indices[36] = 
+    {  
+        0,2,1, 0,3,2,
+        4,6,5, 4,7,6,
+        8,10,9, 8,11,10,
+        12,14,13, 12,15,14,
+        16,18,17, 16,19,18,
+        20,22,21, 20,23,22
+    };
+
+    Init(vertexAttributes, 24, indices, 36, GL_TRIANGLES, GL_STATIC_DRAW);
 }
 ;

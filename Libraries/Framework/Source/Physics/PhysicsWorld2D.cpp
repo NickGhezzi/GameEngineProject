@@ -6,7 +6,9 @@ namespace fw
 {
     PhysicsWorld2D::PhysicsWorld2D()
     {
-        m_pWorld = new b2World(b2Vec2(0, -9.8));
+        //m_pWorld = new b2World(b2Vec2(0, -9.8));
+        m_pWorld = new b2World(b2Vec2(0, 0));
+
     }
     PhysicsWorld2D::~PhysicsWorld2D()
     {

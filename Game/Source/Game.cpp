@@ -61,6 +61,7 @@ Game::~Game()
 
 void Game::Init()
 {
+    glEnable(GL_DEPTH_TEST);
     m_pImGuiManager = new ImGuiManager();
     m_pImGuiManager->Init();
 
@@ -75,20 +76,20 @@ void Game::Init()
     m_pMeshBox->CreateBox( vec2(1,1), vec2(0,0) );
 
     // Load our textures.
-    m_pTexture = new Texture( "Data/Textures/Megaman.png" );
+    m_pTexture = new Texture( "Data/Textures/Dice.png" );
 
     // Create and setup materials
     m_pPlayerMaterial = new Material(m_pShaderTexture, m_pTexture);
 
     // populate resource manager
     m_pResourceManager = new ResourceManager();
-    m_pResourceManager->AddTexture("MegaMan", new Texture("Data/Textures/Megaman.png"));
+    m_pResourceManager->AddTexture("Dice", new Texture("Data/Textures/Dice.png"));
     m_pResourceManager->AddShader("TextureShader", new ShaderProgram("Data/Shaders/texture.vert", "Data/Shaders/texture.frag"));
     m_pResourceManager->AddMaterial("PlayerMaterial", new Material(m_pShaderTexture, m_pTexture));
 
     //remember
     m_pResourceManager->AddMesh("PlayerMesh", new Mesh())->CreateBox(vec2(1, 1), vec2(0, 0));
-
+    m_pResourceManager->AddMesh("CubeMesh", new Mesh())->CreateCube(vec3(1, 1, 1), vec3(0, 0, 0));
 
     //Create physics world
     m_pPhysicsWorld = new fw::PhysicsWorld2D;

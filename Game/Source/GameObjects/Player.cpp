@@ -27,7 +27,7 @@ void Player::Update(float deltaTime)
     GameObject::Update( deltaTime);
 
     float speed = 12;
-    vec3 dir( 0, 0,0 );
+    vec3 dir( 0, 0, 0 );
 
     if( m_pController->m_Up )
         dir.y = 1 * speed;
@@ -38,7 +38,7 @@ void Player::Update(float deltaTime)
     if( m_pController->m_Right )
         dir.x = 1 * speed;
 
-    m_pPhysicsBody->ApplyForce(dir);
+   m_pPhysicsBody->ApplyForce(dir);
     //m_Position += dir * speed * deltaTime;
 
     //ImGui::Text("%f", m_pPhysicsBody->GetPosition().y);
