@@ -84,7 +84,7 @@ void Mesh::Draw(Camera* pCamera, Material* pMat, vec2 pos)
     if (uWorldMatrix != -1)
     {
         mat4 mat;
-        mat.CreateSRT(vec3(1, 1, 1), vec3(pos.x * 30, pos.y * 30, 0), vec3(0, 0, 0));
+        mat.CreateSRT(vec3(1, 1, 1), vec3(0, 0, 0), vec3(pos.x, pos.y, 0));
 
         glUniformMatrix4fv(uWorldMatrix, 1, false, &mat.m11);
     }
@@ -147,6 +147,9 @@ void Mesh::CreateBox(vec2 size, vec2 offset)
     unsigned int indices[6] = { 0,2,1, 0,3,2 };
 
     Init( vertexAttributes, 4, indices, 6, GL_TRIANGLES, GL_STATIC_DRAW );
+}
+void Mesh::CreateFloor()
+{
 }
 void Mesh::CreateCube(vec3 size, vec3 offset)
 {

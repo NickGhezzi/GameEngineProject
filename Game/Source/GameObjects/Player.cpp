@@ -38,11 +38,8 @@ void Player::Update(float deltaTime)
     if( m_pController->m_Right )
         dir.x = 1 * speed;
 
-   m_pPhysicsBody->ApplyForce(dir);
+    m_pPhysicsBody->ApplyForce(dir);
     //m_Position += dir * speed * deltaTime;
 
     //ImGui::Text("%f", m_pPhysicsBody->GetPosition().y);
-
-     //m_Position = m_pPhysicsBody->GetPosition();
-    //m_Position.y = m_pPhysicsBody->GetPosition().y;
 }

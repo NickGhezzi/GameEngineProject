@@ -18,3 +18,4 @@ Camera::Camera(BaseScene* m_pScene, vec3 position, vec2 projectionScale)
 Camera::~Camera()
 {
 }
+
