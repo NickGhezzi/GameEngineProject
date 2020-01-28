@@ -262,8 +262,8 @@ void Mesh::CreatePlane(vec2 size, ivec2 numverts)
 
 
     glPointSize(10.f);
-    Init(vertexAttributes, numv, GL_POINTS);
-    //Init(vertexAttributes, numv, indices, numindeces, GL_POINTS, GL_STATIC_DRAW);
+    //Init(vertexAttributes, numv, GL_POINTS);
+    Init(vertexAttributes, numv, indices, numindeces, GL_POINTS, GL_STATIC_DRAW);
 
     delete[] vertexAttributes;
     delete[] indices;
