@@ -61,7 +61,11 @@ Game::~Game()
 
 void Game::Init()
 {
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CW);
     glEnable(GL_DEPTH_TEST);
+
     m_pImGuiManager = new ImGuiManager();
     m_pImGuiManager->Init();
 
@@ -90,6 +94,7 @@ void Game::Init()
     //remember
     m_pResourceManager->AddMesh("PlayerMesh", new Mesh())->CreateBox(vec2(1, 1), vec2(0, 0));
     m_pResourceManager->AddMesh("CubeMesh", new Mesh())->CreateCube(vec3(1, 1, 1), vec3(0, 0, 0));
+    m_pResourceManager->AddMesh("Plane", new Mesh())->CreatePlane(vec2(1, 1), ivec2(3, 3));
 
     //Create physics world
     m_pPhysicsWorld = new fw::PhysicsWorld2D;

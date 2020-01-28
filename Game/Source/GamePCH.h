@@ -4,6 +4,7 @@
 #include "../../Libraries/Framework/Source/FrameworkPCH.h"
 
 typedef fw::Vector2 vec2;
+typedef fw::Vector2Int ivec2;
 typedef fw::Vector3 vec3;
 typedef fw::MyMatrix mat4;
 typedef fw::ColorByte ColorByte;

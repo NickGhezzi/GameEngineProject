@@ -5,7 +5,6 @@
 class Mesh;
 class Material;
 
-//TODO add materials
 
 class ResourceManager
 {

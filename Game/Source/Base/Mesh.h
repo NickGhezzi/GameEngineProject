@@ -31,6 +31,7 @@ public:
     void CreateBox(vec2 size, vec2 offset);
     void CreateFloor();
     void CreateCube(vec3 size, vec3 offset);
+    void CreatePlane(vec2 size, ivec2 numverts);
 };
 
 #endif //__Mesh_H__

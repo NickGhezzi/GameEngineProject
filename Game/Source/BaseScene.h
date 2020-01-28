@@ -13,7 +13,7 @@ public:
     virtual void Draw() = 0;
 
     virtual Game* GetGame() { return m_pGame; };
-    //
+    
     //void LoadFromFile(const char* filename)
     //{
     //    char* contents = LoadCompleteFile(filename, nullptr);

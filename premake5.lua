@@ -73,6 +73,8 @@ project "Framework"
         "Libraries/Framework/Libraries/LodePNG/lodepng.h",
 		"Libraries/Framework/Libraries/Box2D/**.cpp",
 		"Libraries/Framework/Libraries/Box2D/**.h",
+		"Libraries/Framework/Libraries/cJSON/**.c",
+		"Libraries/Framework/Libraries/cJSON/**.h",
     }
 
    filter "configurations:Debug"

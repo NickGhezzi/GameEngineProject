@@ -84,7 +84,7 @@ void Mesh::Draw(Camera* pCamera, Material* pMat, vec2 pos)
     if (uWorldMatrix != -1)
     {
         mat4 mat;
-        mat.CreateSRT(vec3(1, 1, 1), vec3(0, 0, 0), vec3(pos.x, pos.y, 0));
+        mat.CreateSRT(vec3(1, 1, 1), vec3(pos.x, pos.y, 0), vec3(0, 0, 0));
 
         glUniformMatrix4fv(uWorldMatrix, 1, false, &mat.m11);
     }
@@ -212,14 +212,60 @@ void Mesh::CreateCube(vec3 size, vec3 offset)
   
     unsigned int indices[36] = 
     {  
-        0,2,1, 0,3,2,
-        4,6,5, 4,7,6,
-        8,10,9, 8,11,10,
-        12,14,13, 12,15,14,
-        16,18,17, 16,19,18,
+        0,1,2, 0,2,3,
+        4,5,6, 4,6,7,
+        8,9,10, 8,10,11,
+        12,13,14, 12,14,15,
+        16,17,18, 16,18,19,
         20,22,21, 20,23,22
     };
 
     Init(vertexAttributes, 24, indices, 36, GL_TRIANGLES, GL_STATIC_DRAW);
+}
+void Mesh::CreatePlane(vec2 size, ivec2 numverts)
+{
+    
+    int numindeces = (numverts.x - 1) * (numverts.y - 1) * 2 * 3;
+    int numv = numverts.x * numverts.y;
+    VertexFormat* vertexAttributes = new VertexFormat[numv];
+    unsigned int* indices = new unsigned int[numindeces];
+
+    vec2 gap;
+    gap.x = size.x  / (numverts.x - 1);
+    gap.y = size.y / (numverts.y - 1);
+
+    for (int x = 0; x < numverts.x; x++)
+    {
+        for (int y = 0; y < numverts.y; y++)
+        {
+            vertexAttributes[y * numverts.x + x] = VertexFormat(vec3(gap.x * x, gap.y * y, 0), ColorByte(255,255,255,255), vec2(gap.x * x / size.x, gap.y * y / size.y));
+        }
+    }
+
+    //i needs to be the top left 
+    //index = y * numverts.x + x
+    for (int x = 0; x < numverts.x; x++)
+    {
+        for (int y = 0; y < numverts.y; y++)
+        {
+            int index = y * numverts.x + x;
+            indices[index] = index;
+            indices[index + 1] = index + 1;
+            indices[index + 2] = index + numverts.x;
+
+            indices[index + 3] = index;
+            indices[index + 4] = index + numverts.x;
+            indices[index + 5] = index + (numverts.x + 1);
+        }
+    }
+    
+
+
+    glPointSize(10.f);
+    Init(vertexAttributes, numv, GL_POINTS);
+    //Init(vertexAttributes, numv, indices, numindeces, GL_POINTS, GL_STATIC_DRAW);
+
+    delete[] vertexAttributes;
+    delete[] indices;
 }
 ;

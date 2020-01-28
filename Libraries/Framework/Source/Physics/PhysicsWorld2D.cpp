@@ -24,8 +24,8 @@ namespace fw
 
     PhysicsWorld2D::PhysicsWorld2D()
     {
-        m_pWorld = new b2World(b2Vec2(0, -9.8));
-        //m_pWorld = new b2World(b2Vec2(0, 0));
+       // m_pWorld = new b2World(b2Vec2(0, -9.8));
+        m_pWorld = new b2World(b2Vec2(0, 0));
         m_pContactListener = new Box2DContactListener();
         m_pWorld->SetContactListener(m_pContactListener);
         m_pContactListener->BeginContact(nullptr);

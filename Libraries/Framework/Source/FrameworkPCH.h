@@ -26,6 +26,8 @@
 #include "../Libraries/LodePNG/lodepng.h"
 #include "../Libraries/imgui/imgui.h"
 
+#include "../Libraries/cJSON/cJSON.h"
+
 #include "Utility/MyMemory.h"
 
 #include "ImGuiManager/ImGuiManager.h"
