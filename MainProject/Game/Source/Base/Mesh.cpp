@@ -227,6 +227,7 @@ void Mesh::CreatePlane(vec2 size, ivec2 numverts)
     
     int numindeces = (numverts.x - 1) * (numverts.y - 1) * 2 * 3;
     int numv = numverts.x * numverts.y;
+    int dumb = 0;
     VertexFormat* vertexAttributes = new VertexFormat[numv];
     unsigned int* indices = new unsigned int[numindeces];
 
@@ -242,29 +243,29 @@ void Mesh::CreatePlane(vec2 size, ivec2 numverts)
         }
     }
 
-    //i needs to be the top left 
-    //index = y * numverts.x + x
-    for (int x = 0; x < numverts.x; x++)
+
+    for (int x = 0; x < numverts.x - 1; x++)
     {
-        for (int y = 0; y < numverts.y; y++)
+        for (int y = 0; y < numverts.y - 1; y++)
         {
             int index = y * numverts.x + x;
-            indices[index] = index;
-            indices[index + 1] = index + 1;
-            indices[index + 2] = index + numverts.x;
+            indices[dumb] = index;
+            indices[dumb + 1] = index + numverts.x;
+            indices[dumb + 2] = index + 1;
 
-            indices[index + 3] = index;
-            indices[index + 4] = index + numverts.x;
-            indices[index + 5] = index + (numverts.x + 1);
+            indices[dumb + 3] = index + 1;
+            indices[dumb + 5] = index + numverts.x + 1;
+            indices[dumb + 4] = index + numverts.x;
+            dumb += 6;
         }
     }
     
 
 
-    glPointSize(10.f);
+    glPointSize(5.f);
     //Init(vertexAttributes, numv, GL_POINTS);
-    Init(vertexAttributes, numv, indices, numindeces, GL_POINTS, GL_STATIC_DRAW);
-
+    Init(vertexAttributes, numv, indices, numindeces, GL_TRIANGLES, GL_STATIC_DRAW);
+    //Init(vertexAttributes, numv, indices, numindeces, GL_POINTS, GL_STATIC_DRAW);
     delete[] vertexAttributes;
     delete[] indices;
 }

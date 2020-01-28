@@ -94,7 +94,7 @@ void Game::Init()
     //remember
     m_pResourceManager->AddMesh("PlayerMesh", new Mesh())->CreateBox(vec2(1, 1), vec2(0, 0));
     m_pResourceManager->AddMesh("CubeMesh", new Mesh())->CreateCube(vec3(1, 1, 1), vec3(0, 0, 0));
-    m_pResourceManager->AddMesh("Plane", new Mesh())->CreatePlane(vec2(1, 1), ivec2(3, 3));
+    m_pResourceManager->AddMesh("Plane", new Mesh())->CreatePlane(vec2(4, 4), ivec2(20, 20));
 
     //Create physics world
     m_pPhysicsWorld = new fw::PhysicsWorld2D;
