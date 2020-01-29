@@ -6,8 +6,10 @@
 #include "GameObjects/Camera.h"
 #include "GameObjects/Player.h"
 #include "GameObjects/PlayerController.h"
-#include "BaseScene.h"
-#include "SceneCube.h"
+
+#include "Scenes/SceneCube.h"
+#include "Scenes/SimpleScene.h"
+
 #include "ResourceManager.h"
 #include "Base/Material.h"
 
@@ -91,7 +93,7 @@ void Game::Init()
     m_pResourceManager->AddShader("TextureShader", new ShaderProgram("Data/Shaders/texture.vert", "Data/Shaders/texture.frag"));
     m_pResourceManager->AddMaterial("PlayerMaterial", new Material(m_pShaderTexture, m_pTexture));
 
-    //remember
+    //meshes
     m_pResourceManager->AddMesh("PlayerMesh", new Mesh())->CreateBox(vec2(1, 1), vec2(0, 0));
     m_pResourceManager->AddMesh("CubeMesh", new Mesh())->CreateCube(vec3(1, 1, 1), vec3(0, 0, 0));
     m_pResourceManager->AddMesh("Plane", new Mesh())->CreatePlane(vec2(4, 4), ivec2(20, 20));
@@ -99,9 +101,11 @@ void Game::Init()
     //Create physics world
     m_pPhysicsWorld = new fw::PhysicsWorld2D;
 
-    m_pScenes = new SceneCube(this);
+    m_pScenes = new SimpleScene(this);
+    
     m_pScenes->Init();
 
+    m_pScenes->LoadFromFile("Data/Simple.box2dscene");
     // Create our GameObjects.
     //m_pPlayer = new Player( m_pScenes, m_pMeshBox, m_pResourceManager->GetShader("TextureShader"), m_pResourceManager->GetTexture("MegaMan"), vec2( 0, 0 ), 0, m_pController );
     m_pCamera = new Camera( m_pScenes, vec2( 0, 0 ), vec2( 1/5.0f, 1/5.0f ) );

@@ -1,25 +1,22 @@
 #pragma once
 #include "BaseScene.h"
 
-class Player;
 class Camera;
 class Game;
 class ResourceManager;
 
-class SceneCube : public BaseScene
+class SimpleScene : public BaseScene
 {
 public:
-    SceneCube(Game* game);
-    ~SceneCube();
+    SimpleScene(Game* game);
+    ~SimpleScene();
 
     virtual void Init() override;
     virtual void Update(float deltaTime) override;
     virtual void Draw() override;
+    virtual void LoadFromFile(const char* filename) override;
 
-    
 private:
-    Player* m_pPlayer;
-    Player* m_pDummy;
-    Camera* m_pCamera;
     ResourceManager* m_pResources;
+    Camera* m_pCamera;
 };

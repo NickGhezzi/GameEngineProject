@@ -14,17 +14,17 @@ namespace fw
         m_pBody->GetWorld()->DestroyBody(m_pBody);
     }
 
-    void PhysicsBody2D::AddBox(Vector3 size)
+    void PhysicsBody2D::AddBox(Vector3 size, float density, bool isSensor, float friction, float restitution)
     {
         b2PolygonShape boxShape;
         boxShape.SetAsBox(size.x / 2, size.y / 2);
 
         b2FixtureDef fixtureDef;
         fixtureDef.shape = &boxShape;
-        fixtureDef.density = 1;
-        fixtureDef.isSensor = false;
-        fixtureDef.friction = 0.2f;
-        fixtureDef.restitution = 0.0f;
+        fixtureDef.density = density;
+        fixtureDef.isSensor = isSensor;
+        fixtureDef.friction = friction;
+        fixtureDef.restitution = restitution;
 
         m_pBody->CreateFixture(&fixtureDef);
     }

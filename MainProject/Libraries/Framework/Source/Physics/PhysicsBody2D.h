@@ -10,7 +10,7 @@ namespace fw
         PhysicsBody2D(b2Body* body);
         virtual ~PhysicsBody2D();
 
-        virtual void AddBox(Vector3 size) override;
+        virtual void AddBox(Vector3 size, float density, bool isSensor, float friction, float restitution) override;
         virtual void AddCircle(float radius) override;
 
         virtual void ApplyForce(Vector3 force) override;

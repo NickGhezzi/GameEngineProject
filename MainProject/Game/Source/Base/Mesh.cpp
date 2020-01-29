@@ -47,7 +47,7 @@ void Mesh::Init(VertexFormat* pVerts, unsigned int numVerts, GLenum primitiveTyp
     Init( pVerts, numVerts, nullptr, 0, primitiveType, GL_STATIC_DRAW );
 }
 
-void Mesh::Draw(Camera* pCamera, Material* pMat, vec2 pos)
+void Mesh::Draw(Camera* pCamera, Material* pMat, vec3 scale, vec3 rotation, vec2 pos)
 {
     assert( m_PrimitiveType != -1 );
     assert( m_NumVerts != 0 );
@@ -84,7 +84,7 @@ void Mesh::Draw(Camera* pCamera, Material* pMat, vec2 pos)
     if (uWorldMatrix != -1)
     {
         mat4 mat;
-        mat.CreateSRT(vec3(1, 1, 1), vec3(pos.x, pos.y, 0), vec3(0, 0, 0));
+        mat.CreateSRT(vec3(scale.x, scale.y, scale.z), vec3(rotation.x, rotation.y, rotation.z), vec3(pos.x, pos.y, 0));
 
         glUniformMatrix4fv(uWorldMatrix, 1, false, &mat.m11);
     }

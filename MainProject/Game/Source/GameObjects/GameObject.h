@@ -13,6 +13,8 @@ protected:
     Mesh* m_pMesh;
     Material* m_pMaterial;
     vec3 m_Position;
+    vec3 m_Rotation;
+    vec3 m_Scale;
     float m_Radius;
 
     //create physics body
@@ -20,18 +22,20 @@ protected:
 
 public:
     //swap all vec2 to vec3
-    GameObject(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec3 position);
+    GameObject(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec3 scale, vec3 rotation, vec3 position);
 
     ~GameObject();
 
     vec3 GetPosition() { return m_Position; }
     float GetRadius() { return m_Radius; }
 
+    void SetScale(vec3 scale) { m_Scale = scale; }
+    void SetRotation(vec3 rot) { m_Rotation = rot; }
     void SetPosition(vec3 pos) { m_Position = pos; }
 
     void CreateBody(bool isDynamic);
     void AddCircle(float radius);
-    void AddBox(vec3 size);
+    void AddBox(vec3 size, float density, bool isSensor, float friction, float restitution);
 
     virtual void Update(float deltaTime);
     virtual void Draw(Camera* pCamera);

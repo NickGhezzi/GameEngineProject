@@ -5,12 +5,12 @@
 #include "GameObjects/GameObject.h"
 #include "GameObjects/Player.h"
 #include "GameObjects/PlayerController.h"
-#include "BaseScene.h"
+#include "../Scenes/BaseScene.h"
 
 using namespace fw;
 
-Player::Player(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec3 position, int playerNum, PlayerController* pController)
-: GameObject(m_pScene, pMesh, pMat, position )
+Player::Player(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec3 scale, vec3 rotation, vec3 position, int playerNum, PlayerController* pController)
+: GameObject(m_pScene, pMesh, pMat, scale, rotation, position )
 , m_PlayerNumber( playerNum )
 , m_pController( pController )
 {
