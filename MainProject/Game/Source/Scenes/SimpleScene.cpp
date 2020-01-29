@@ -66,7 +66,7 @@ void SimpleScene::LoadFromFile(const char* filename)
     {
         cJSON* jGameObject = cJSON_GetArrayItem(jGameObjectArray, i);
 
-        std::string flag = (std::string)cJSON_GetObjectItem(jGameObject, "Flags")->valuestring;
+        std::string name = (std::string)cJSON_GetObjectItem(jGameObject, "Name")->valuestring;
 
         cJSON* pos = cJSON_GetObjectItem(jGameObject, "Pos");
         cJSON* rot = cJSON_GetObjectItem(jGameObject, "Rot");
@@ -85,8 +85,26 @@ void SimpleScene::LoadFromFile(const char* filename)
         vscale.x = (float)cJSON_GetArrayItem(scale, 1)->valuedouble;
         vscale.x = (float)cJSON_GetArrayItem(scale, 2)->valuedouble;
 
-        if (flag == "Player")
+        if (name == "Player")
         {
+            cJSON* components = cJSON_GetObjectItem(jGameObject, "Components");
+
+            cJSON* physicscomp = cJSON_GetArrayItem(components, 0);
+            cJSON* spritecomp = cJSON_GetArrayItem(components, 1);
+
+            std::string type = cJSON_GetArrayItem(physicscomp, 3)->string;
+            bool isStatic = cJSON_GetArrayItem(physicscomp, 4);
+            float density = (float)cJSON_GetArrayItem(physicscomp, 6)->valuedouble;
+            float issensor = (float)cJSON_GetArrayItem(physicscomp, 7)->valuedouble;
+            float friction = (float)cJSON_GetArrayItem(physicscomp, 8)->valuedouble;
+            float restitution = (float)cJSON_GetArrayItem(physicscomp, 9)->valuedouble;
+
+            std::string material = cJSON_GetArrayItem(spritecomp, 2)->string;
+            std::string texture = cJSON_GetArrayItem(spritecomp, 3)->string;
+            std::string shader = cJSON_GetArrayItem(spritecomp, 4)->string;
+
+
+            //todo if type == box create box
             int i = 0;
         }
     }

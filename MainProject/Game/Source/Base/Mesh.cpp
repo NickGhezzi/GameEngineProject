@@ -254,8 +254,8 @@ void Mesh::CreatePlane(vec2 size, ivec2 numverts)
             indices[dumb + 2] = index + 1;
 
             indices[dumb + 3] = index + 1;
-            indices[dumb + 5] = index + numverts.x + 1;
             indices[dumb + 4] = index + numverts.x;
+            indices[dumb + 5] = index + numverts.x + 1;
             dumb += 6;
         }
     }

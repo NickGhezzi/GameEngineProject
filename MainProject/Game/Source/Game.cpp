@@ -102,6 +102,7 @@ void Game::Init()
     m_pPhysicsWorld = new fw::PhysicsWorld2D;
 
     m_pScenes = new SimpleScene(this);
+    //m_pScenes = new SceneCube(this);
     
     m_pScenes->Init();
 
