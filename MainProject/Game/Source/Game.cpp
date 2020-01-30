@@ -75,7 +75,7 @@ void Game::Init()
     wglSwapInterval( 1 );
 
     // Create our shaders.
-   m_pShaderTexture = new ShaderProgram( "Data/Shaders/texture.vert", "Data/Shaders/texture.frag" );
+    m_pShaderTexture = new ShaderProgram( "Data/Shaders/texture.vert", "Data/Shaders/texture.frag" );
 
     // Create our meshes.
     m_pMeshBox = new Mesh();
@@ -99,18 +99,23 @@ void Game::Init()
     m_pResourceManager->AddMesh("Plane", new Mesh())->CreatePlane(vec2(4, 4), ivec2(20, 20));
 
     //Create physics world
-    m_pPhysicsWorld = new fw::PhysicsWorld2D;
+    m_pPhysicsWorld = new fw::PhysicsWorld2D(;
 
     //CUBE ASSIGNMENT:::: comment out simple scene and uncomment scenecube for the cube. sorry for the inconvenience
-    m_pScenes = new SimpleScene(this);
-    //m_pScenes = new SceneCube(this);
+    //m_pScenes = new SimpleScene(this);
+    m_pScenes = new SceneCube(this);
     
     m_pScenes->Init();
 
-    m_pScenes->LoadFromFile("Data/Simple.box2dscene");
+    //m_pScenes->LoadFromFile("Data/Simple.box2dscene");
     // Create our GameObjects.
-    //m_pPlayer = new Player( m_pScenes, m_pMeshBox, m_pResourceManager->GetShader("TextureShader"), m_pResourceManager->GetTexture("MegaMan"), vec2( 0, 0 ), 0, m_pController );
-    m_pCamera = new Camera( m_pScenes, vec2( 0, 0 ), vec2( 1/5.0f, 1/5.0f ) );
+    
+
+    /*ViewProperties view = ViewProperties(vec3(0, 0, -15), vec3(0, 1, 0), vec3(0, 0, 0));
+    ProjectionProperties proj = ProjectionProperties(45, 1, 0.01, 100);
+*/
+    /*m_pCamera = new Camera( m_pScenes, vec2( 0, 0 ), vec2( 1/5.0f, 1/5.0f ) );
+    m_pCamera->Init(view, proj);*/
 }
 
 void Game::OnEvent(Event* pEvent)
@@ -160,7 +165,7 @@ ResourceManager* Game::GetResourceManager()
     return m_pResourceManager;
 }
 
-fw::PhysicsWorld* Game::GetPhysicsWorld()
+fw::PhysicsWorld2D* Game::GetPhysicsWorld()
 {
-    return m_pPhysicsWorld;
+    return (PhysicsWorld2D*)m_pPhysicsWorld;
 }

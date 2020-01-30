@@ -82,8 +82,8 @@ void SimpleScene::LoadFromFile(const char* filename)
         vrot.z = (float)cJSON_GetArrayItem(rot, 2)->valuedouble;
 
         vscale.x = (float)cJSON_GetArrayItem(scale, 0)->valuedouble;
-        vscale.x = (float)cJSON_GetArrayItem(scale, 1)->valuedouble;
-        vscale.x = (float)cJSON_GetArrayItem(scale, 2)->valuedouble;
+        vscale.y = (float)cJSON_GetArrayItem(scale, 1)->valuedouble;
+        vscale.z = (float)cJSON_GetArrayItem(scale, 2)->valuedouble;
 
         if (name == "Player")
         {
@@ -103,8 +103,10 @@ void SimpleScene::LoadFromFile(const char* filename)
             std::string texture = cJSON_GetArrayItem(spritecomp, 3)->string;
             std::string shader = cJSON_GetArrayItem(spritecomp, 4)->string;
 
-            Player* pPlayer = new Player(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial(material), );
-
+            Player* pPlayer = new Player(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("Megaman"), vscale, vrot, vpos, 1, m_pGame->m_pController);
+            pPlayer->CreateBody(isStatic);
+            pPlayer->AddBox(vec2(1, 1), density, issensor, friction, restitution);
+            m_pGameObjects.push_back(pPlayer);
             //todo if type == box create box
             int i = 0;
         }

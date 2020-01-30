@@ -32,6 +32,8 @@ protected:
 
     fw::PhysicsWorld* m_pPhysicsWorld;
 
+
+
 public:
     Game(fw::Framework* pFramework);
     virtual ~Game();
@@ -43,7 +45,7 @@ public:
 
     ResourceManager* GetResourceManager();
 
-    fw::PhysicsWorld* GetPhysicsWorld();
+    fw::PhysicsWorld2D* GetPhysicsWorld();
 
     PlayerController* m_pController;
 };

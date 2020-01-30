@@ -1,5 +1,6 @@
 #include "FrameworkPCH.h"
 #include "box2d/box2d.h"
+#include "Box2DDebugDraw.h"
 
 
 namespace fw
@@ -26,8 +27,14 @@ namespace fw
     {
        // m_pWorld = new b2World(b2Vec2(0, -9.8));
         m_pWorld = new b2World(b2Vec2(0, 0));
+
+        m_pShader = new ShaderProgram("Data/Shaders/Box2DDebug.vert", "Data/Shaders/Box2DDebug.frag");
+
         m_pContactListener = new Box2DContactListener();
+        m_pDebugDraw = new Box2DDebugDraw(m_pShader, nullptr, nullptr);
+
         m_pWorld->SetContactListener(m_pContactListener);
+        m_pWorld->SetDebugDraw(m_pDebugDraw);
         m_pContactListener->BeginContact(nullptr);
     }
     PhysicsWorld2D::~PhysicsWorld2D()
@@ -43,6 +50,20 @@ namespace fw
         int positionIterations = 3;  
 
         m_pWorld->Step(timeStep, velocityIterations, positionIterations);
+    }
+
+    void PhysicsWorld2D::DrawDebugData(mat4* view, mat4* proj)
+    {
+        m_pDebugDraw->SetViewProjMatrices(view, proj);
+        m_pWorld->DrawDebugData();
+
+        int32 flags = b2Draw::e_shapeBit; 
+        flags |= b2Draw::e_jointBit; 
+        flags |= b2Draw::e_centerOfMassBit; 
+        flags |= b2Draw::e_aabbBit; 
+        flags |= b2Draw::e_pairBit;
+
+        m_pDebugDraw->SetFlags(flags);
     }
 
     PhysicsBody* PhysicsWorld2D::CreateBody(Vector3 pos, float angle, bool isDynamic, void* pUserData)

@@ -52,4 +52,5 @@
 #include "Framework.h"
 #include "GameCore.h"
 
+typedef fw::MyMatrix mat4;
 #endif //__FrameworkPCH_H__

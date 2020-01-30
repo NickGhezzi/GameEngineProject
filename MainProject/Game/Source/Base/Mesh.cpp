@@ -94,8 +94,8 @@ void Mesh::Draw(Camera* pCamera, Material* pMat, vec3 scale, vec3 rotation, vec2
     GLint uViewMatrix = glGetUniformLocation(pMat->m_pShader->GetProgram(), "u_ViewMatrix" );
     if(uViewMatrix != -1 )
     {
-        mat4 mat;
-        mat.CreateLookAtViewLeftHanded(vec3(0, 0, -15), vec3(0, 1, 0), vec3(0, 0, 0));
+        mat4 mat = pCamera->GetViewMatrix();
+        //mat.CreateLookAtViewLeftHanded(vec3(0, 0, -15), vec3(0, 1, 0), vec3(0, 0, 0));
        
         glUniformMatrix4fv(uViewMatrix, 1, false, &mat.m11);
     }
@@ -103,8 +103,8 @@ void Mesh::Draw(Camera* pCamera, Material* pMat, vec3 scale, vec3 rotation, vec2
     GLint uProjectionMat = glGetUniformLocation(pMat->m_pShader->GetProgram(), "u_ProjectionMatrix" );
     if(uProjectionMat != -1 )
     {
-        mat4 projMatrix;
-        projMatrix.CreatePerspectiveVFoV(45, 1, 0.01, 100);
+        mat4 projMatrix = pCamera->GetProjectionMatrix();
+        //projMatrix.CreatePerspectiveVFoV(45, 1, 0.01, 100);
         glUniformMatrix4fv(uProjectionMat, 1, false, &projMatrix.m11);
     }
 
