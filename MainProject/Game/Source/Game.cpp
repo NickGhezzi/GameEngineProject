@@ -90,8 +90,8 @@ void Game::Init()
     // populate resource manager
     m_pResourceManager = new ResourceManager();
     m_pResourceManager->AddTexture("Dice", new Texture("Data/Textures/Dice.png"));
-    m_pResourceManager->AddShader("TextureShader", new ShaderProgram("Data/Shaders/texture.vert", "Data/Shaders/texture.frag"));
-    m_pResourceManager->AddMaterial("PlayerMaterial", new Material(m_pShaderTexture, m_pTexture));
+    m_pResourceManager->AddShader("Shader_Texture", new ShaderProgram("Data/Shaders/texture.vert", "Data/Shaders/texture.frag"));
+    m_pResourceManager->AddMaterial("Megaman", new Material(m_pShaderTexture, m_pTexture));
 
     //meshes
     m_pResourceManager->AddMesh("PlayerMesh", new Mesh())->CreateBox(vec2(1, 1), vec2(0, 0));
@@ -101,6 +101,7 @@ void Game::Init()
     //Create physics world
     m_pPhysicsWorld = new fw::PhysicsWorld2D;
 
+    //CUBE ASSIGNMENT:::: comment out simple scene and uncomment scenecube for the cube. sorry for the inconvenience
     m_pScenes = new SimpleScene(this);
     //m_pScenes = new SceneCube(this);
     

@@ -103,6 +103,7 @@ void SimpleScene::LoadFromFile(const char* filename)
             std::string texture = cJSON_GetArrayItem(spritecomp, 3)->string;
             std::string shader = cJSON_GetArrayItem(spritecomp, 4)->string;
 
+            Player* pPlayer = new Player(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial(material), );
 
             //todo if type == box create box
             int i = 0;
