@@ -29,10 +29,10 @@ void SimpleScene::Init()
 {
     m_pResources = m_pGame->GetResourceManager();
     m_pCamera = new Camera(this, vec3(0, 0, 0), vec2(1 / 5.0f, 1 / 5.0f));
-    Player* pPlayer = new Player(this, m_pResources->GetMesh("CubeMesh"), m_pResources->GetMaterial("PlayerMaterial"), vec3(1, 1, 1), vec3(0, 0, 0), vec3(0, 0, 0), 0, m_pGame->m_pController);
-    pPlayer->CreateBody(true);
-    pPlayer->AddBox(vec3(1, 1, 1), 1, false, 0.2, 0);
-    m_pGameObjects.push_back(pPlayer);
+    //Player* pPlayer = new Player(this, m_pResources->GetMesh("CubeMesh"), m_pResources->GetMaterial("PlayerMaterial"), vec3(1, 1, 1), vec3(0, 0, 0), vec3(0, 0, 0), 0, m_pGame->m_pController);
+    //pPlayer->CreateBody(true);
+    //pPlayer->AddBox(vec3(1, 1, 1), 1, false, 0.2, 0);
+    //m_pGameObjects.push_back(pPlayer);
 }
 
 void SimpleScene::Update(float deltaTime)
@@ -41,6 +41,7 @@ void SimpleScene::Update(float deltaTime)
     {
         obj->Update(deltaTime);
     }
+    m_pCamera->Update(deltaTime);
 }
 
 void SimpleScene::Draw()
@@ -99,9 +100,9 @@ void SimpleScene::LoadFromFile(const char* filename)
             float friction = (float)cJSON_GetArrayItem(physicscomp, 8)->valuedouble;
             float restitution = (float)cJSON_GetArrayItem(physicscomp, 9)->valuedouble;
 
-            std::string material = cJSON_GetArrayItem(spritecomp, 2)->string;
-            std::string texture = cJSON_GetArrayItem(spritecomp, 3)->string;
-            std::string shader = cJSON_GetArrayItem(spritecomp, 4)->string;
+            std::string material = (std::string)cJSON_GetArrayItem(spritecomp, 2)->string;
+            std::string texture = (std::string)cJSON_GetArrayItem(spritecomp, 3)->string;
+            std::string shader = (std::string)cJSON_GetArrayItem(spritecomp, 4)->string;
 
             Player* pPlayer = new Player(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("Megaman"), vscale, vrot, vpos, 1, m_pGame->m_pController);
             pPlayer->CreateBody(isStatic);

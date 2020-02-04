@@ -20,6 +20,8 @@ protected:
     BaseScene* m_pCurrentScene;
     BaseScene* m_pSceneWater;
     BaseScene* m_pSceneCube;
+    BaseScene* m_pSimpleScene;
+
 
     ResourceManager* m_pResourceManager;
 

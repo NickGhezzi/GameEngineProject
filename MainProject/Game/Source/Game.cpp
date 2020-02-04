@@ -56,6 +56,7 @@ Game::~Game()
 
     delete m_pSceneCube;
     delete m_pSceneWater;
+    delete m_pSimpleScene;
 
     delete m_pPlayerMaterial;
 
@@ -111,22 +112,17 @@ void Game::Init()
 
     m_pSceneCube = new SceneCube(this);
     m_pSceneWater = new SceneWater(this);
+    m_pSimpleScene = new SimpleScene(this);
     m_pSceneCube->Init();
     m_pSceneWater->Init();
-    
-    m_pCurrentScene = m_pSceneWater;
+    m_pSimpleScene->Init();
+    m_pSimpleScene->LoadFromFile("Data/Simple.box2dscene");
 
-    
+    m_pCurrentScene = m_pSimpleScene;
 
-    //m_pScenes->LoadFromFile("Data/Simple.box2dscene");
+
     // Create our GameObjects.
     
-
-    /*ViewProperties view = ViewProperties(vec3(0, 0, -15), vec3(0, 1, 0), vec3(0, 0, 0));
-    ProjectionProperties proj = ProjectionProperties(45, 1, 0.01, 100);
-*/
-    /*m_pCamera = new Camera( m_pScenes, vec2( 0, 0 ), vec2( 1/5.0f, 1/5.0f ) );
-    m_pCamera->Init(view, proj);*/
 }
 
 void Game::OnEvent(Event* pEvent)
