@@ -4,7 +4,6 @@
 class Ball;
 class Camera;
 class GameObject;
-class ImGuiManager;
 class Mesh;
 class Player;
 class PlayerController;
@@ -16,9 +15,11 @@ class Material;
 class Game : public fw::GameCore
 {
 protected:
-    ImGuiManager* m_pImGuiManager;
+    fw::ImGuiManager* m_pImGuiManager;
 
-    BaseScene* m_pScenes;
+    BaseScene* m_pCurrentScene;
+    BaseScene* m_pSceneWater;
+    BaseScene* m_pSceneCube;
 
     ResourceManager* m_pResourceManager;
 
@@ -28,6 +29,7 @@ protected:
     Material* m_pPlayerMaterial;
     Mesh* m_pMeshBox;
     fw::ShaderProgram* m_pShaderTexture;
+    fw::ShaderProgram* m_pShaderWater;
     fw::Texture* m_pTexture;
 
     fw::PhysicsWorld* m_pPhysicsWorld;

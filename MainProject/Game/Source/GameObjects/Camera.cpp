@@ -15,9 +15,9 @@ Camera::Camera(BaseScene* m_pScene, vec3 position, vec2 projectionScale)
     //delete m_pPhysicsBody;
     m_pPhysicsBody = nullptr;
 
-    m_ViewProperties.at = vec3(0, 0, -15);
-    m_ViewProperties.eye = vec3(0, 1, 0);
-    m_ViewProperties.up = vec3(0, 0, 0);
+    m_ViewProperties.at = vec3(0, 0, 0);
+    m_ViewProperties.eye = vec3(0, 0, -15);
+    m_ViewProperties.up = vec3(0, 1, 0);
 
     m_ProjectionProperties.aspect = 1;
     m_ProjectionProperties.farzy = 100;
@@ -32,9 +32,16 @@ Camera::~Camera()
 
 void Camera::Update(float deltaTime)
 {
-    m_ViewMatrix.CreateLookAtViewLeftHanded(m_ViewProperties.at, m_ViewProperties.eye, m_ViewProperties.up);
-    m_ProjectionMatrix.CreatePerspectiveVFoV(m_ProjectionProperties.fov, m_ProjectionProperties.aspect, m_ProjectionProperties.nearzy, m_ProjectionProperties.farzy);
 
+    ImGui::Begin("Camera Controlls");
+
+    ImGui::DragFloat3("Pos", &m_ViewProperties.eye.x, 0.1f);
+    ImGui::DragFloat3("At", &m_ViewProperties.at.x, 0.1f);
+
+    ImGui::End();
+
+    m_ViewMatrix.CreateLookAtViewLeftHanded(m_ViewProperties.eye, m_ViewProperties.up, m_ViewProperties.at);
+    m_ProjectionMatrix.CreatePerspectiveVFoV(m_ProjectionProperties.fov, m_ProjectionProperties.aspect, m_ProjectionProperties.nearzy, m_ProjectionProperties.farzy);
 }
 
 mat4 Camera::GetProjectionMatrix()

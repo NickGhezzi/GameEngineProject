@@ -38,6 +38,7 @@
 
 #include "Math/Vector.h"
 #include "Math/MyMatrix.h"
+typedef fw::MyMatrix mat4;
 
 #include "Physics/PhysicsBody.h"
 #include "Physics/PhysicsBody2D.h"
@@ -52,5 +53,4 @@
 #include "Framework.h"
 #include "GameCore.h"
 
-typedef fw::MyMatrix mat4;
 #endif //__FrameworkPCH_H__

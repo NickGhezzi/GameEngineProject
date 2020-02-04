@@ -9,6 +9,7 @@
 
 #include "Scenes/SceneCube.h"
 #include "Scenes/SimpleScene.h"
+#include "Scenes/SceneWater.h"
 
 #include "ResourceManager.h"
 #include "Base/Material.h"
@@ -32,7 +33,7 @@ Game::Game(Framework* pFramework)
 
     m_pPhysicsWorld = nullptr;
 
-    m_pScenes = nullptr;
+    
     m_pResourceManager = nullptr;
 
 }
@@ -49,10 +50,12 @@ Game::~Game()
     delete m_pMeshBox;
 
     delete m_pShaderTexture;
+    delete m_pShaderWater;
 
     delete m_pImGuiManager;
 
-    delete m_pScenes;
+    delete m_pSceneCube;
+    delete m_pSceneWater;
 
     delete m_pPlayerMaterial;
 
@@ -76,6 +79,7 @@ void Game::Init()
 
     // Create our shaders.
     m_pShaderTexture = new ShaderProgram( "Data/Shaders/texture.vert", "Data/Shaders/texture.frag" );
+    m_pShaderWater = new ShaderProgram("Data/Shaders/Water.vert", "Data/Shaders/Water.frag");
 
     // Create our meshes.
     m_pMeshBox = new Mesh();
@@ -91,21 +95,28 @@ void Game::Init()
     m_pResourceManager = new ResourceManager();
     m_pResourceManager->AddTexture("Dice", new Texture("Data/Textures/Dice.png"));
     m_pResourceManager->AddShader("Shader_Texture", new ShaderProgram("Data/Shaders/texture.vert", "Data/Shaders/texture.frag"));
+    m_pResourceManager->AddShader("Shader_Water", new ShaderProgram("Data/Shaders/Water.vert", "Data/Shaders/Water.frag"));
     m_pResourceManager->AddMaterial("Megaman", new Material(m_pShaderTexture, m_pTexture));
+    m_pResourceManager->AddMaterial("Water", new Material(m_pShaderWater, m_pTexture));
 
     //meshes
     m_pResourceManager->AddMesh("PlayerMesh", new Mesh())->CreateBox(vec2(1, 1), vec2(0, 0));
     m_pResourceManager->AddMesh("CubeMesh", new Mesh())->CreateCube(vec3(1, 1, 1), vec3(0, 0, 0));
-    m_pResourceManager->AddMesh("Plane", new Mesh())->CreatePlane(vec2(4, 4), ivec2(20, 20));
+    m_pResourceManager->AddMesh("Plane", new Mesh())->CreatePlane(vec2(6, 6), ivec2(20, 20));
 
     //Create physics world
-    m_pPhysicsWorld = new fw::PhysicsWorld2D(;
+    m_pPhysicsWorld = new fw::PhysicsWorld2D();
 
     //CUBE ASSIGNMENT:::: comment out simple scene and uncomment scenecube for the cube. sorry for the inconvenience
-    //m_pScenes = new SimpleScene(this);
-    m_pScenes = new SceneCube(this);
+
+    m_pSceneCube = new SceneCube(this);
+    m_pSceneWater = new SceneWater(this);
+    m_pSceneCube->Init();
+    m_pSceneWater->Init();
     
-    m_pScenes->Init();
+    m_pCurrentScene = m_pSceneWater;
+
+    
 
     //m_pScenes->LoadFromFile("Data/Simple.box2dscene");
     // Create our GameObjects.
@@ -120,6 +131,7 @@ void Game::Init()
 
 void Game::OnEvent(Event* pEvent)
 {
+    m_pImGuiManager->OnEvent( pEvent );
     m_pController->OnEvent( pEvent );
 }
 
@@ -137,9 +149,20 @@ void Game::Update(float deltaTime)
     m_pPhysicsWorld->Update(deltaTime);
 
     // Update objects.
-   // m_pPlayer->Update( deltaTime );
-   // m_pCamera->Update( deltaTime );
-    m_pScenes->Update(deltaTime);
+    ImGui::Begin("Scene Selector");
+    if (ImGui::Button("Cube"))
+    {
+        m_pCurrentScene = m_pSceneCube;
+        
+    }
+    if (ImGui::Button("Water"))
+    {
+        m_pCurrentScene = m_pSceneWater;
+       
+    }
+    ImGui::End();
+
+    m_pCurrentScene->Update(deltaTime);
    
 }
 
@@ -155,7 +178,7 @@ void Game::Draw()
 
     // Draw our game objects.
     //m_pPlayer->Draw( m_pCamera );
-    m_pScenes->Draw();
+    m_pCurrentScene->Draw();
 
     m_pImGuiManager->EndFrame();
 }

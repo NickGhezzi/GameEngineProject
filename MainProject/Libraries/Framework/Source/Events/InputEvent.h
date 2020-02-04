@@ -5,29 +5,54 @@
 
 namespace fw
 {
+    enum class InputDevice
+    {
+        Keyboard,
+        Mouse,
+    };
+
     enum class InputState
     {
         Pressed,
         Released,
+        Moved,
     };
 
     class InputEvent : public Event
     {
     protected:
+        InputDevice m_Device;
         InputState m_State;
-        int m_KeyCode;
+        union
+        {
+            int m_KeyCode;
+            int m_MouseButtonID;
+        };
+        Vector2Int m_Position;
 
     public:
         InputEvent(InputState state, int keyCode)
         {
+            m_Device = InputDevice::Keyboard;
             m_State = state;
             m_KeyCode = keyCode;
         }
 
+        InputEvent(InputState state, int mouseButtonID, Vector2Int position)
+        {
+            m_Device = InputDevice::Mouse;
+            m_State = state;
+            m_MouseButtonID = mouseButtonID;
+            m_Position = position;
+        }
+
         virtual std::string GetType() { return "InputEvent"; }
 
+        InputDevice GetDevice() { return m_Device; }
         InputState GetState() { return m_State; }
         int GetKeyCode() { return m_KeyCode; };
+        int GetMouseButtonID() { return m_MouseButtonID; };
+        Vector2Int GetPosition() { return m_Position; };
     };
 
 } // namespace fw

@@ -37,10 +37,13 @@ namespace fw
         m_pWorld->SetDebugDraw(m_pDebugDraw);
         m_pContactListener->BeginContact(nullptr);
     }
+
     PhysicsWorld2D::~PhysicsWorld2D()
     {
         delete m_pWorld;
         delete m_pContactListener;
+        delete m_pShader;
+        delete m_pDebugDraw;
     }
 
     void PhysicsWorld2D::Update(float deltaTime)

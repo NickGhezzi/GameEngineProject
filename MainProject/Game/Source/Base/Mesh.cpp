@@ -108,6 +108,12 @@ void Mesh::Draw(Camera* pCamera, Material* pMat, vec3 scale, vec3 rotation, vec2
         glUniformMatrix4fv(uProjectionMat, 1, false, &projMatrix.m11);
     }
 
+    GLint uTime = glGetUniformLocation(pMat->m_pShader->GetProgram(), "u_Time");
+    if (uTime != -1)
+    {
+        glUniform1f(uTime, fw::GetSystemTimeSinceGameStart());
+    }
+
     // Setup the texture.
     int textureUnit = 0;
     glActiveTexture( GL_TEXTURE0 + textureUnit );
@@ -239,7 +245,7 @@ void Mesh::CreatePlane(vec2 size, ivec2 numverts)
     {
         for (int y = 0; y < numverts.y; y++)
         {
-            vertexAttributes[y * numverts.x + x] = VertexFormat(vec3(gap.x * x, gap.y * y, 0), ColorByte(255,255,255,255), vec2(gap.x * x / size.x, gap.y * y / size.y));
+            vertexAttributes[y * numverts.x + x] = VertexFormat(vec3(gap.x * x,  0, gap.y * y), ColorByte(255,255,255,255), vec2(gap.x * x / size.x, gap.y * y / size.y));
         }
     }
 

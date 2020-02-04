@@ -482,29 +482,38 @@ namespace fw
             return 0;
 
         case WM_MOUSEMOVE:
-            {
-                int x = GET_X_LPARAM( lParam );
-                int y = GET_Y_LPARAM( lParam );
-            }
-            return 0;
+        {
+            int x = GET_X_LPARAM( lParam );
+            int y = GET_Y_LPARAM( lParam );
+
+            InputEvent* pEvent = new InputEvent( InputState::Moved, (int)-1, Vector2Int( x, y ) );
+            pFramework->m_pEventManager->AddEventToQueue( pEvent );
+        }
+        return 0;
 
         case WM_LBUTTONDOWN:
-            {
-                pFramework->m_MouseButtonStates[0] = true;
+        {
+            pFramework->m_MouseButtonStates[0] = true;
 
-                int x = GET_X_LPARAM( lParam );
-                int y = GET_Y_LPARAM( lParam );
-            }
-            return 0;
+            int x = GET_X_LPARAM( lParam );
+            int y = GET_Y_LPARAM( lParam );
+
+            InputEvent* pEvent = new InputEvent( InputState::Pressed, (int)0, Vector2Int( x, y ) );
+            pFramework->m_pEventManager->AddEventToQueue( pEvent );
+        }
+        return 0;
 
         case WM_LBUTTONUP:
-            {
-                pFramework->m_MouseButtonStates[0] = false;
+        {
+            pFramework->m_MouseButtonStates[0] = false;
 
-                int x = GET_X_LPARAM( lParam );
-                int y = GET_Y_LPARAM( lParam );
-            }
-            return 0;
+            int x = GET_X_LPARAM( lParam );
+            int y = GET_Y_LPARAM( lParam );
+
+            InputEvent* pEvent = new InputEvent( InputState::Released, (int)0, Vector2Int( x, y ) );
+            pFramework->m_pEventManager->AddEventToQueue( pEvent );        
+        }
+        return 0;
 
         case WM_SIZE:
             {

@@ -12,43 +12,50 @@
 
 #include "../../Libraries/imgui/imgui.h"
 
-class ImGuiManager
+namespace fw
 {
-protected:
-    void ClearInput();
 
-    GLuint m_FontTexture;
-    int m_ShaderHandle;
-    int m_VertHandle;
-    int m_FragHandle;
-    int m_AttribLocationTex;
-    int m_AttribLocationProjMtx;
-    int m_AttribLocationPosition;
-    int m_AttribLocationUV;
-    int m_AttribLocationColor;
-    unsigned int m_VboHandle;
-    unsigned int m_VaoHandle;
-    unsigned int m_ElementsHandle;
+    class Event;
 
-public:
-    ImGuiManager();
-    virtual ~ImGuiManager();
+    class ImGuiManager
+    {
+    protected:
+        void ClearInput();
 
-    void Init();
-    void Shutdown();
+        GLuint m_FontTexture;
+        int m_ShaderHandle;
+        int m_VertHandle;
+        int m_FragHandle;
+        int m_AttribLocationTex;
+        int m_AttribLocationProjMtx;
+        int m_AttribLocationPosition;
+        int m_AttribLocationUV;
+        int m_AttribLocationColor;
+        unsigned int m_VboHandle;
+        unsigned int m_VaoHandle;
+        unsigned int m_ElementsHandle;
 
-    void OnFocusLost();
+    public:
+        ImGuiManager();
+        virtual ~ImGuiManager();
 
-    //void OnEvent(Event* pEvent);
+        void Init();
+        void Shutdown();
 
-    void StartFrame(float width, float height, float deltaTime);
-    void EndFrame();
+        void OnFocusLost();
 
-    void RenderDrawLists(ImDrawData* draw_data);
+        void OnEvent(fw::Event* pEvent);
 
-    bool CreateFontsTexture();
-    bool CreateDeviceObjects();
-    void InvalidateDeviceObjects();
-};
+        void StartFrame(float width, float height, float deltaTime);
+        void EndFrame();
+
+        void RenderDrawLists(ImDrawData* draw_data);
+
+        bool CreateFontsTexture();
+        bool CreateDeviceObjects();
+        void InvalidateDeviceObjects();
+    };
+
+}
 
 #endif //__ImGuiManager_H__
