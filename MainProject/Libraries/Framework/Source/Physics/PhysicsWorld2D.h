@@ -16,7 +16,7 @@ namespace fw
 
         ShaderProgram* m_pShader;
     public:
-        PhysicsWorld2D();
+        PhysicsWorld2D(Framework* pFramework);
         virtual ~PhysicsWorld2D();
 
         virtual void Update(float deltaTime) override;
@@ -24,6 +24,7 @@ namespace fw
 
         // Inherited via PhysicsWorld
         virtual PhysicsBody* CreateBody(Vector3 pos, float angle, bool isDynamic, void* pUserData) override;
+        
 
     };
 }

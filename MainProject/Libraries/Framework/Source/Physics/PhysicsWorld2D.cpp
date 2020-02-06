@@ -1,21 +1,32 @@
 #include "FrameworkPCH.h"
 #include "box2d/box2d.h"
 #include "Box2DDebugDraw.h"
-
+#include "../Events/CollisionEvent.h"
 
 namespace fw
 {
 
     class Box2DContactListener : public b2ContactListener
     {
+    protected:
+        Framework* m_pFramework;
+
     public:
+        Box2DContactListener(Framework* pFramework)
+        {
+            m_pFramework = pFramework;
+        }
         virtual void BeginContact(b2Contact* contact) override;
         virtual void EndContact(b2Contact* contact) override;
     };
 
     void Box2DContactListener::BeginContact(b2Contact* contact)
     {
-        //contact->GetFixtureA()->GetBody()->GetUserData();
+        void* pUserDataA = contact->GetFixtureA()->GetBody()->GetUserData();
+        void* pUserDataB = contact->GetFixtureB()->GetBody()->GetUserData();
+
+        //CollisionEvent* pEvent = new CollisionEvent(CollisionEventType::OnHit, pUserDataA, pUserDataB, worldNarmal);
+        //m_pFramework->GetEventManager()->AddEventToQueue(pEvent);
     }
 
     void Box2DContactListener::EndContact(b2Contact* contact)
@@ -23,14 +34,14 @@ namespace fw
         //contact->GetFixtureA()->GetBody()->GetUserData();
     }
 
-    PhysicsWorld2D::PhysicsWorld2D()
+    PhysicsWorld2D::PhysicsWorld2D(Framework* pFramework)
     {
        m_pWorld = new b2World(b2Vec2(0, -9.8));
         //m_pWorld = new b2World(b2Vec2(0, 0));
 
         m_pShader = new ShaderProgram("Data/Shaders/Box2DDebug.vert", "Data/Shaders/Box2DDebug.frag");
 
-        m_pContactListener = new Box2DContactListener();
+        m_pContactListener = new Box2DContactListener(pFramework);
         m_pDebugDraw = new Box2DDebugDraw(m_pShader, nullptr, nullptr);
 
         m_pWorld->SetContactListener(m_pContactListener);
@@ -83,4 +94,5 @@ namespace fw
 
         return pPhysicsBody;
     }
+
 }

@@ -1,5 +1,6 @@
 #ifndef __GameObject_H__
 #define __GameObject_H__
+#include "Base/ObjectPool.h"
 
 class Game;
 class BaseScene;
@@ -20,6 +21,8 @@ protected:
     //create physics body
     fw::PhysicsBody* m_pPhysicsBody;
 
+    ObjectPool<GameObject*>* m_pPoolWeCameFrom;
+
 public:
     //swap all vec2 to vec3
     GameObject(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec3 scale, vec3 rotation, vec3 position);
@@ -34,6 +37,7 @@ public:
     void SetPosition(vec3 pos) { m_Position = pos; }
 
     void CreateBody(bool isDynamic);
+    fw::PhysicsBody* GetBody();
     void AddCircle(float radius);
     void AddBox(vec3 size, float density, bool isSensor, float friction, float restitution);
 
@@ -42,6 +46,8 @@ public:
 
     virtual bool IsColliding(GameObject* pOtherGameObject);
     virtual void OnCollision(GameObject* pOtherGameObject);
+
+    void SetPoolWhereWeCameFrom(ObjectPool<GameObject*>* obj);
 };
 
 #endif //__GameObject_H__

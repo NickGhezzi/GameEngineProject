@@ -1,6 +1,10 @@
 #ifndef __Game_H__
 #define __Game_H__
 
+//TODO:: Move Physics world into theyre repective scene
+//TODO:: get debug draw working
+
+
 class Ball;
 class Camera;
 class GameObject;
@@ -21,6 +25,7 @@ protected:
     BaseScene* m_pSceneWater;
     BaseScene* m_pSceneCube;
     BaseScene* m_pScenePhysics;
+    BaseScene* m_pBoxStackingScene;
 
     ResourceManager* m_pResourceManager;
 

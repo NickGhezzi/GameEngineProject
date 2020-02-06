@@ -31,6 +31,11 @@ void GameObject::CreateBody(bool isStatic)
     m_pPhysicsBody = m_pScene->GetGame()->GetPhysicsWorld()->CreateBody(m_Position, 0, isStatic, this);
 }
 
+fw::PhysicsBody* GameObject::GetBody()
+{
+    return m_pPhysicsBody;
+}
+
 void GameObject::AddCircle(float radius)
 {
     m_pPhysicsBody->AddCircle(radius);
@@ -64,4 +69,9 @@ bool GameObject::IsColliding(GameObject* pOtherGameObject)
 
 void GameObject::OnCollision(GameObject* pOtherGameObject)
 {
+}
+
+void GameObject::SetPoolWhereWeCameFrom(ObjectPool<GameObject*>* obj)
+{
+    m_pPoolWeCameFrom = obj;
 }

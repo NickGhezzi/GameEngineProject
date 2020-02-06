@@ -55,4 +55,9 @@ namespace fw
     {
         return Vector3(m_pBody->GetPosition().x, m_pBody->GetPosition().y, 0);
     }
+
+    void PhysicsBody2D::SetActive(bool isactive)
+    {
+        m_pBody->SetActive(isactive);
+    }
 }

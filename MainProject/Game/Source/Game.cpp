@@ -10,6 +10,7 @@
 #include "Scenes/SceneCube.h"
 #include "Scenes/SceneWater.h"
 #include "Scenes/ScenePhysics.h"
+#include "Scenes/BoxStackingScene.h"
 
 #include "ResourceManager.h"
 #include "Base/Material.h"
@@ -38,6 +39,7 @@ Game::~Game()
     delete m_pSceneCube;
     delete m_pSceneWater;
     delete m_pScenePhysics;
+    delete m_pBoxStackingScene;
 
     delete m_pResourceManager;
 
@@ -79,24 +81,26 @@ void Game::Init()
     //meshes
     m_pResourceManager->AddMesh("PlayerMesh", new Mesh())->CreateBox(vec2(1, 1), vec2(0, 0));
     m_pResourceManager->AddMesh("CubeMesh", new Mesh())->CreateCube(vec3(1, 1, 1), vec3(0, 0, 0));
-    m_pResourceManager->AddMesh("Plane", new Mesh())->CreatePlane(vec2(30, 30), ivec2(50, 50));
+    m_pResourceManager->AddMesh("Plane", new Mesh())->CreatePlane(vec2(50, 50), ivec2(100, 100));
 
     //Create physics world
-    m_pPhysicsWorld = new fw::PhysicsWorld2D();
+    m_pPhysicsWorld = new fw::PhysicsWorld2D(m_pFramework);
 
     //CUBE ASSIGNMENT:::: comment out simple scene and uncomment scenecube for the cube. sorry for the inconvenience
 
     m_pSceneCube = new SceneCube(this);
     m_pSceneWater = new SceneWater(this);
     m_pScenePhysics = new ScenePhysics(this);
+    m_pBoxStackingScene = new BoxStackingScene(this);
 
     m_pSceneCube->Init();
     m_pSceneWater->Init();
     m_pScenePhysics->Init();
+    m_pBoxStackingScene->Init();
 
     m_pScenePhysics->LoadFromFile("Data/Simple.box2dscene");
 
-    m_pCurrentScene = m_pSceneWater;
+    m_pCurrentScene = m_pBoxStackingScene;
 
 
     // Create our GameObjects.

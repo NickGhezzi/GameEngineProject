@@ -16,6 +16,7 @@ namespace fw
         virtual void ApplyForce(Vector3 force) override;
         virtual Vector3 GetPosition() override;
 
+        virtual void SetActive(bool isactive) override;
     private:
         b2Body* m_pBody;
     };

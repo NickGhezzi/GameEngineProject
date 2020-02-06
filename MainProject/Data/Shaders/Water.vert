@@ -10,6 +10,7 @@ uniform mat4 u_ProjectionMatrix;
 uniform float u_Time;
 
 varying vec2 v_UV;
+varying vec3 v_Pos;
 
 void main()
 {
@@ -27,4 +28,5 @@ void main()
     gl_Position = clipspacePosition;
 
     v_UV = a_UV;
+	v_Pos = a_Position;
 }
