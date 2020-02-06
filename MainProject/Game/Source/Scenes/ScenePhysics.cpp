@@ -1,44 +1,37 @@
 #include "GamePCH.h"
+#include "ScenePhysics.h"
 #include "BaseScene.h"
-#include "SimpleScene.h"
 #include "Game.h"
 #include "GameObjects/GameObject.h"
 #include "GameObjects/Player.h"
 #include "GameObjects/Camera.h"
 #include "ResourceManager.h"
 
-SimpleScene::SimpleScene(Game* game):
-BaseScene(game)
+ScenePhysics::ScenePhysics(Game* game) :
+    BaseScene(game)
 {
-    
 }
 
-SimpleScene::~SimpleScene()
+ScenePhysics::~ScenePhysics()
 {
     for (auto obj : m_pGameObjects)
     {
         delete obj;
     }
-    
+
 
     delete m_pCamera;
     m_pGameObjects.clear();
 }
 
-void SimpleScene::Init()
+void ScenePhysics::Init()
 {
     m_pResources = m_pGame->GetResourceManager();
     m_pCamera = new Camera(this, vec3(0, 0, 0), vec2(1 / 5.0f, 1 / 5.0f));
-    //Player* pPlayer = new Player(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("Megaman"), vec3(1, 1, 1), vec3(0, 0, 0), vec3(0, 0, 0), 0, m_pGame->m_pController);
-    //pPlayer->CreateBody(true);
-    //pPlayer->AddBox(vec3(1, 1, 1), 1, false, 0.2, 0);
-    //m_pGameObjects.push_back(pPlayer);
 }
 
-void SimpleScene::Update(float deltaTime)
+void ScenePhysics::Update(float deltaTime)
 {
-    int i = 0;
-
     for (auto obj : m_pGameObjects)
     {
         obj->Update(deltaTime);
@@ -46,17 +39,15 @@ void SimpleScene::Update(float deltaTime)
     m_pCamera->Update(deltaTime);
 }
 
-void SimpleScene::Draw()
+void ScenePhysics::Draw()
 {
-    int i = 0;
-
     for (auto obj : m_pGameObjects)
     {
         obj->Draw(m_pCamera);
     }
 }
 
-void SimpleScene::LoadFromFile(const char* filename)
+void ScenePhysics::LoadFromFile(const char* filename)
 {
     long filelength;
     char* contents = fw::LoadCompleteFile(filename, &filelength);
@@ -113,7 +104,7 @@ void SimpleScene::LoadFromFile(const char* filename)
             pPlayer->AddBox(vec2(1, 1), density, issensor, friction, restitution);
             m_pGameObjects.push_back(pPlayer);
             //todo if type == box create box
-            
+
         }
         if (name == "Ground")
         {

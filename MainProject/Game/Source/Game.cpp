@@ -8,8 +8,8 @@
 #include "GameObjects/PlayerController.h"
 
 #include "Scenes/SceneCube.h"
-#include "Scenes/SimpleScene.h"
 #include "Scenes/SceneWater.h"
+#include "Scenes/ScenePhysics.h"
 
 #include "ResourceManager.h"
 #include "Base/Material.h"
@@ -37,7 +37,7 @@ Game::~Game()
 
     delete m_pSceneCube;
     delete m_pSceneWater;
-    delete m_pSimpleScene;
+    delete m_pScenePhysics;
 
     delete m_pResourceManager;
 
@@ -64,6 +64,8 @@ void Game::Init()
     m_pResourceManager->AddTexture("Dice", new Texture("Data/Textures/Dice.png"));
     m_pResourceManager->AddTexture("Megaman", new Texture("Data/Textures/Megaman.png"));
     m_pResourceManager->AddTexture("Ground", new Texture("Data/Textures/Ground.png"));
+    m_pResourceManager->AddTexture("Water", new Texture("Data/Textures/Water.png"));
+
 
     m_pResourceManager->AddShader("Shader_Texture", new ShaderProgram("Data/Shaders/texture.vert", "Data/Shaders/texture.frag"));
     m_pResourceManager->AddShader("Shader_Water", new ShaderProgram("Data/Shaders/Water.vert", "Data/Shaders/Water.frag"));
@@ -71,12 +73,13 @@ void Game::Init()
     m_pResourceManager->AddMaterial("Megaman", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("Megaman")));
     m_pResourceManager->AddMaterial("Ground", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("Ground")));
     m_pResourceManager->AddMaterial("Dice", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("Dice")));
-    m_pResourceManager->AddMaterial("Water", new Material(m_pResourceManager->GetShader("Shader_Water"), m_pResourceManager->GetTexture("Dice")));
+    m_pResourceManager->AddMaterial("Water", new Material(m_pResourceManager->GetShader("Shader_Water"), m_pResourceManager->GetTexture("Water")));
+
 
     //meshes
     m_pResourceManager->AddMesh("PlayerMesh", new Mesh())->CreateBox(vec2(1, 1), vec2(0, 0));
     m_pResourceManager->AddMesh("CubeMesh", new Mesh())->CreateCube(vec3(1, 1, 1), vec3(0, 0, 0));
-    m_pResourceManager->AddMesh("Plane", new Mesh())->CreatePlane(vec2(6, 6), ivec2(20, 20));
+    m_pResourceManager->AddMesh("Plane", new Mesh())->CreatePlane(vec2(30, 30), ivec2(50, 50));
 
     //Create physics world
     m_pPhysicsWorld = new fw::PhysicsWorld2D();
@@ -85,15 +88,15 @@ void Game::Init()
 
     m_pSceneCube = new SceneCube(this);
     m_pSceneWater = new SceneWater(this);
-    m_pSimpleScene = new SimpleScene(this);
+    m_pScenePhysics = new ScenePhysics(this);
 
     m_pSceneCube->Init();
     m_pSceneWater->Init();
-    m_pSimpleScene->Init();
+    m_pScenePhysics->Init();
 
-    m_pSimpleScene->LoadFromFile("Data/Simple.box2dscene");
+    m_pScenePhysics->LoadFromFile("Data/Simple.box2dscene");
 
-    m_pCurrentScene = m_pSimpleScene;
+    m_pCurrentScene = m_pSceneWater;
 
 
     // Create our GameObjects.
@@ -133,7 +136,7 @@ void Game::Update(float deltaTime)
     }
     if (ImGui::Button("SimpleScene"))
     {
-        m_pCurrentScene = m_pSimpleScene;
+        m_pCurrentScene = m_pScenePhysics;
 
     }
     ImGui::End();

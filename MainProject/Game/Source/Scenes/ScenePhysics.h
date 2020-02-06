@@ -5,11 +5,11 @@ class Camera;
 class Game;
 class ResourceManager;
 
-class SimpleScene : public BaseScene
+class ScenePhysics : public BaseScene
 {
 public:
-    SimpleScene(Game* game);
-    ~SimpleScene();
+    ScenePhysics(Game* game);
+    ~ScenePhysics();
 
     virtual void Init() override;
     virtual void Update(float deltaTime) override;

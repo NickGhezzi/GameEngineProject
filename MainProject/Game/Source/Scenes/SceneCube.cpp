@@ -30,7 +30,7 @@ void SceneCube::Init()
     m_pPlayer->CreateBody(true);
     m_pPlayer->AddBox(vec3(1, 1, 1), 1, false, 0.2, 0);
 
-    m_pDummy = new Player(this, m_pResources->GetMesh("Plane"), m_pResources->GetMaterial("Water"), vec3(1,1,1), vec3(0,0,0), vec3(-3, -5, 0), 0, m_pGame->m_pController);
+    m_pDummy = new Player(this, m_pResources->GetMesh("Plane"), m_pResources->GetMaterial("Dice"), vec3(1,1,1), vec3(0,0,0), vec3(-3, -5, 0), 0, m_pGame->m_pController);
     m_pDummy->CreateBody(true);
     m_pDummy->AddBox(vec3(1, 1, 1), 1, false, 0.2, 0);
 

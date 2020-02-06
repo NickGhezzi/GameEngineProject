@@ -10,7 +10,6 @@ uniform mat4 u_ProjectionMatrix;
 uniform float u_Time;
 
 varying vec2 v_UV;
-varying float v_Time;
 
 void main()
 {
