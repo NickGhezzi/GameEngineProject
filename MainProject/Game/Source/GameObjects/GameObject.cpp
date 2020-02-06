@@ -26,9 +26,9 @@ GameObject::~GameObject()
     delete m_pPhysicsBody;
 }
 
-void GameObject::CreateBody(bool isDynamic)
+void GameObject::CreateBody(bool isStatic)
 {
-    m_pPhysicsBody = m_pScene->GetGame()->GetPhysicsWorld()->CreateBody(m_Position, 0, isDynamic, this);
+    m_pPhysicsBody = m_pScene->GetGame()->GetPhysicsWorld()->CreateBody(m_Position, 0, isStatic, this);
 }
 
 void GameObject::AddCircle(float radius)

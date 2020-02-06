@@ -29,7 +29,7 @@ void SimpleScene::Init()
 {
     m_pResources = m_pGame->GetResourceManager();
     m_pCamera = new Camera(this, vec3(0, 0, 0), vec2(1 / 5.0f, 1 / 5.0f));
-    //Player* pPlayer = new Player(this, m_pResources->GetMesh("CubeMesh"), m_pResources->GetMaterial("PlayerMaterial"), vec3(1, 1, 1), vec3(0, 0, 0), vec3(0, 0, 0), 0, m_pGame->m_pController);
+    //Player* pPlayer = new Player(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("Megaman"), vec3(1, 1, 1), vec3(0, 0, 0), vec3(0, 0, 0), 0, m_pGame->m_pController);
     //pPlayer->CreateBody(true);
     //pPlayer->AddBox(vec3(1, 1, 1), 1, false, 0.2, 0);
     //m_pGameObjects.push_back(pPlayer);
@@ -37,6 +37,8 @@ void SimpleScene::Init()
 
 void SimpleScene::Update(float deltaTime)
 {
+    int i = 0;
+
     for (auto obj : m_pGameObjects)
     {
         obj->Update(deltaTime);
@@ -46,6 +48,8 @@ void SimpleScene::Update(float deltaTime)
 
 void SimpleScene::Draw()
 {
+    int i = 0;
+
     for (auto obj : m_pGameObjects)
     {
         obj->Draw(m_pCamera);
@@ -93,23 +97,46 @@ void SimpleScene::LoadFromFile(const char* filename)
             cJSON* physicscomp = cJSON_GetArrayItem(components, 0);
             cJSON* spritecomp = cJSON_GetArrayItem(components, 1);
 
-            std::string type = cJSON_GetArrayItem(physicscomp, 3)->string;
-            bool isStatic = cJSON_GetArrayItem(physicscomp, 4);
+            std::string type = cJSON_GetArrayItem(physicscomp, 3)->valuestring;
+            bool isStatic = cJSON_GetArrayItem(physicscomp, 4)->valueint;
             float density = (float)cJSON_GetArrayItem(physicscomp, 6)->valuedouble;
             float issensor = (float)cJSON_GetArrayItem(physicscomp, 7)->valuedouble;
             float friction = (float)cJSON_GetArrayItem(physicscomp, 8)->valuedouble;
             float restitution = (float)cJSON_GetArrayItem(physicscomp, 9)->valuedouble;
 
-            std::string material = (std::string)cJSON_GetArrayItem(spritecomp, 2)->string;
-            std::string texture = (std::string)cJSON_GetArrayItem(spritecomp, 3)->string;
-            std::string shader = (std::string)cJSON_GetArrayItem(spritecomp, 4)->string;
+            std::string material = (std::string)cJSON_GetArrayItem(spritecomp, 2)->valuestring;
+            std::string texture = (std::string)cJSON_GetArrayItem(spritecomp, 3)->valuestring;
+            std::string shader = (std::string)cJSON_GetArrayItem(spritecomp, 4)->valuestring;
 
-            Player* pPlayer = new Player(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("Megaman"), vscale, vrot, vpos, 1, m_pGame->m_pController);
+            Player* pPlayer = new Player(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial(material), vscale, vrot, vpos, 1, m_pGame->m_pController);
             pPlayer->CreateBody(isStatic);
             pPlayer->AddBox(vec2(1, 1), density, issensor, friction, restitution);
             m_pGameObjects.push_back(pPlayer);
             //todo if type == box create box
-            int i = 0;
+            
+        }
+        if (name == "Ground")
+        {
+            cJSON* components = cJSON_GetObjectItem(jGameObject, "Components");
+
+            cJSON* physicscomp = cJSON_GetArrayItem(components, 0);
+            cJSON* spritecomp = cJSON_GetArrayItem(components, 1);
+
+            std::string type = (std::string)cJSON_GetArrayItem(physicscomp, 3)->valuestring;
+            bool isStatic = (bool)cJSON_GetArrayItem(physicscomp, 4)->valueint;
+            float density = (float)cJSON_GetArrayItem(physicscomp, 6)->valuedouble;
+            float issensor = (float)cJSON_GetArrayItem(physicscomp, 7)->valuedouble;
+            float friction = (float)cJSON_GetArrayItem(physicscomp, 8)->valuedouble;
+            float restitution = (float)cJSON_GetArrayItem(physicscomp, 9)->valuedouble;
+
+            std::string material = (std::string)cJSON_GetArrayItem(spritecomp, 2)->valuestring;
+            std::string texture = (std::string)cJSON_GetArrayItem(spritecomp, 3)->valuestring;
+            std::string shader = (std::string)cJSON_GetArrayItem(spritecomp, 4)->valuestring;
+
+            GameObject* pGround = new GameObject(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial(material), vscale, vrot, vpos);
+            pGround->CreateBody(isStatic);
+            pGround->AddBox(vec2(1, 1), density, issensor, friction, restitution);
+            m_pGameObjects.push_back(pGround);
         }
     }
 

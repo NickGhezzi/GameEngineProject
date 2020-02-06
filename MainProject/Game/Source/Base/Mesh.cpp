@@ -150,7 +150,7 @@ void Mesh::CreateBox(vec2 size, vec2 offset)
         VertexFormat( vec2(  size.x/2, -size.y/2 ) + offset, ColorByte( 255, 255, 255, 255 ), vec2( 1.0f, 0.0f ) ),
     };
 
-    unsigned int indices[6] = { 0,2,1, 0,3,2 };
+    unsigned int indices[6] = { 0,1,2, 0,2,3 };
 
     Init( vertexAttributes, 4, indices, 6, GL_TRIANGLES, GL_STATIC_DRAW );
 }

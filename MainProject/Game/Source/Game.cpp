@@ -21,19 +21,10 @@ Game::Game(Framework* pFramework)
 {
     m_pImGuiManager = nullptr;
 
-    m_pPlayerMaterial = nullptr;
-    m_pMeshBox = nullptr;
-    m_pShaderTexture = nullptr;
-    m_pTexture = 0;
-
-    m_pPlayer = nullptr;
-    m_pCamera = nullptr;
-
     m_pController = new PlayerController();
 
     m_pPhysicsWorld = nullptr;
 
-    
     m_pResourceManager = nullptr;
 
 }
@@ -42,23 +33,11 @@ Game::~Game()
 {
     delete m_pController;
 
-    delete m_pPlayer;
-    delete m_pCamera;
-
-    delete m_pTexture;
-
-    delete m_pMeshBox;
-
-    delete m_pShaderTexture;
-    delete m_pShaderWater;
-
     delete m_pImGuiManager;
 
     delete m_pSceneCube;
     delete m_pSceneWater;
     delete m_pSimpleScene;
-
-    delete m_pPlayerMaterial;
 
     delete m_pResourceManager;
 
@@ -78,27 +57,21 @@ void Game::Init()
     // Turn on v-sync.
     wglSwapInterval( 1 );
 
-    // Create our shaders.
-    m_pShaderTexture = new ShaderProgram( "Data/Shaders/texture.vert", "Data/Shaders/texture.frag" );
-    m_pShaderWater = new ShaderProgram("Data/Shaders/Water.vert", "Data/Shaders/Water.frag");
-
-    // Create our meshes.
-    m_pMeshBox = new Mesh();
-    m_pMeshBox->CreateBox( vec2(1,1), vec2(0,0) );
-
-    // Load our textures.
-    m_pTexture = new Texture( "Data/Textures/Dice.png" );
-
-    // Create and setup materials
-    m_pPlayerMaterial = new Material(m_pShaderTexture, m_pTexture);
 
     // populate resource manager
     m_pResourceManager = new ResourceManager();
+
     m_pResourceManager->AddTexture("Dice", new Texture("Data/Textures/Dice.png"));
+    m_pResourceManager->AddTexture("Megaman", new Texture("Data/Textures/Megaman.png"));
+    m_pResourceManager->AddTexture("Ground", new Texture("Data/Textures/Ground.png"));
+
     m_pResourceManager->AddShader("Shader_Texture", new ShaderProgram("Data/Shaders/texture.vert", "Data/Shaders/texture.frag"));
     m_pResourceManager->AddShader("Shader_Water", new ShaderProgram("Data/Shaders/Water.vert", "Data/Shaders/Water.frag"));
-    m_pResourceManager->AddMaterial("Megaman", new Material(m_pShaderTexture, m_pTexture));
-    m_pResourceManager->AddMaterial("Water", new Material(m_pShaderWater, m_pTexture));
+
+    m_pResourceManager->AddMaterial("Megaman", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("Megaman")));
+    m_pResourceManager->AddMaterial("Ground", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("Ground")));
+    m_pResourceManager->AddMaterial("Dice", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("Dice")));
+    m_pResourceManager->AddMaterial("Water", new Material(m_pResourceManager->GetShader("Shader_Water"), m_pResourceManager->GetTexture("Dice")));
 
     //meshes
     m_pResourceManager->AddMesh("PlayerMesh", new Mesh())->CreateBox(vec2(1, 1), vec2(0, 0));
@@ -113,9 +86,11 @@ void Game::Init()
     m_pSceneCube = new SceneCube(this);
     m_pSceneWater = new SceneWater(this);
     m_pSimpleScene = new SimpleScene(this);
+
     m_pSceneCube->Init();
     m_pSceneWater->Init();
     m_pSimpleScene->Init();
+
     m_pSimpleScene->LoadFromFile("Data/Simple.box2dscene");
 
     m_pCurrentScene = m_pSimpleScene;
@@ -155,6 +130,11 @@ void Game::Update(float deltaTime)
     {
         m_pCurrentScene = m_pSceneWater;
        
+    }
+    if (ImGui::Button("SimpleScene"))
+    {
+        m_pCurrentScene = m_pSimpleScene;
+
     }
     ImGui::End();
 

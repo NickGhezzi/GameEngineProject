@@ -25,8 +25,8 @@ namespace fw
 
     PhysicsWorld2D::PhysicsWorld2D()
     {
-       // m_pWorld = new b2World(b2Vec2(0, -9.8));
-        m_pWorld = new b2World(b2Vec2(0, 0));
+       m_pWorld = new b2World(b2Vec2(0, -9.8));
+        //m_pWorld = new b2World(b2Vec2(0, 0));
 
         m_pShader = new ShaderProgram("Data/Shaders/Box2DDebug.vert", "Data/Shaders/Box2DDebug.frag");
 
@@ -69,12 +69,12 @@ namespace fw
         m_pDebugDraw->SetFlags(flags);
     }
 
-    PhysicsBody* PhysicsWorld2D::CreateBody(Vector3 pos, float angle, bool isDynamic, void* pUserData)
+    PhysicsBody* PhysicsWorld2D::CreateBody(Vector3 pos, float angle, bool isStatic, void* pUserData)
     {
         b2BodyDef bodydef;
         bodydef.position = b2Vec2(pos.x, pos.y);
         bodydef.angle = angle;
-        bodydef.type = isDynamic ? b2_dynamicBody : b2_staticBody;
+        bodydef.type = isStatic ? b2_staticBody : b2_dynamicBody;
         bodydef.userData = pUserData;
         
 

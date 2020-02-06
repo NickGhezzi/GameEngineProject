@@ -22,21 +22,9 @@ protected:
     BaseScene* m_pSceneCube;
     BaseScene* m_pSimpleScene;
 
-
     ResourceManager* m_pResourceManager;
 
-    Player* m_pPlayer;
-    Camera* m_pCamera;
-
-    Material* m_pPlayerMaterial;
-    Mesh* m_pMeshBox;
-    fw::ShaderProgram* m_pShaderTexture;
-    fw::ShaderProgram* m_pShaderWater;
-    fw::Texture* m_pTexture;
-
     fw::PhysicsWorld* m_pPhysicsWorld;
-
-
 
 public:
     Game(fw::Framework* pFramework);

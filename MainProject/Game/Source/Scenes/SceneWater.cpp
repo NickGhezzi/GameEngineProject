@@ -23,7 +23,7 @@ void SceneWater::Init()
     m_pResources = m_pGame->GetResourceManager();
 
     m_pWater = new Player(this, m_pResources->GetMesh("Plane"), m_pResources->GetMaterial("Water"), vec3(1, 1, 1), vec3(0, 0, 0), vec3(-3, -1, 0), 0, m_pGame->m_pController);
-    m_pWater->CreateBody(false);
+    m_pWater->CreateBody(true);
     m_pWater->AddBox(vec3(1, 1, 1), 1, false, 0.2, 0);
 
     ViewProperties view = ViewProperties(vec3(0, 15, -15), vec3(0, 1, 0), vec3(0, 0, 0));

@@ -26,17 +26,17 @@ SceneCube::~SceneCube()
 void SceneCube::Init()
 {
     m_pResources = m_pGame->GetResourceManager();
-    m_pPlayer = new Player(this, m_pResources->GetMesh("CubeMesh"), m_pResources->GetMaterial("Megaman"), vec3(1, 1, 1), vec3(0, 0, 0), vec3(0, 0, 0), 0, m_pGame->m_pController);
+    m_pPlayer = new Player(this, m_pResources->GetMesh("CubeMesh"), m_pResources->GetMaterial("Dice"), vec3(1, 1, 1), vec3(0, 0, 0), vec3(0, 0, 0), 0, m_pGame->m_pController);
     m_pPlayer->CreateBody(true);
     m_pPlayer->AddBox(vec3(1, 1, 1), 1, false, 0.2, 0);
 
-    m_pDummy = new Player(this, m_pResources->GetMesh("Plane"), m_pResources->GetMaterial("Megaman"), vec3(1,1,1), vec3(0,0,0), vec3(-3, -5, 0), 0, m_pGame->m_pController);
-    m_pDummy->CreateBody(false);
+    m_pDummy = new Player(this, m_pResources->GetMesh("Plane"), m_pResources->GetMaterial("Water"), vec3(1,1,1), vec3(0,0,0), vec3(-3, -5, 0), 0, m_pGame->m_pController);
+    m_pDummy->CreateBody(true);
     m_pDummy->AddBox(vec3(1, 1, 1), 1, false, 0.2, 0);
 
     m_pCamera = new Camera(this, vec3(0, 0, 0), vec2(1 / 5.0f, 1 / 5.0f));
 
-    //m_pGame->GetPhysicsWorld()->
+    //m_pGame->GetPhysicsWorld()->DrawDebugData(m_pCamera->GetViewMatrix(), m_pCamera->GetProjectionMatrix());
 }
 
 void SceneCube::Update(float deltaTime)
