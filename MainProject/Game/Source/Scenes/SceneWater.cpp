@@ -26,7 +26,7 @@ void SceneWater::Init()
     m_pWater->CreateBody(true);
     m_pWater->AddBox(vec3(1, 1, 1), 1, false, 0.2, 0);
 
-    ViewProperties view = ViewProperties(vec3(0, 15, -15), vec3(0, 1, 0), vec3(0, 0, 0));
+    ViewProperties view = ViewProperties(vec3(0, 15, -15), vec3(0, 1, 0), vec3(0, 0, 22.0));
     ProjectionProperties proj = ProjectionProperties(45, 1, 0.01, 100);
 
     m_pCamera = new Camera(this, vec3(0, 0, 0), vec2(1 / 5.0f, 1 / 5.0f));
