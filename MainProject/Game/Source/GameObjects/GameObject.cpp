@@ -55,7 +55,7 @@ void GameObject::Update(float deltaTime)
 void GameObject::Draw(Camera* pCamera)
 {
 	if( m_pMesh != 0 )
-        m_pMesh->Draw( pCamera, m_pMaterial, m_Scale, m_Rotation, vec2(m_Position.x, m_Position.y) );
+        m_pMesh->Draw( pCamera, m_pMaterial, m_Scale, m_Rotation, m_Position);
 }
 
 bool GameObject::IsColliding(GameObject* pOtherGameObject)

@@ -22,8 +22,8 @@ namespace fw
 
     void Box2DContactListener::BeginContact(b2Contact* contact)
     {
-        void* pUserDataA = contact->GetFixtureA()->GetBody()->GetUserData();
-        void* pUserDataB = contact->GetFixtureB()->GetBody()->GetUserData();
+        //void* pUserDataA = contact->GetFixtureA()->GetBody()->GetUserData();
+        //void* pUserDataB = contact->GetFixtureB()->GetBody()->GetUserData();
 
         //CollisionEvent* pEvent = new CollisionEvent(CollisionEventType::OnHit, pUserDataA, pUserDataB, worldNarmal);
         //m_pFramework->GetEventManager()->AddEventToQueue(pEvent);

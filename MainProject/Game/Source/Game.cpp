@@ -39,7 +39,7 @@ Game::~Game()
     delete m_pSceneCube;
     delete m_pSceneWater;
     delete m_pScenePhysics;
-    delete m_pBoxStackingScene;
+    //delete m_pBoxStackingScene;
 
     delete m_pResourceManager;
 
@@ -91,16 +91,16 @@ void Game::Init()
     m_pSceneCube = new SceneCube(this);
     m_pSceneWater = new SceneWater(this);
     m_pScenePhysics = new ScenePhysics(this);
-    m_pBoxStackingScene = new BoxStackingScene(this);
+    //m_pBoxStackingScene = new BoxStackingScene(this);
 
     m_pSceneCube->Init();
     m_pSceneWater->Init();
     m_pScenePhysics->Init();
-    m_pBoxStackingScene->Init();
+    //m_pBoxStackingScene->Init();
 
     m_pScenePhysics->LoadFromFile("Data/Simple.box2dscene");
 
-    m_pCurrentScene = m_pBoxStackingScene;
+    m_pCurrentScene = m_pSceneWater;
 
 
     // Create our GameObjects.

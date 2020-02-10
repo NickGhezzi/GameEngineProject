@@ -47,7 +47,7 @@ void Mesh::Init(VertexFormat* pVerts, unsigned int numVerts, GLenum primitiveTyp
     Init( pVerts, numVerts, nullptr, 0, primitiveType, GL_STATIC_DRAW );
 }
 
-void Mesh::Draw(Camera* pCamera, Material* pMat, vec3 scale, vec3 rotation, vec2 pos)
+void Mesh::Draw(Camera* pCamera, Material* pMat, vec3 scale, vec3 rotation, vec3 pos)
 {
     assert( m_PrimitiveType != -1 );
     assert( m_NumVerts != 0 );
@@ -112,6 +112,12 @@ void Mesh::Draw(Camera* pCamera, Material* pMat, vec3 scale, vec3 rotation, vec2
     if (uTime != -1)
     {
         glUniform1f(uTime, fw::GetSystemTimeSinceGameStart());
+    }
+
+    GLint uRipple = glGetUniformLocation(pMat->m_pShader->GetProgram(), "u_RippleOrigin");
+    if (uRipple != -1)
+    {
+        glUniform3f(uRipple, 5, 0, 5);
     }
 
     // Setup the texture.

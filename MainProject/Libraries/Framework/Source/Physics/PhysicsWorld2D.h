@@ -6,6 +6,7 @@ namespace fw
 {
     class Box2DContactListener;
     class Box2DDebugDraw;
+    class Framework;
 
     class PhysicsWorld2D: public PhysicsWorld
     {

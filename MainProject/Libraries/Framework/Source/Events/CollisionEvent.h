@@ -14,14 +14,14 @@ namespace fw
     protected:
         CollisionEventType m_CollisionEventType;
     public:
-        CollisionEvent(CollisionEventType type, void* a, void* b, )
+        CollisionEvent(CollisionEventType type, void* a, void* b )
         {
             m_CollisionEventType = type;
         }
 
         virtual std::string GetType() { return "CollisionEvent"; }
 
-        CollisionEvent GetGameEventType() { return m_CollisionEventType; }
+        CollisionEventType GetGameEventType() { return m_CollisionEventType; }
 
     };
 }
