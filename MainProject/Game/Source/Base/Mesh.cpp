@@ -117,7 +117,7 @@ void Mesh::Draw(Camera* pCamera, Material* pMat, vec3 scale, vec3 rotation, vec3
     GLint uRipple = glGetUniformLocation(pMat->m_pShader->GetProgram(), "u_RippleOrigin");
     if (uRipple != -1)
     {
-        glUniform3f(uRipple, 5, 0, 5);
+        glUniform3f(uRipple, 25, 0, 25);
     }
 
     // Setup the texture.

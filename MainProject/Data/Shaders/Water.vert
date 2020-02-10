@@ -19,15 +19,12 @@ void main()
 	vec4 worldPosition = u_WorldMatrix * objectPosition;
 	vec4 ripple = vec4(u_RippleOrigin, 1);
 
-	float Distance = sqrt(((worldPosition.x - ripple.x) * (worldPosition.x - ripple.x)) - ((worldPosition.z - ripple.z) * (worldPosition.z - ripple.z)));
+	float Distance = sqrt(((objectPosition.x - ripple.x) * (objectPosition.x - ripple.x)) + ((objectPosition.z - ripple.z) * (objectPosition.z - ripple.z)));
 
-	//float Distance = sqrt((( objectPosition.x - worldPosition.x) * (objectPosition.x - worldPosition.x)) - ((objectPosition.z - worldPosition.z) * (objectPosition.z - worldPosition.z)));
+	worldPosition.y =  (1.0/(Distance + 0.1)) * sin(u_Time -  Distance);
 
-
-	worldPosition.y = (1/Distance + 0.1) * sin(u_Time -  Distance );
-
-	//worldPosition.y += 0.5 * sin(objectPosition.x + u_Time);
-	//worldPosition.y += 0.5 * sin(objectPosition.z + u_Time);
+	//worldPosition.y += 0.1 * sin(objectPosition.x + u_Time);
+	//worldPosition.y += 0.1 * sin(objectPosition.z + u_Time);
 
     vec4 viewPosition = u_ViewMatrix * worldPosition;
 	vec4 clipspacePosition = u_ProjectionMatrix * viewPosition;

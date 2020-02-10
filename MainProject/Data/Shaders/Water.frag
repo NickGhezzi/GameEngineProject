@@ -14,7 +14,7 @@ void main()
 
 	if(v_Pos.y > 0)
 	{
-		tex.b = 1 / v_Pos.y;
+		tex.b = 1 * v_Pos.y;
 	}
 
 	vec2 uv = (vec2(u_Time , u_Time) * 0.01) + v_UV;
