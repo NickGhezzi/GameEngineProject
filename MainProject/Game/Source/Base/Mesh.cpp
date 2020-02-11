@@ -288,6 +288,9 @@ void Mesh::LoadObjFromFile(const char* filename)
     std::vector<vec3> positions;
     std::vector<vec2> uvs;
     std::vector<vec3> normals;
+    std::vector<VertexFormat*> vertex;
+
+    //int index = 0;
 
 
     long length = 0;
@@ -305,45 +308,62 @@ void Mesh::LoadObjFromFile(const char* filename)
     while (line)
     {
         
-        if (line[0] == 'v')
-        {
-            if (line[1] == 't')
+            if (line[0] == 'v')
             {
-                //do uv
-                vec2 temp;
-                sscanf_s(line, "%*s %f", &temp.x);
-                sscanf_s(line, "%*s %*s %f", &temp.y);
+                if (line[1] == 't')
+                {
+                    //do uv
+                    vec2 temp;
+                    sscanf_s(line, "%*s %f", &temp.x);
+                    sscanf_s(line, "%*s %*s %f", &temp.y);
 
-                uvs.push_back(temp);
+                    uvs.push_back(temp);
 
+                }
+                else if (line[1] == 'n')
+                {
+                    //do nomrals
+                    vec3 temp;
+                    sscanf_s(line, "%*s %f", &temp.x);
+                    sscanf_s(line, "%*s %*s %f", &temp.y);
+                    sscanf_s(line, "%*s %*s %*s %f", &temp.z);
+
+                    normals.push_back(temp);
+                }
+                else
+                {
+                    //do positions
+                    vec3 temp;
+                    sscanf_s(line, "%*s %f", &temp.x);
+                    sscanf_s(line, "%*s %*s %f", &temp.y);
+                    sscanf_s(line, "%*s %*s %*s %f", &temp.z);
+
+                    positions.push_back(temp);
+                }
             }
-            else if (line[1] == 'n')
+            else if(line[0] == 'f')
             {
-                //do nomrals
-                vec3 temp;
-                sscanf_s(line, "%*s %f", &temp.x);
-                sscanf_s(line, "%*s %*s %f", &temp.y);
-                sscanf_s(line, "%*s %*s %*s %f", &temp.z);
+                //do vertexformat
+                //char* value1[3];
+                //char* value2[3];
+                //char* value3[3];
 
-                normals.push_back(temp);
-            }
-            else
-            {
-                //do positions
-                vec3 temp;
-                sscanf_s(line, "%*s %f", &temp.x);
-                sscanf_s(line, "%*s %*s %f", &temp.y);
-                sscanf_s(line, "%*s %*s %*s %f", &temp.z);
+                int positionindex;
+                int uvindex;
+                int normalindex;
 
-                positions.push_back(temp);
+                //sscanf_s(line, "%*s %s", value1, 3);
+                //sscanf_s(line, "%*s %*s %i", value2, 3);
+                //sscanf_s(line, "%*s %*s %*s %i", value3, 3);
+
+                sscanf_s(line, "%*s %d/%d/%d", &positionindex, &uvindex, &normalindex);
+ 
+                vertex.push_back(new VertexFormat(positions[positionindex], ColorByte(255, 255, 255, 255), uvs[uvindex]));
+                
             }
-        }
-        else
-        {
-            //do vertexformat
-        }
+        
         line = strtok_s(0, "\n", &next_token);
-       // OutputMessage("%s\n", line);
     }
+    int i = 0;
 }
 ;
