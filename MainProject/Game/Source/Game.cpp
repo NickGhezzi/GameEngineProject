@@ -83,6 +83,8 @@ void Game::Init()
     m_pResourceManager->AddMesh("CubeMesh", new Mesh())->CreateCube(vec3(1, 1, 1), vec3(0, 0, 0));
     m_pResourceManager->AddMesh("Plane", new Mesh())->CreatePlane(vec2(50, 50), ivec2(100, 100));
 
+    m_pResourceManager->AddMesh("Cube", new Mesh())->LoadObjFromFile("Data/OBJ Files/cube.obj");
+
     //Create physics world
     m_pPhysicsWorld = new fw::PhysicsWorld2D(m_pFramework);
 
@@ -174,4 +176,9 @@ ResourceManager* Game::GetResourceManager()
 fw::PhysicsWorld2D* Game::GetPhysicsWorld()
 {
     return (PhysicsWorld2D*)m_pPhysicsWorld;
+}
+
+fw::Framework* Game::GetFramework()
+{
+    return m_pFramework;
 }

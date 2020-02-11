@@ -32,6 +32,8 @@ public:
     void CreateFloor();
     void CreateCube(vec3 size, vec3 offset);
     void CreatePlane(vec2 size, ivec2 numverts);
+
+    void LoadObjFromFile(const char* filename);
 };
 
 #endif //__Mesh_H__

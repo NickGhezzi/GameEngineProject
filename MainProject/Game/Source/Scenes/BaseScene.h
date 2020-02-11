@@ -23,6 +23,7 @@ public:
 
 protected:
     Game* m_pGame;
+    fw::PhysicsWorld* m_pPhysicsWorld;
     std::vector<GameObject*> m_pGameObjects;
 
 };

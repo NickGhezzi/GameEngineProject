@@ -4,6 +4,7 @@
 BaseScene::BaseScene(Game* game)
 {
     m_pGame = game;
+    //m_pPhysicsWorld = new fw::PhysicsWorld2D(game->GetFramework());
 }
 
 BaseScene::~BaseScene()

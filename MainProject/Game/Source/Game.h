@@ -43,6 +43,7 @@ public:
     ResourceManager* GetResourceManager();
 
     fw::PhysicsWorld2D* GetPhysicsWorld();
+    fw::Framework* GetFramework();
 
     PlayerController* m_pController;
 };

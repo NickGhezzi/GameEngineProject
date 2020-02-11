@@ -7,6 +7,8 @@
 #include "GameObjects/Camera.h"
 #include "GameObjects/GameObject.h"
 
+#include <stdio.h>
+
 using namespace fw;
 
 Mesh::Mesh()
@@ -280,5 +282,68 @@ void Mesh::CreatePlane(vec2 size, ivec2 numverts)
     //Init(vertexAttributes, numv, indices, numindeces, GL_POINTS, GL_STATIC_DRAW);
     delete[] vertexAttributes;
     delete[] indices;
+}
+void Mesh::LoadObjFromFile(const char* filename)
+{
+    std::vector<vec3> positions;
+    std::vector<vec2> uvs;
+    std::vector<vec3> normals;
+
+
+    long length = 0;
+
+    char* buffer = LoadCompleteFile(filename, &length);
+
+    if (buffer == 0 || length == 0)
+    {
+        delete[] buffer;
+        return;
+    }
+
+    char* next_token = 0;
+    char* line = strtok_s(buffer, "\n", &next_token);
+    while (line)
+    {
+        
+        if (line[0] == 'v')
+        {
+            if (line[1] == 't')
+            {
+                //do uv
+                vec2 temp;
+                sscanf_s(line, "%*s %f", &temp.x);
+                sscanf_s(line, "%*s %*s %f", &temp.y);
+
+                uvs.push_back(temp);
+
+            }
+            else if (line[1] == 'n')
+            {
+                //do nomrals
+                vec3 temp;
+                sscanf_s(line, "%*s %f", &temp.x);
+                sscanf_s(line, "%*s %*s %f", &temp.y);
+                sscanf_s(line, "%*s %*s %*s %f", &temp.z);
+
+                normals.push_back(temp);
+            }
+            else
+            {
+                //do positions
+                vec3 temp;
+                sscanf_s(line, "%*s %f", &temp.x);
+                sscanf_s(line, "%*s %*s %f", &temp.y);
+                sscanf_s(line, "%*s %*s %*s %f", &temp.z);
+
+                positions.push_back(temp);
+            }
+        }
+        else
+        {
+            //do vertexformat
+        }
+        line = strtok_s(0, "\n", &next_token);
+       // OutputMessage("%s\n", line);
+    }
 }
 ;
