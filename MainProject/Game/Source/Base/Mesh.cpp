@@ -288,7 +288,7 @@ void Mesh::LoadObjFromFile(const char* filename)
     std::vector<vec3> positions;
     std::vector<vec2> uvs;
     std::vector<vec3> normals;
-    std::vector<VertexFormat*> vertex;
+    std::vector<VertexFormat> vertex;
 
     //int index = 0;
 
@@ -343,27 +343,32 @@ void Mesh::LoadObjFromFile(const char* filename)
             }
             else if(line[0] == 'f')
             {
-                //do vertexformat
-                //char* value1[3];
-                //char* value2[3];
-                //char* value3[3];
-
                 int positionindex;
                 int uvindex;
                 int normalindex;
-
-                //sscanf_s(line, "%*s %s", value1, 3);
-                //sscanf_s(line, "%*s %*s %i", value2, 3);
-                //sscanf_s(line, "%*s %*s %*s %i", value3, 3);
-
                 sscanf_s(line, "%*s %d/%d/%d", &positionindex, &uvindex, &normalindex);
- 
-                vertex.push_back(new VertexFormat(positions[positionindex], ColorByte(255, 255, 255, 255), uvs[uvindex]));
-                
+                vertex.push_back(VertexFormat(positions[positionindex - 1], ColorByte(255, 255, 255, 255), uvs[uvindex - 1]));
+
+                sscanf_s(line, "%*s %*s %d/%d/%d", &positionindex, &uvindex, &normalindex);
+                vertex.push_back(VertexFormat(positions[positionindex - 1], ColorByte(255, 255, 255, 255), uvs[uvindex - 1]));
+
+                sscanf_s(line, "%*s %*s %*s %d/%d/%d", &positionindex, &uvindex, &normalindex);
+                vertex.push_back(VertexFormat(positions[positionindex - 1], ColorByte(255, 255, 255, 255), uvs[uvindex - 1]));
             }
         
         line = strtok_s(0, "\n", &next_token);
     }
-    int i = 0;
+
+    VertexFormat* vertexAttributes = new VertexFormat[vertex.size()];
+    
+    for (int i = 0; i < vertex.size(); i++)
+    {
+        vertexAttributes[i] = vertex[i];
+    }
+
+    Init(vertexAttributes, vertex.size(), GL_TRIANGLES);
+
+    delete[] vertexAttributes;
+    delete[] buffer;
 }
 ;

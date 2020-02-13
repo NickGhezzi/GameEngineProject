@@ -11,6 +11,7 @@ SceneCube::SceneCube(Game* game):
 {
     m_pCamera = nullptr;
     m_pPlayer = nullptr;
+    m_pCube = nullptr;
     m_pDummy = nullptr;
 
     m_Timer = 0;
@@ -20,6 +21,7 @@ SceneCube::~SceneCube()
 {
     delete m_pCamera;
     delete m_pPlayer;
+    delete m_pCube;
     delete m_pDummy;
 }
 
@@ -34,6 +36,10 @@ void SceneCube::Init()
     m_pDummy->CreateBody(true);
     m_pDummy->AddBox(vec3(1, 1, 1), 1, false, 0.2, 0);
 
+    m_pCube = new GameObject(this, m_pResources->GetMesh("Cube"), m_pResources->GetMaterial("Dice"), vec3(1, 1, 1), vec3(0, 0, 0), vec3(0, 0, 0));
+    m_pCube->CreateBody(true);
+    m_pCube->AddBox(vec3(1, 1, 1), 1, false, 0.2, 0);
+
     m_pCamera = new Camera(this, vec3(0, 0, 0), vec2(1 / 5.0f, 1 / 5.0f));
 
     //m_pGame->GetPhysicsWorld()->DrawDebugData(m_pCamera->GetViewMatrix(), m_pCamera->GetProjectionMatrix());
@@ -45,13 +51,16 @@ void SceneCube::Update(float deltaTime)
     m_pPlayer->SetRotation(vec3(m_Timer, m_Timer, m_Timer));
     m_pPlayer->Update(deltaTime);
 
+    m_pCube->Update(deltaTime);
+
     m_pDummy->Update(deltaTime);
     m_pCamera->Update(deltaTime);
 }
 
 void SceneCube::Draw()
 {
-    m_pPlayer->Draw(m_pCamera);
+   // m_pPlayer->Draw(m_pCamera);
+    m_pCube->Draw(m_pCamera);
     m_pDummy->Draw(m_pCamera);
 }
 

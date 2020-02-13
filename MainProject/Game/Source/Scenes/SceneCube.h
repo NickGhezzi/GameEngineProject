@@ -20,6 +20,7 @@ public:
 private:
     Player* m_pPlayer;
     Player* m_pDummy;
+    GameObject* m_pCube;
     Camera* m_pCamera;
     ResourceManager* m_pResources;
 
