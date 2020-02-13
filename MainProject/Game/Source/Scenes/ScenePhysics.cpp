@@ -22,6 +22,7 @@ ScenePhysics::~ScenePhysics()
 
     delete m_pCamera;
     m_pGameObjects.clear();
+    delete m_pPhysicsWorld;
 }
 
 void ScenePhysics::Init()
@@ -32,6 +33,7 @@ void ScenePhysics::Init()
 
 void ScenePhysics::Update(float deltaTime)
 {
+    m_pPhysicsWorld->Update(deltaTime);
     for (auto obj : m_pGameObjects)
     {
         obj->Update(deltaTime);

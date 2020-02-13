@@ -16,6 +16,7 @@ SceneWater::~SceneWater()
 {
     delete m_pCamera;
     delete m_pWater;
+    delete m_pPhysicsWorld;
 }
 
 void SceneWater::Init()
@@ -35,6 +36,7 @@ void SceneWater::Init()
 
 void SceneWater::Update(float deltaTime)
 {
+    m_pPhysicsWorld->Update(deltaTime);
     m_pWater->Update(deltaTime);
     m_pCamera->Update(deltaTime);
 }

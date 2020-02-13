@@ -26,6 +26,7 @@ protected:
     BaseScene* m_pSceneCube;
     BaseScene* m_pScenePhysics;
     BaseScene* m_pBoxStackingScene;
+    BaseScene* m_pTestScene;
 
     ResourceManager* m_pResourceManager;
 

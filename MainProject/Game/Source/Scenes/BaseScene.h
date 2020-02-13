@@ -19,7 +19,7 @@ public:
 
 
     virtual Game* GetGame();
-    
+    virtual fw::PhysicsWorld* GetPhysicsWorld();
 
 protected:
     Game* m_pGame;

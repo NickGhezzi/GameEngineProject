@@ -1,10 +1,11 @@
 #include "GamePCH.h"
+#include "Game.h"
 #include "BaseScene.h"
 
 BaseScene::BaseScene(Game* game)
 {
     m_pGame = game;
-    //m_pPhysicsWorld = new fw::PhysicsWorld2D(game->GetFramework());
+    m_pPhysicsWorld = new fw::PhysicsWorld2D(game->GetFramework());
 }
 
 BaseScene::~BaseScene()
@@ -33,4 +34,9 @@ void BaseScene::RemoveObjectFromScene(GameObject* pObj)
 Game* BaseScene::GetGame()
 {
     return m_pGame;
+}
+
+fw::PhysicsWorld* BaseScene::GetPhysicsWorld()
+{
+    return m_pPhysicsWorld;
 }

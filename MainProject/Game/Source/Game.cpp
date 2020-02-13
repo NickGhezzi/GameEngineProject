@@ -11,6 +11,7 @@
 #include "Scenes/SceneWater.h"
 #include "Scenes/ScenePhysics.h"
 #include "Scenes/BoxStackingScene.h"
+#include "Scenes/TestScene.h"
 
 #include "ResourceManager.h"
 #include "Base/Material.h"
@@ -40,6 +41,7 @@ Game::~Game()
     delete m_pSceneWater;
     delete m_pScenePhysics;
     //delete m_pBoxStackingScene;
+    delete m_pTestScene;
 
     delete m_pResourceManager;
 
@@ -82,27 +84,27 @@ void Game::Init()
     m_pResourceManager->AddMesh("PlayerMesh", new Mesh())->CreateBox(vec2(1, 1), vec2(0, 0));
     m_pResourceManager->AddMesh("CubeMesh", new Mesh())->CreateCube(vec3(1, 1, 1), vec3(0, 0, 0));
     m_pResourceManager->AddMesh("Plane", new Mesh())->CreatePlane(vec2(50, 50), ivec2(100, 100));
+    m_pResourceManager->AddMesh("FloorMesh", new Mesh())->CreateCube(vec3(5, 1, 1), vec3(0, 0, 0));
 
     m_pResourceManager->AddMesh("Cube", new Mesh())->LoadObjFromFile("Data/OBJ Files/cube.obj");
 
     //Create physics world
-    m_pPhysicsWorld = new fw::PhysicsWorld2D(m_pFramework);
-
-    //CUBE ASSIGNMENT:::: comment out simple scene and uncomment scenecube for the cube. sorry for the inconvenience
 
     m_pSceneCube = new SceneCube(this);
     m_pSceneWater = new SceneWater(this);
     m_pScenePhysics = new ScenePhysics(this);
     //m_pBoxStackingScene = new BoxStackingScene(this);
+    m_pTestScene = new TestScene(this);
 
     m_pSceneCube->Init();
     m_pSceneWater->Init();
     m_pScenePhysics->Init();
-    //m_pBoxStackingScene->Init();
+   // m_pBoxStackingScene->Init();
+    m_pTestScene->Init();
 
     m_pScenePhysics->LoadFromFile("Data/Simple.box2dscene");
 
-    m_pCurrentScene = m_pSceneWater;
+    m_pCurrentScene = m_pTestScene;
 
 
     // Create our GameObjects.
@@ -125,9 +127,6 @@ void Game::Update(float deltaTime)
     if( m_pFramework->IsKeyDown( VK_F2 ) )
         wglSwapInterval( 1 );
 
-    //update physicsworld
-    m_pPhysicsWorld->Update(deltaTime);
-
     // Update objects.
     ImGui::Begin("Scene Selector");
     if (ImGui::Button("Cube"))
@@ -141,6 +140,11 @@ void Game::Update(float deltaTime)
        
     }
     if (ImGui::Button("SimpleScene"))
+    {
+        m_pCurrentScene = m_pScenePhysics;
+
+    }
+    if (ImGui::Button("BoxStackingScene"))
     {
         m_pCurrentScene = m_pScenePhysics;
 

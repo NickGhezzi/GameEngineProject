@@ -40,6 +40,7 @@ public:
     fw::PhysicsBody* GetBody();
     void AddCircle(float radius);
     void AddBox(vec3 size, float density, bool isSensor, float friction, float restitution);
+    void AddJoint(GameObject* thingtoattach, vec2 pos);
 
     virtual void Update(float deltaTime);
     virtual void Draw(Camera* pCamera);

@@ -28,7 +28,7 @@ GameObject::~GameObject()
 
 void GameObject::CreateBody(bool isStatic)
 {
-    m_pPhysicsBody = m_pScene->GetGame()->GetPhysicsWorld()->CreateBody(m_Position, 0, isStatic, this);
+    m_pPhysicsBody = m_pScene->GetPhysicsWorld()->CreateBody(m_Position, 0, isStatic, this);
 }
 
 fw::PhysicsBody* GameObject::GetBody()
@@ -44,6 +44,11 @@ void GameObject::AddCircle(float radius)
 void GameObject::AddBox(vec3 size, float density, bool isSensor, float friction, float restitution)
 {
     m_pPhysicsBody->AddBox(size, density, isSensor, friction, restitution);
+}
+
+void GameObject::AddJoint(GameObject* thingtoattach, vec2 pos)
+{
+    m_pPhysicsBody->AddJoint(thingtoattach->GetBody(), pos);
 }
 
 void GameObject::Update(float deltaTime)

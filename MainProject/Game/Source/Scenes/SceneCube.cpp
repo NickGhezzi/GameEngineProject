@@ -23,6 +23,7 @@ SceneCube::~SceneCube()
     delete m_pPlayer;
     delete m_pCube;
     delete m_pDummy;
+    delete m_pPhysicsWorld;
 }
 
 void SceneCube::Init()
@@ -47,6 +48,8 @@ void SceneCube::Init()
 
 void SceneCube::Update(float deltaTime)
 {
+    m_pPhysicsWorld->Update(deltaTime);
+
     m_Timer += deltaTime * 100;
     m_pPlayer->SetRotation(vec3(m_Timer, m_Timer, m_Timer));
     m_pPlayer->Update(deltaTime);

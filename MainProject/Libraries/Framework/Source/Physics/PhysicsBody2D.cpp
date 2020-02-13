@@ -1,5 +1,7 @@
 #include "FrameworkPCH.h"
 #include "box2d/box2d.h"
+#include "PhysicsBody2D.h"
+#include "Box2DDebugDraw.h"
 
 namespace fw
 {
@@ -7,6 +9,7 @@ namespace fw
     PhysicsBody2D::PhysicsBody2D(b2Body* body)
     {
         m_pBody = body;
+
     }
 
     PhysicsBody2D::~PhysicsBody2D()
@@ -45,6 +48,16 @@ namespace fw
         m_pBody->CreateFixture(&fixtureDef);
     }
 
+    void PhysicsBody2D::AddJoint(PhysicsBody* objectToAttach, Vector2 anchorPos)
+    {
+        b2RevoluteJointDef jointdef;
+        b2Vec2 anchor(anchorPos.x, anchorPos.y);
+     
+        jointdef.Initialize(m_pBody, objectToAttach->GetBody(), anchor);
+
+        m_pBody->GetWorld()->CreateJoint(&jointdef);
+    }
+
     void PhysicsBody2D::ApplyForce(Vector3 force)
     {
         b2Vec2 temp = b2Vec2(force.x, force.y);
@@ -54,6 +67,11 @@ namespace fw
     Vector3 PhysicsBody2D::GetPosition()
     {
         return Vector3(m_pBody->GetPosition().x, m_pBody->GetPosition().y, 0);
+    }
+
+    b2Body* PhysicsBody2D::GetBody()
+    {
+        return m_pBody;
     }
 
     void PhysicsBody2D::SetActive(bool isactive)
