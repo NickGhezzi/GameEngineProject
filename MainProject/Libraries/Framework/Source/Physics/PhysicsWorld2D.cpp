@@ -22,17 +22,27 @@ namespace fw
 
     void Box2DContactListener::BeginContact(b2Contact* contact)
     {
-        //void* pUserDataA = contact->GetFixtureA()->GetBody()->GetUserData();
-        //void* pUserDataB = contact->GetFixtureB()->GetBody()->GetUserData();
+        void* pUserDataA = contact->GetFixtureA()->GetBody()->GetUserData();
+        void* pUserDataB = contact->GetFixtureB()->GetBody()->GetUserData();
 
-        //CollisionEvent* pEvent = new CollisionEvent(CollisionEventType::OnHit, pUserDataA, pUserDataB, worldNarmal);
-        //m_pFramework->GetEventManager()->AddEventToQueue(pEvent);
+        b2WorldManifold world;
+
+        contact->GetWorldManifold(&world);
+
+        Vector2 normal(world.normal.x, world.normal.y);
+
+        CollisionEvent* pEvent = new CollisionEvent(CollisionEventType::OnHit, pUserDataA, pUserDataB, normal);
+        m_pFramework->GetEventManager()->AddEventToQueue(pEvent);
     }
 
     void Box2DContactListener::EndContact(b2Contact* contact)
     {
         //contact->GetFixtureA()->GetBody()->GetUserData();
     }
+
+
+    ///////////////////////////////////////////////////////////////////////
+
 
     PhysicsWorld2D::PhysicsWorld2D(Framework* pFramework)
     {
@@ -46,8 +56,8 @@ namespace fw
 
         m_pWorld->SetContactListener(m_pContactListener);
         m_pWorld->SetDebugDraw(m_pDebugDraw);
-        //m_pContactListener->BeginContact(nullptr);
         m_UnusedTime = 0;
+
     }
 
     PhysicsWorld2D::~PhysicsWorld2D()

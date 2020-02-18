@@ -100,7 +100,7 @@ void Game::Init()
 
     m_pScenePhysics->LoadFromFile("Data/Simple.box2dscene");
 
-    m_pCurrentScene = m_pTestScene;
+    m_pCurrentScene = m_pBoxStackingScene;
 
 
     // Create our GameObjects.

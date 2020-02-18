@@ -74,6 +74,11 @@ namespace fw
         return m_pBody;
     }
 
+    void PhysicsBody2D::SetGravity(float scale)
+    {
+        m_pBody->SetGravityScale(scale);
+    }
+
     void PhysicsBody2D::SetActive(bool isactive)
     {
         m_pBody->SetActive(isactive);

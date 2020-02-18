@@ -49,6 +49,7 @@ typedef fw::MyMatrix mat4;
 #include "Events/Event.h"
 #include "Events/InputEvent.h"
 #include "Events/GameEvent.h"
+#include "Events/CollisionEvent.h"
 
 #include "Framework.h"
 #include "GameCore.h"

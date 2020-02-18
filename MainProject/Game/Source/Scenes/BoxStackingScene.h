@@ -24,4 +24,6 @@ private:
     Camera* m_pCamera;
     ResourceManager* m_pResources;
     ObjectPool<GameObject*> m_ObjectPool;
+
+    Player* m_pPlayer;
 };

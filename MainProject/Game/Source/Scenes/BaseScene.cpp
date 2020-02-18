@@ -1,11 +1,13 @@
 #include "GamePCH.h"
 #include "Game.h"
 #include "BaseScene.h"
+#include "GameObjects/Camera.h"
 
 BaseScene::BaseScene(Game* game)
 {
     m_pGame = game;
     m_pPhysicsWorld = new fw::PhysicsWorld2D(game->GetFramework());
+    m_pCamera = new Camera(this, vec3(0, 0, 0), vec2(1 / 5.0f, 1 / 5.0f));
 }
 
 BaseScene::~BaseScene()
@@ -15,17 +17,18 @@ BaseScene::~BaseScene()
     //    delete obj;
     //}
     //m_pGameObjects.clear();
+    delete m_pCamera;
     delete m_pPhysicsWorld;
 }
 
 void BaseScene::Update(float deltaTime)
 {
-
+    m_pCamera->Update(deltaTime);
 }
 
 void BaseScene::Draw()
 {
-
+    
 }
 
 void BaseScene::LoadFromFile(const char* filename)
@@ -49,6 +52,19 @@ void BaseScene::RemoveObjectFromScene(GameObject* pObj)
     m_pGameObjects.erase(it);
 
     assert(std::find(m_pGameObjects.begin(), m_pGameObjects.end(), pObj) == m_pGameObjects.end());
+}
+
+void BaseScene::OnEvent(fw::Event* pEvent)
+{
+    if (pEvent->GetType() == "CollisionEvent")
+    {
+        fw::CollisionEvent* pCollisionEvent = (fw::CollisionEvent*)pEvent;
+        if (pCollisionEvent)
+        {
+            GameObject* A = (GameObject*)pCollisionEvent->GetBodyA();
+            GameObject* B = (GameObject*)pCollisionEvent->GetBodyB();
+        }
+    }
 }
 
 Game* BaseScene::GetGame()

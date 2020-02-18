@@ -18,6 +18,8 @@ public:
     ~Player();
 
     virtual void Update(float deltaTime) override;
+
+    bool bLockToX;
 };
 
 #endif //__Player_H__

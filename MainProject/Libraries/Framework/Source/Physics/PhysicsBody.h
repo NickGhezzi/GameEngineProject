@@ -19,6 +19,8 @@ namespace fw
         virtual Vector3 GetPosition() = 0;
         virtual b2Body* GetBody() = 0;
 
+        virtual void SetGravity(float scale) = 0;
+
         virtual void SetActive(bool isactive) = 0;
     };
 }

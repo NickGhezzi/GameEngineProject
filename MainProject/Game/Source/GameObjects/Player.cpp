@@ -14,7 +14,7 @@ Player::Player(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec3 scale, vec
 , m_PlayerNumber( playerNum )
 , m_pController( pController )
 {
-
+    bLockToX = false;
 }
     
 Player::~Player()
@@ -29,14 +29,22 @@ void Player::Update(float deltaTime)
     float speed = 12;
     vec3 dir( 0, 0, 0 );
 
-    if( m_pController->m_Up )
+    if (m_pController->m_Up && bLockToX == false)
+    {
         dir.y = 1 * speed;
-    if( m_pController->m_Down )
+    }
+    if (m_pController->m_Down && bLockToX == false)
+    {
         dir.y = -1 * speed;
-    if( m_pController->m_Left )
+    }
+    if (m_pController->m_Left)
+    {
         dir.x = -1 * speed;
-    if( m_pController->m_Right )
+    }
+    if (m_pController->m_Right)
+    {
         dir.x = 1 * speed;
+    }
 
     m_pPhysicsBody->ApplyForce(dir);
     //m_Position += dir * speed * deltaTime;
