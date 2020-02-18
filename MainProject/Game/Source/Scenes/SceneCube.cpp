@@ -23,7 +23,6 @@ SceneCube::~SceneCube()
     delete m_pPlayer;
     delete m_pCube;
     delete m_pDummy;
-    delete m_pPhysicsWorld;
 }
 
 void SceneCube::Init()

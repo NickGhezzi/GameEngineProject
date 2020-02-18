@@ -46,7 +46,8 @@ namespace fw
 
         m_pWorld->SetContactListener(m_pContactListener);
         m_pWorld->SetDebugDraw(m_pDebugDraw);
-        m_pContactListener->BeginContact(nullptr);
+        //m_pContactListener->BeginContact(nullptr);
+        m_UnusedTime = 0;
     }
 
     PhysicsWorld2D::~PhysicsWorld2D()
@@ -59,11 +60,15 @@ namespace fw
 
     void PhysicsWorld2D::Update(float deltaTime)
     {
+        m_UnusedTime += deltaTime;
         float timeStep = 1 / 60.0;  
         int velocityIterations = 8;  
         int positionIterations = 3;  
-
-        m_pWorld->Step(timeStep, velocityIterations, positionIterations);
+        while (m_UnusedTime > 1 / 60.0f)
+        {
+            m_pWorld->Step(timeStep, velocityIterations, positionIterations);
+            m_UnusedTime -= 1 / 60.0f;
+        }
     }
 
     void PhysicsWorld2D::DrawDebugData(mat4* view, mat4* proj)

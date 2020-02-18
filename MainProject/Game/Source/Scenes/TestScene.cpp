@@ -18,7 +18,6 @@ TestScene::~TestScene()
     delete m_pCamera;
     delete m_pPlayer;
     delete m_pFloor;
-    delete m_pPhysicsWorld;
 }
 
 void TestScene::Init()

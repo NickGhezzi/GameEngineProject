@@ -16,6 +16,7 @@ namespace fw
         Box2DDebugDraw* m_pDebugDraw;
 
         ShaderProgram* m_pShader;
+        float m_UnusedTime;
     public:
         PhysicsWorld2D(Framework* pFramework);
         virtual ~PhysicsWorld2D();

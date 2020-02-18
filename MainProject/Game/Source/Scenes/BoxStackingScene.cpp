@@ -20,10 +20,10 @@ BoxStackingScene::~BoxStackingScene()
     {
         delete obj;
     }
+    m_pGameObjects.clear();
 
     delete m_pCamera;
-    m_pGameObjects.clear();
-    delete m_pPhysicsWorld;
+    //delete m_pPhysicsWorld;
 }
 
 void BoxStackingScene::Init()
@@ -47,7 +47,6 @@ void BoxStackingScene::Init()
         AddObjectToScene(pObj);
         pObj->GetBody()->SetActive(true);
     }
-
 }
 
 void BoxStackingScene::Update(float deltaTime)
@@ -70,6 +69,7 @@ void BoxStackingScene::Draw()
 
 void BoxStackingScene::LoadFromFile(const char* filename)
 {
+
 }
 
 

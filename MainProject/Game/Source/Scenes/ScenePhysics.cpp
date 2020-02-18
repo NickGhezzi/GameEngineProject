@@ -22,7 +22,6 @@ ScenePhysics::~ScenePhysics()
 
     delete m_pCamera;
     m_pGameObjects.clear();
-    delete m_pPhysicsWorld;
 }
 
 void ScenePhysics::Init()

@@ -30,8 +30,6 @@ protected:
 
     ResourceManager* m_pResourceManager;
 
-    fw::PhysicsWorld* m_pPhysicsWorld;
-
 public:
     Game(fw::Framework* pFramework);
     virtual ~Game();

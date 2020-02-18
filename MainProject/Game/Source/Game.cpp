@@ -25,8 +25,6 @@ Game::Game(Framework* pFramework)
 
     m_pController = new PlayerController();
 
-    m_pPhysicsWorld = nullptr;
-
     m_pResourceManager = nullptr;
 
 }
@@ -40,12 +38,10 @@ Game::~Game()
     delete m_pSceneCube;
     delete m_pSceneWater;
     delete m_pScenePhysics;
-    //delete m_pBoxStackingScene;
+    delete m_pBoxStackingScene;
     delete m_pTestScene;
 
     delete m_pResourceManager;
-
-    delete m_pPhysicsWorld;
 }
 
 void Game::Init()
@@ -93,13 +89,13 @@ void Game::Init()
     m_pSceneCube = new SceneCube(this);
     m_pSceneWater = new SceneWater(this);
     m_pScenePhysics = new ScenePhysics(this);
-    //m_pBoxStackingScene = new BoxStackingScene(this);
+    m_pBoxStackingScene = new BoxStackingScene(this);
     m_pTestScene = new TestScene(this);
 
     m_pSceneCube->Init();
     m_pSceneWater->Init();
     m_pScenePhysics->Init();
-   // m_pBoxStackingScene->Init();
+    m_pBoxStackingScene->Init();
     m_pTestScene->Init();
 
     m_pScenePhysics->LoadFromFile("Data/Simple.box2dscene");
@@ -146,7 +142,7 @@ void Game::Update(float deltaTime)
     }
     if (ImGui::Button("BoxStackingScene"))
     {
-        m_pCurrentScene = m_pScenePhysics;
+        m_pCurrentScene = m_pBoxStackingScene;
 
     }
     ImGui::End();
@@ -177,10 +173,6 @@ ResourceManager* Game::GetResourceManager()
     return m_pResourceManager;
 }
 
-fw::PhysicsWorld2D* Game::GetPhysicsWorld()
-{
-    return (PhysicsWorld2D*)m_pPhysicsWorld;
-}
 
 fw::Framework* Game::GetFramework()
 {

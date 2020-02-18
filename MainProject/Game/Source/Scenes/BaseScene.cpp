@@ -10,6 +10,26 @@ BaseScene::BaseScene(Game* game)
 
 BaseScene::~BaseScene()
 {
+    //for (auto obj : m_pGameObjects)
+    //{
+    //    delete obj;
+    //}
+    //m_pGameObjects.clear();
+    delete m_pPhysicsWorld;
+}
+
+void BaseScene::Update(float deltaTime)
+{
+
+}
+
+void BaseScene::Draw()
+{
+
+}
+
+void BaseScene::LoadFromFile(const char* filename)
+{
 
 }
 

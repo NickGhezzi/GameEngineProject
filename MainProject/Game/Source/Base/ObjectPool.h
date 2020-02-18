@@ -10,7 +10,10 @@ public:
 
     ~ObjectPool()
     {
-
+        for (GameObject* obj : m_Objects)
+        {
+            delete obj;
+        }
     }
 
     void AddObjectToPool(Type obj)

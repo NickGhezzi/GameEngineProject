@@ -16,7 +16,6 @@ SceneWater::~SceneWater()
 {
     delete m_pCamera;
     delete m_pWater;
-    delete m_pPhysicsWorld;
 }
 
 void SceneWater::Init()

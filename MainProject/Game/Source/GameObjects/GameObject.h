@@ -36,7 +36,7 @@ public:
     void SetRotation(vec3 rot) { m_Rotation = rot; }
     void SetPosition(vec3 pos) { m_Position = pos; }
 
-    void CreateBody(bool isDynamic);
+    void CreateBody(bool isStatic);
     fw::PhysicsBody* GetBody();
     void AddCircle(float radius);
     void AddBox(vec3 size, float density, bool isSensor, float friction, float restitution);
