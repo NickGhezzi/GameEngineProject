@@ -52,6 +52,8 @@ public:
     virtual void OnCollision(GameObject* pOtherGameObject);
 
     void SetPoolWhereWeCameFrom(ObjectPool<GameObject*>* obj);
+
+    bool bHasCollided;
 };
 
 #endif //__GameObject_H__

@@ -139,8 +139,10 @@ void BoxStackingScene::OnEvent(fw::Event* pEvent)
                         {
                             m_PreviousHighestY = m_HighestY;
                             m_HighestY = tempy;
+                            
                         }
-
+                        A->bHasCollided = true;
+                        B->bHasCollided = true;
                     }
                 }
             }
@@ -156,14 +158,20 @@ void BoxStackingScene::OnEvent(fw::Event* pEvent)
                     m_bInitialBox = true;
                 }
             }
+                 //if (m_HighestY > m_PreviousHighestY && (A->bHasCollided == true && B->bHasCollided == false || A->bHasCollided == false && B->bHasCollided == true || A->bHasCollided == false && B->bHasCollided == false))
+                 //{
+                 //    m_Score++;
+                 //    A->bHasCollided = true;
+                 //    B->bHasCollided = true;
+                 //}
         }
+   
     }
 
-    if (m_HighestY > m_PreviousHighestY)
-    {
-        m_Score++;
-    }
-   
+                 if (m_HighestY > m_PreviousHighestY)
+                 {
+                      m_Score++;
+                 }
 }
 
 void BoxStackingScene::SpawnBox()
