@@ -23,7 +23,7 @@ public:
     virtual void OnEvent(fw::Event* pEvent) override;
 
     void SpawnBox();
-
+    void Reset();
 private:
     Camera* m_pCamera;
     ResourceManager* m_pResources;
@@ -34,7 +34,8 @@ private:
 
     int m_NumActiveBoxes;
     float m_HighestY;
-    std::vector<float> m_PreviousHighestYs;
+    float m_PreviousHighestY;
     int m_Score;
+    bool m_bInitialBox;
     
 };

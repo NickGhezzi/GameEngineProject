@@ -17,7 +17,7 @@ BoxStackingScene::BoxStackingScene(Game* game):
     m_pFloor = nullptr;
     m_NumActiveBoxes = 0;
     m_Score = 0;
-    m_PreviousHighestYs.push_back(-10.0f);
+    m_bInitialBox = false;
 }
 
 BoxStackingScene::~BoxStackingScene()
@@ -45,6 +45,7 @@ void BoxStackingScene::Init()
     m_pPlayer->bLockControlls = true;
 
     m_pFloor = new GameObject(this, m_pResources->GetMesh("FloorMesh"), m_pResources->GetMaterial("Ground"), vec3(2, 1, 1), vec3(0, 0, 0), vec3(0, -5, 0));
+    m_pFloor->SetName("Floor");
     m_pFloor->CreateBody(true);
     m_pFloor->AddBox(vec3(10, 1, 1), 1, false, 0.2, 0);
 
@@ -117,7 +118,7 @@ void BoxStackingScene::LoadFromFile(const char* filename)
 
 void BoxStackingScene::OnEvent(fw::Event* pEvent)
 {
-    m_PreviousHighestYs.push_back(m_HighestY);
+    m_PreviousHighestY = m_HighestY;
 
     if (pEvent->GetType() == "CollisionEvent")
     {
@@ -136,29 +137,32 @@ void BoxStackingScene::OnEvent(fw::Event* pEvent)
                         float tempy = m_pGameObjects[i]->GetPosition().y;
                         if (tempy > m_HighestY)
                         {
-                            m_PreviousHighestYs.push_back(m_HighestY);;
+                            m_PreviousHighestY = m_HighestY;
                             m_HighestY = tempy;
                         }
+
                     }
-                    for (int i = 0; i < m_NumActiveBoxes; i++)
-                    {
-                        if (m_HighestY < m_PreviousHighestYs[i])
-                        {
-                            m_Score = m_Score - (m_PreviousHighestYs.size() - m_NumActiveBoxes);
-                            break;
-                        }
-                        else if (m_HighestY > m_PreviousHighestYs[m_NumActiveBoxes])
-                        {
-                            m_Score++;
-                            break;
-                        }
-                    }
+                }
+            }
+
+            if (A->GetName() == "Floor" || B->GetName() == "Floor")
+            {
+                if (m_bInitialBox)
+                {
+                    Reset();
+                }
+                else
+                {
+                    m_bInitialBox = true;
                 }
             }
         }
     }
 
-    
+    if (m_HighestY > m_PreviousHighestY)
+    {
+        m_Score++;
+    }
    
 }
 
@@ -169,6 +173,23 @@ void BoxStackingScene::SpawnBox()
     pObj->SetPosition(vec3(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y - 1, 0));
     pObj->GetBody()->SetActive(true);
     m_NumActiveBoxes++;
+}
+
+void BoxStackingScene::Reset()
+{
+
+    for(int i = m_pGameObjects.size() - 1; i >= 0; i--)
+    {
+            GameObject* obj = m_pGameObjects[i];
+            obj->GetBody()->ResetVelocity();
+            obj->GetBody()->SetActive(false);
+            m_ObjectPool.AddObjectToPool(obj);
+            RemoveObjectFromScene(obj);
+            m_NumActiveBoxes--;
+    }
+    m_bInitialBox = false;
+    m_Score = 0;
+    m_HighestY = m_pFloor->GetPosition().y + 1;
 }
 
 
