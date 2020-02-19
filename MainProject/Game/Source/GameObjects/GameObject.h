@@ -23,6 +23,7 @@ protected:
 
     ObjectPool<GameObject*>* m_pPoolWeCameFrom;
 
+    std::string m_Name;
 public:
     //swap all vec2 to vec3
     GameObject(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec3 scale, vec3 rotation, vec3 position);
@@ -31,10 +32,12 @@ public:
 
     vec3 GetPosition() { return m_Position; }
     float GetRadius() { return m_Radius; }
+    std::string GetName();
 
     void SetScale(vec3 scale) { m_Scale = scale; }
     void SetRotation(vec3 rot) { m_Rotation = rot; }
-    void SetPosition(vec3 pos) { m_Position = pos; }
+    void SetPosition(vec3 pos) { m_pPhysicsBody->SetPosition(pos); }
+    void SetName(std::string name) { m_Name = name; }
 
     void CreateBody(bool isStatic);
     fw::PhysicsBody* GetBody();

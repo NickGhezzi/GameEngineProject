@@ -41,8 +41,8 @@ void SceneCube::Init()
     m_pCube->AddBox(vec3(1, 1, 1), 1, false, 0.2, 0);
 
     m_pCamera = new Camera(this, vec3(0, 0, 0), vec2(1 / 5.0f, 1 / 5.0f));
-
-    //m_pGame->GetPhysicsWorld()->DrawDebugData(m_pCamera->GetViewMatrix(), m_pCamera->GetProjectionMatrix());
+    
+    //static_cast<fw::PhysicsWorld2D*>(m_pPhysicsWorld)->DrawDebugData(&m_pCamera->GetViewMatrix(), &m_pCamera->GetProjectionMatrix());
 }
 
 void SceneCube::Update(float deltaTime)
@@ -64,6 +64,7 @@ void SceneCube::Draw()
    // m_pPlayer->Draw(m_pCamera);
     m_pCube->Draw(m_pCamera);
     m_pDummy->Draw(m_pCamera);
+    static_cast<fw::PhysicsWorld2D*>(m_pPhysicsWorld)->DrawDebugData(&m_pCamera->GetViewMatrix(), &m_pCamera->GetProjectionMatrix());
 }
 
 void SceneCube::LoadFromFile(const char* filename)

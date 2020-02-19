@@ -64,9 +64,24 @@ namespace fw
         m_pBody->ApplyForce(temp, m_pBody->GetWorldCenter(), true);
     }
 
+    void PhysicsBody2D::ApplyTorque(float torque)
+    {
+        m_pBody->ApplyTorque((torque * (PI / 180)), true);
+    }
+
     Vector3 PhysicsBody2D::GetPosition()
     {
         return Vector3(m_pBody->GetPosition().x, m_pBody->GetPosition().y, 0);
+    }
+
+    float PhysicsBody2D::GetRotation()
+    {
+        return (m_pBody->GetAngle() * (180/ PI));
+    }
+
+    void PhysicsBody2D::SetPosition(Vector3 pos)
+    {
+        m_pBody->SetTransform(b2Vec2(pos.x, pos.y), 0);
     }
 
     b2Body* PhysicsBody2D::GetBody()
@@ -82,5 +97,11 @@ namespace fw
     void PhysicsBody2D::SetActive(bool isactive)
     {
         m_pBody->SetActive(isactive);
+    }
+    void PhysicsBody2D::ResetVelocity()
+    {
+        m_pBody->SetLinearVelocity(b2Vec2(0, 0));
+        m_pBody->SetAngularVelocity(0);
+        m_pBody->SetTransform(b2Vec2(0, 0), 0);
     }
 }

@@ -10,6 +10,7 @@ PlayerController::PlayerController()
     m_Down = false;
     m_Left = false;
     m_Right = false;
+    m_Action = false;
 }
 
 PlayerController::~PlayerController()
@@ -30,6 +31,7 @@ void PlayerController::OnEvent(fw::Event* pEvent)
             if( pIE->GetKeyCode() == 'S' ) m_Down = true;
             if( pIE->GetKeyCode() == 'A' ) m_Left = true;
             if( pIE->GetKeyCode() == 'D' ) m_Right = true;
+            if (pIE->GetKeyCode() == VK_SPACE) m_Action = true;
         }
 
         if( pIE->GetState() == InputState::Released )
@@ -38,6 +40,7 @@ void PlayerController::OnEvent(fw::Event* pEvent)
             if( pIE->GetKeyCode() == 'S' ) m_Down = false;
             if( pIE->GetKeyCode() == 'A' ) m_Left = false;
             if( pIE->GetKeyCode() == 'D' ) m_Right = false;
+            if (pIE->GetKeyCode() == VK_SPACE) m_Action = false;
         }
     }
 }

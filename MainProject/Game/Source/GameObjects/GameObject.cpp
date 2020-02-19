@@ -18,12 +18,17 @@ GameObject::GameObject(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec3 sc
 , m_Position( position )
 , m_Radius( 2 )
 {
-    
+    m_Name = "GameObject";
 }
 
 GameObject::~GameObject()
 {
     delete m_pPhysicsBody;
+}
+
+std::string GameObject::GetName()
+{
+    return m_Name;
 }
 
 void GameObject::CreateBody(bool isStatic)
@@ -55,6 +60,7 @@ void GameObject::Update(float deltaTime)
 {
     if(m_pPhysicsBody)
     m_Position = m_pPhysicsBody->GetPosition();
+    m_Rotation.z = m_pPhysicsBody->GetRotation();
 }
 
 void GameObject::Draw(Camera* pCamera)

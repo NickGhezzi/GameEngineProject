@@ -10,6 +10,7 @@ protected:
     bool m_Down;
     bool m_Left;
     bool m_Right;
+    bool m_Action;
 
 public:
     PlayerController();

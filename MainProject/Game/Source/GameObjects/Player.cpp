@@ -15,6 +15,7 @@ Player::Player(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec3 scale, vec
 , m_pController( pController )
 {
     bLockToX = false;
+    bPressed = false;
 }
     
 Player::~Player()
@@ -29,25 +30,33 @@ void Player::Update(float deltaTime)
     float speed = 12;
     vec3 dir( 0, 0, 0 );
 
-    if (m_pController->m_Up && bLockToX == false)
+    if (m_pController->m_Up && bLockToX == false && bLockControlls == false)
     {
         dir.y = 1 * speed;
     }
-    if (m_pController->m_Down && bLockToX == false)
+    if (m_pController->m_Down && bLockToX == false && bLockControlls == false)
     {
         dir.y = -1 * speed;
     }
-    if (m_pController->m_Left)
+    if (m_pController->m_Left && bLockControlls == false)
     {
         dir.x = -1 * speed;
     }
-    if (m_pController->m_Right)
+    if (m_pController->m_Right && bLockControlls == false)
     {
         dir.x = 1 * speed;
     }
+    
+    if (m_pController->m_Action && !bPressed)
+    {
+        bPressed = true;
+        bIsActionPressed = true;
+    }
+    else if (!m_pController->m_Action && bPressed)
+    {
+        bPressed = false;
+    }
 
     m_pPhysicsBody->ApplyForce(dir);
-    //m_Position += dir * speed * deltaTime;
 
-    //ImGui::Text("%f", m_pPhysicsBody->GetPosition().y);
 }

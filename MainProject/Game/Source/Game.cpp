@@ -65,6 +65,7 @@ void Game::Init()
     m_pResourceManager->AddTexture("Megaman", new Texture("Data/Textures/Megaman.png"));
     m_pResourceManager->AddTexture("Ground", new Texture("Data/Textures/Ground.png"));
     m_pResourceManager->AddTexture("Water", new Texture("Data/Textures/Water.png"));
+    m_pResourceManager->AddTexture("Box", new Texture("Data/Textures/Box.png"));
 
 
     m_pResourceManager->AddShader("Shader_Texture", new ShaderProgram("Data/Shaders/texture.vert", "Data/Shaders/texture.frag"));
@@ -74,6 +75,7 @@ void Game::Init()
     m_pResourceManager->AddMaterial("Ground", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("Ground")));
     m_pResourceManager->AddMaterial("Dice", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("Dice")));
     m_pResourceManager->AddMaterial("Water", new Material(m_pResourceManager->GetShader("Shader_Water"), m_pResourceManager->GetTexture("Water")));
+    m_pResourceManager->AddMaterial("Box", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("Box")));
 
 
     //meshes
@@ -111,6 +113,7 @@ void Game::OnEvent(Event* pEvent)
 {
     m_pImGuiManager->OnEvent( pEvent );
     m_pController->OnEvent( pEvent );
+    m_pCurrentScene->OnEvent(pEvent);
 }
 
 void Game::Update(float deltaTime)

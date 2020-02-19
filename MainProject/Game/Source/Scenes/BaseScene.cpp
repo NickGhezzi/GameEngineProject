@@ -63,6 +63,7 @@ void BaseScene::OnEvent(fw::Event* pEvent)
         {
             GameObject* A = (GameObject*)pCollisionEvent->GetBodyA();
             GameObject* B = (GameObject*)pCollisionEvent->GetBodyB();
+
         }
     }
 }

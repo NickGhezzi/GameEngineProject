@@ -15,13 +15,20 @@ namespace fw
         virtual void AddJoint(PhysicsBody* objectToAttach, Vector2 anchorPos) override;
 
         virtual void ApplyForce(Vector3 force) override;
+        virtual void ApplyTorque(float torque) override;
 
         virtual Vector3 GetPosition() override;
+        virtual float GetRotation() override;
+
+        virtual void SetPosition(Vector3 pos) override;
+
         virtual b2Body* GetBody() override;
 
         virtual void SetGravity(float scale) override;
 
         virtual void SetActive(bool isactive) override;
+
+        virtual void ResetVelocity() override;
     protected:
         b2Body* m_pBody;
     };

@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "GameObjects/Player.h"
 #include "GameObjects/Camera.h"
+#include "GameObjects/GameObject.h"
 #include "ResourceManager.h"
 #include "Base/ObjectPool.h"
 
@@ -13,7 +14,10 @@ BoxStackingScene::BoxStackingScene(Game* game):
     m_pCamera = nullptr;
     m_pResources = nullptr;
     m_pPlayer = nullptr;
-
+    m_pFloor = nullptr;
+    m_NumActiveBoxes = 0;
+    m_Score = 0;
+    m_PreviousHighestYs.push_back(-10.0f);
 }
 
 BoxStackingScene::~BoxStackingScene()
@@ -26,6 +30,7 @@ BoxStackingScene::~BoxStackingScene()
 
     delete m_pCamera;
     delete m_pPlayer;
+    delete m_pFloor;
 }
 
 void BoxStackingScene::Init()
@@ -37,48 +42,133 @@ void BoxStackingScene::Init()
     m_pPlayer->CreateBody(false);
     m_pPlayer->AddBox(vec3(1, 1, 1), 1, false, 0.2, 0);
     m_pPlayer->GetBody()->SetGravity(0);
-    m_pPlayer->bLockToX = true;
+    m_pPlayer->bLockControlls = true;
+
+    m_pFloor = new GameObject(this, m_pResources->GetMesh("FloorMesh"), m_pResources->GetMaterial("Ground"), vec3(2, 1, 1), vec3(0, 0, 0), vec3(0, -5, 0));
+    m_pFloor->CreateBody(true);
+    m_pFloor->AddBox(vec3(10, 1, 1), 1, false, 0.2, 0);
+
+    //add to pool
     for (int i = 0; i < 100; i++)
     {
-        GameObject* pObj = new GameObject(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("Megaman"), vec3(1, 1, 1), vec3(0, 0, 0), vec3(0, 0, 0));
+        GameObject* pObj = new GameObject(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("Box"), vec3(1, 1, 1), vec3(0, 0, 0), vec3(0, 0, 0));
         pObj->CreateBody(false);
         pObj->GetBody()->SetActive(false);
         pObj->AddBox(vec3(1, 1, 1), 1, false, 0.2, 0);
+        pObj->SetName("Box");
         m_ObjectPool.AddObjectToPool(pObj);
         pObj->SetPoolWhereWeCameFrom(&m_ObjectPool);
     }
 
-    for (int i = 0; i < 3; i++)
-    {
-        GameObject* pObj = m_ObjectPool.GetObjectFromPool();
-        AddObjectToScene(pObj);
-        pObj->GetBody()->SetActive(true);
-    }
+    
 }
 
 void BoxStackingScene::Update(float deltaTime)
 {
     m_pPhysicsWorld->Update(deltaTime);
     m_pPlayer->Update(deltaTime);
+    m_pFloor->Update(deltaTime);
+    m_pPlayer->SetPosition(vec3(sin(fw::GetSystemTimeSinceGameStart()) * 5, 3, 0));
+    //////////// game stuff //////////////
+    if (m_pPlayer->bIsActionPressed == true)
+    {
+        SpawnBox();
+        m_pPlayer->bIsActionPressed = false;
+    }
+
+
     for (auto obj : m_pGameObjects)
     {
         obj->Update(deltaTime);
+        if (obj->GetPosition().y < -10.0f)
+        {
+            obj->GetBody()->ResetVelocity();
+            obj->GetBody()->SetActive(false);
+            m_ObjectPool.AddObjectToPool(obj);
+            RemoveObjectFromScene(obj);
+            m_NumActiveBoxes--;
+        }
     }
+
+    ImGui::Begin("GameStuff");
+    ImGui::Text("Score: %d", m_Score);
+
+    ImGui::End();
+    ////////////////////////////////////////
     m_pCamera->Update(deltaTime);
 }
 
 void BoxStackingScene::Draw()
 {
     m_pPlayer->Draw(m_pCamera);
+    m_pFloor->Draw(m_pCamera);
     for (auto obj : m_pGameObjects)
     {
         obj->Draw(m_pCamera);
     }
+
+    static_cast<fw::PhysicsWorld2D*>(m_pPhysicsWorld)->DrawDebugData(&m_pCamera->GetViewMatrix(), &m_pCamera->GetProjectionMatrix());
 }
 
 void BoxStackingScene::LoadFromFile(const char* filename)
 {
 
+}
+
+void BoxStackingScene::OnEvent(fw::Event* pEvent)
+{
+    m_PreviousHighestYs.push_back(m_HighestY);
+
+    if (pEvent->GetType() == "CollisionEvent")
+    {
+        fw::CollisionEvent* pCollisionEvent = (fw::CollisionEvent*)pEvent;
+        if (pCollisionEvent)
+        {
+            GameObject* A = static_cast<GameObject*>(pCollisionEvent->GetBodyA());
+            GameObject* B = static_cast<GameObject*>(pCollisionEvent->GetBodyB());
+            
+            if (A->GetName() == "Box")
+            {
+                if(B->GetName() == "Box")
+                {
+                    for (int i = 0; i < m_NumActiveBoxes; i++)
+                    {
+                        float tempy = m_pGameObjects[i]->GetPosition().y;
+                        if (tempy > m_HighestY)
+                        {
+                            m_PreviousHighestYs.push_back(m_HighestY);;
+                            m_HighestY = tempy;
+                        }
+                    }
+                    for (int i = 0; i < m_NumActiveBoxes; i++)
+                    {
+                        if (m_HighestY < m_PreviousHighestYs[i])
+                        {
+                            m_Score = m_Score - (m_PreviousHighestYs.size() - m_NumActiveBoxes);
+                            break;
+                        }
+                        else if (m_HighestY > m_PreviousHighestYs[m_NumActiveBoxes])
+                        {
+                            m_Score++;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    
+   
+}
+
+void BoxStackingScene::SpawnBox()
+{
+    GameObject* pObj = m_ObjectPool.GetObjectFromPool();
+    AddObjectToScene(pObj);
+    pObj->SetPosition(vec3(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y - 1, 0));
+    pObj->GetBody()->SetActive(true);
+    m_NumActiveBoxes++;
 }
 
 

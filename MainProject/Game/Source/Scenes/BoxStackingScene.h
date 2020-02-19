@@ -4,6 +4,7 @@
 #include "Base/ObjectPool.h"
 
 class Player;
+class GameObject;
 class Camera;
 class Game;
 class ResourceManager;
@@ -19,6 +20,9 @@ public:
     virtual void Update(float deltaTime) override;
     virtual void Draw() override;
     virtual void LoadFromFile(const char* filename) override;
+    virtual void OnEvent(fw::Event* pEvent) override;
+
+    void SpawnBox();
 
 private:
     Camera* m_pCamera;
@@ -26,4 +30,11 @@ private:
     ObjectPool<GameObject*> m_ObjectPool;
 
     Player* m_pPlayer;
+    GameObject* m_pFloor;
+
+    int m_NumActiveBoxes;
+    float m_HighestY;
+    std::vector<float> m_PreviousHighestYs;
+    int m_Score;
+    
 };
