@@ -108,7 +108,7 @@ void BoxStackingScene::Draw()
         obj->Draw(m_pCamera);
     }
 
-    static_cast<fw::PhysicsWorld2D*>(m_pPhysicsWorld)->DrawDebugData(&m_pCamera->GetViewMatrix(), &m_pCamera->GetProjectionMatrix());
+    //static_cast<fw::PhysicsWorld2D*>(m_pPhysicsWorld)->DrawDebugData(&m_pCamera->GetViewMatrix(), &m_pCamera->GetProjectionMatrix());
 }
 
 void BoxStackingScene::LoadFromFile(const char* filename)
@@ -118,8 +118,6 @@ void BoxStackingScene::LoadFromFile(const char* filename)
 
 void BoxStackingScene::OnEvent(fw::Event* pEvent)
 {
-    m_PreviousHighestY = m_HighestY;
-
     if (pEvent->GetType() == "CollisionEvent")
     {
         fw::CollisionEvent* pCollisionEvent = (fw::CollisionEvent*)pEvent;
@@ -127,20 +125,14 @@ void BoxStackingScene::OnEvent(fw::Event* pEvent)
         {
             GameObject* A = static_cast<GameObject*>(pCollisionEvent->GetBodyA());
             GameObject* B = static_cast<GameObject*>(pCollisionEvent->GetBodyB());
-            
+
             if (A->GetName() == "Box")
             {
-                if(B->GetName() == "Box")
+                if (B->GetName() == "Box")
                 {
-                    for (int i = 0; i < m_NumActiveBoxes; i++)
+                    if ((A->bHasCollided == true && B->bHasCollided == false) || (A->bHasCollided == false && B->bHasCollided == true) || (A->bHasCollided == false && B->bHasCollided == false))
                     {
-                        float tempy = m_pGameObjects[i]->GetPosition().y;
-                        if (tempy > m_HighestY)
-                        {
-                            m_PreviousHighestY = m_HighestY;
-                            m_HighestY = tempy;
-                            
-                        }
+                        m_Score++;
                         A->bHasCollided = true;
                         B->bHasCollided = true;
                     }
@@ -158,20 +150,10 @@ void BoxStackingScene::OnEvent(fw::Event* pEvent)
                     m_bInitialBox = true;
                 }
             }
-                 //if (m_HighestY > m_PreviousHighestY && (A->bHasCollided == true && B->bHasCollided == false || A->bHasCollided == false && B->bHasCollided == true || A->bHasCollided == false && B->bHasCollided == false))
-                 //{
-                 //    m_Score++;
-                 //    A->bHasCollided = true;
-                 //    B->bHasCollided = true;
-                 //}
-        }
-   
-    }
 
-                 if (m_HighestY > m_PreviousHighestY)
-                 {
-                      m_Score++;
-                 }
+        }
+
+    }
 }
 
 void BoxStackingScene::SpawnBox()
@@ -191,13 +173,13 @@ void BoxStackingScene::Reset()
             GameObject* obj = m_pGameObjects[i];
             obj->GetBody()->ResetVelocity();
             obj->GetBody()->SetActive(false);
+            obj->bHasCollided = false;
             m_ObjectPool.AddObjectToPool(obj);
             RemoveObjectFromScene(obj);
             m_NumActiveBoxes--;
     }
     m_bInitialBox = false;
     m_Score = 0;
-    m_HighestY = m_pFloor->GetPosition().y + 1;
 }
 
 

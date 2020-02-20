@@ -33,8 +33,6 @@ private:
     GameObject* m_pFloor;
 
     int m_NumActiveBoxes;
-    float m_HighestY;
-    float m_PreviousHighestY;
     int m_Score;
     bool m_bInitialBox;
     

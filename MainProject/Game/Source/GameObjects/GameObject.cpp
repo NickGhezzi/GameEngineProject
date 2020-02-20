@@ -19,6 +19,7 @@ GameObject::GameObject(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec3 sc
 , m_Radius( 2 )
 {
     m_Name = "GameObject";
+    bHasCollided = false;
 }
 
 GameObject::~GameObject()
@@ -60,7 +61,7 @@ void GameObject::Update(float deltaTime)
 {
     if(m_pPhysicsBody)
     m_Position = m_pPhysicsBody->GetPosition();
-    m_Rotation.z = m_pPhysicsBody->GetRotation();
+    m_Rotation.z = -m_pPhysicsBody->GetRotation();
 }
 
 void GameObject::Draw(Camera* pCamera)
