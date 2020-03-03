@@ -62,6 +62,7 @@ project "Framework"
         "Libraries/Framework/Source",
 		"Libraries/Framework/Libraries/Box2D/include",
 		"Libraries/Framework/Libraries/Box2D/src",
+		"Libraries/Framework/Libraries/Bullet3D",
     }
 
     files {
@@ -73,6 +74,8 @@ project "Framework"
         "Libraries/Framework/Libraries/LodePNG/lodepng.h",
         "Libraries/Framework/Libraries/Box2D/**.cpp",
         "Libraries/Framework/Libraries/Box2D/**.h",
+		"Libraries/Framework/Libraries/Bullet3D/**.cpp",
+        "Libraries/Framework/Libraries/Bullet3D/**.h",
     }
 
    filter "configurations:Debug"
@@ -84,3 +87,6 @@ project "Framework"
 
     filter "files:Libraries/Framework/Libraries/LodePNG/**"
         disablewarnings { "4551", "4334", "4267" }
+
+	filter "files:Libraries/Framework/Libraries/Bullet3D/**"
+        disablewarnings { "4305", "4244", "4267" }

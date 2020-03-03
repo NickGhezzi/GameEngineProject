@@ -41,6 +41,8 @@
 #include "Physics/PhysicsWorld2D.h"
 #include "Physics/PhysicsBody.h"
 #include "Physics/PhysicsBody2D.h"
+#include "Physics/PhysicsWorldBullet.h"
+#include "Physics/PhysicsBodyBullet.h"
 
 #include "Events/EventManager.h"
 #include "Events/Event.h"

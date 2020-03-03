@@ -52,16 +52,17 @@ void SheepObject::Update(float deltaTime)
     }
 
     // TODO_ICA1: Make the SheepObject make small jumps to the left or right based on input from the player controller object.
-    if (m_IsDead == false)
+   m_CanJump = true;
+   if (m_IsDead == false)
     {
         if (m_pController->IsRightHeld() && m_CanJump == true)
         {
-            m_pBody->ApplyLinearImpulseToCenter(vec3(0.7, 3, 0));
+            m_pBody->ApplyLinearImpulseToCenter(vec3(0.7, 1, 0));
             m_CanJump = false;
         }
         if (m_pController->IsLeftHeld() && m_CanJump == true)
         {
-            m_pBody->ApplyLinearImpulseToCenter(vec3(-0.7, 3, 0));
+            m_pBody->ApplyLinearImpulseToCenter(vec3(-0.7, 1, 0));
             m_CanJump = false;
         }
     }

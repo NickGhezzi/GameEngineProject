@@ -44,7 +44,7 @@ void ICA1Scene::Init()
     BaseScene::Init();
     
     // Create physics world.
-    m_pPhysicsWorld = new fw::PhysicsWorld2D( m_pGame->GetFramework() );
+    m_pPhysicsWorld = new fw::PhysicsWorldBullet( m_pGame->GetFramework() );
 
     ResourceManager* pResources = m_pGame->GetResourceManager();
 
@@ -221,6 +221,4 @@ void ICA1Scene::SpawnMeatChunks(vec3 spawnPos, unsigned int numChunks)
         obj->GetBody()->ApplyTorque(vec3(0, 0, rot));
         AddObjectToScene(obj);
     }
-
-
 }
