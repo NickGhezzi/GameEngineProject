@@ -9,6 +9,7 @@
 #include "GameObjects/PlayerController.h"
 #include "Scenes/BaseScene.h"
 #include "ICA1/ICA1Scene.h"
+#include "Trig/TrigScene.h"
 
 using namespace fw;
 
@@ -54,11 +55,15 @@ void Game::Init()
     pMesh->CreateBox( vec2(1,1), vec2(0,0) );
     m_pResourceManager->AddMesh( "Box", pMesh );
 
+    Mesh* pMesh1 = new Mesh();
+    pMesh1->CreateCube(vec3(1, 1, 1), vec3(0, 0, 0));
+    m_pResourceManager->AddMesh("Cube", pMesh1);
+
     // Load our textures.
     m_pResourceManager->AddTexture( "Megaman", new fw::Texture( "Data/Textures/Megaman.png" ) );
 
     //m_pPhysicsScene = new BoxStackingScene( this );
-    m_pPhysicsScene = new ICA1Scene( this );
+    m_pPhysicsScene = new TrigScene( this );
     m_pPhysicsScene->Init();
     
     m_pActiveScene = m_pPhysicsScene;

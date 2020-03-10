@@ -26,6 +26,7 @@ public:
     void Draw(Camera* pCamera, fw::ShaderProgram* pShader, mat4* worldMat, fw::Texture* pTexture);
 
     void CreateBox(vec2 size, vec2 offset);
+    void CreateCube(vec3 size, vec3 offset);
 };
 
 #endif //__Mesh_H__

@@ -63,6 +63,7 @@ void BaseScene::Reset()
 
 void BaseScene::Update(float deltaTime)
 {
+    if(m_pPhysicsWorld)
     m_pPhysicsWorld->Update( deltaTime );
 
     for( GameObject* object : m_Objects )
