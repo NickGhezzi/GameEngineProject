@@ -168,11 +168,16 @@ void Mesh::CreateFloor()
 void Mesh::GenerateScore(int num)
 {
 
-    VertexFormat attribs[] = { VertexFormat(vec3(0, 0, 0), ColorByte(0,0,0,255), vec2((num * 0.1),0)), 
-                               VertexFormat(vec3(0, 0, 0), ColorByte(0,0,0,255), vec2((num * 0.1),1)), 
-                               VertexFormat(vec3(0, 0, 0), ColorByte(0,0,0,255), vec2((num * 0.1) + 0.1 ,0)), 
-                               VertexFormat(vec3(0, 0, 0), ColorByte(0,0,0,255), vec2((num * 0.1) + 0.1,1)) };
-    Init(attribs, 4, GL_TRIANGLE_STRIP);
+    VertexFormat attribs[] = { 
+        VertexFormat(vec3(0, 0, 0), ColorByte(255,255,255,255), vec2((num * 0.1), 0.0f)),                       
+        VertexFormat(vec3(0, 1, 0), ColorByte(255,255,255,255), vec2((num * 0.1), 1.0f)),                          
+        VertexFormat(vec3(1, 1, 0), ColorByte(255,255,255,255), vec2((num * 0.1) + 0.1f, 1.0f)),           
+        VertexFormat(vec3(1, 0, 0), ColorByte(255,255,255,255), vec2((num * 0.1) + 0.1f, 0.0f))
+    };
+
+    unsigned int indices[6] = { 0,1,2, 0,2,3 };
+
+    Init(attribs, 4, indices, 6, GL_TRIANGLES, GL_STATIC_DRAW);
 
 }
 void Mesh::CreateCube(vec3 size, vec3 offset)

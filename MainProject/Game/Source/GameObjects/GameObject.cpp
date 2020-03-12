@@ -20,11 +20,15 @@ GameObject::GameObject(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec3 sc
 {
     m_Name = "GameObject";
     bHasCollided = false;
+    m_pPhysicsBody = nullptr;
 }
 
 GameObject::~GameObject()
 {
-    delete m_pPhysicsBody;
+    if (m_pPhysicsBody != nullptr)
+    {
+        delete m_pPhysicsBody;
+    }
 }
 
 std::string GameObject::GetName()

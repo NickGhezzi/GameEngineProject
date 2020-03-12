@@ -93,6 +93,7 @@ void Game::Init()
     m_pResourceManager->AddMaterial("BinRed", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("BinRed")));
     m_pResourceManager->AddMaterial("BinGreen", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("BinGreen")));
     m_pResourceManager->AddMaterial("BinBlue", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("BinBlue")));
+
     m_pResourceManager->AddMaterial("Score", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("ScoreFont")));
 
     //meshes

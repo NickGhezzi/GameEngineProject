@@ -23,7 +23,7 @@ SortingGameScene::SortingGameScene(Game* game):
 
 SortingGameScene::~SortingGameScene()
 {
-
+    delete m_HUDScene;
 }
 
 void SortingGameScene::Init()
@@ -55,11 +55,11 @@ void SortingGameScene::Init()
     trigger->CreateBody(true);
     trigger->AddBox(vec3(1, 0.5, 1), 1, true, 0.2, 0);
 
-    GameObject* ball = new Ball(this, m_pResources->GetMesh("Sphere"), m_pResources->GetMaterial("BallRed"), vec3(0.2, 0.2, 0.2), vec3(0, 0, 0), vec3(-4, 0, 0), ColorType::Red);
+    GameObject* ball = new Ball(this, m_pResources->GetMesh("Sphere"), m_pResources->GetMaterial("BallRed"), vec3(0.2, 0.2, 0.2), vec3(0, 0, 0), vec3(1, 0, 0), ColorType::Red);
     ball->CreateBody(false);
     ball->AddCircle(0.2);
 
-    GameObject* bin = new Bin(this, m_pResources->GetMesh("BinMesh"), m_pResources->GetMaterial("BinGreen"), vec3(1, 1, 1), vec3(0, 0, 0), vec3(-4, -3, 0), ColorType::Green);
+    GameObject* bin = new Bin(this, m_pResources->GetMesh("BinMesh"), m_pResources->GetMaterial("BinRed"), vec3(1, 1, 1), vec3(0, 0, 0), vec3(-4, -3, 0), ColorType::Red);
     bin->CreateBody(true);
     bin->AddBox(vec3(2, 1, 1), 1, false, 0.2, 0);
 
@@ -135,10 +135,10 @@ void SortingGameScene::OnEvent(fw::Event* pEvent)
                 }
                 else
                 {
-                    ball->GetBody()->ResetVelocity();
-                    ball->GetBody()->SetActive(false);
+                   // ball->GetBody()->ResetVelocity();
+                  //  ball->GetBody()->SetActive(false);
                     //m_ObjectPool.AddObjectToPool(obj);
-                    RemoveObjectFromScene(ball);
+                   // RemoveObjectFromScene(ball);
                 }
             }
             if (B->GetName() == "Bin")
@@ -156,10 +156,10 @@ void SortingGameScene::OnEvent(fw::Event* pEvent)
                 }
                 else
                 {
-                    ball->GetBody()->ResetVelocity();
-                    ball->GetBody()->SetActive(false);
+                   // ball->GetBody()->ResetVelocity();
+                   // ball->GetBody()->SetActive(false);
                     //m_ObjectPool.AddObjectToPool(obj);
-                    RemoveObjectFromScene(ball);
+                   // RemoveObjectFromScene(ball);
                 }
             }
         }
