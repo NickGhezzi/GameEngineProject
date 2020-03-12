@@ -12,6 +12,7 @@
 #include "Scenes/ScenePhysics.h"
 #include "Scenes/BoxStackingScene.h"
 #include "Scenes/TestScene.h"
+#include "Scenes/SortingGameScene.h"
 
 #include "ResourceManager.h"
 #include "Base/Material.h"
@@ -40,6 +41,7 @@ Game::~Game()
     delete m_pScenePhysics;
     delete m_pBoxStackingScene;
     delete m_pTestScene;
+    delete m_pSortingGameScene;
 
     delete m_pResourceManager;
 }
@@ -93,16 +95,18 @@ void Game::Init()
     m_pScenePhysics = new ScenePhysics(this);
     m_pBoxStackingScene = new BoxStackingScene(this);
     m_pTestScene = new TestScene(this);
+    m_pSortingGameScene = new SortingGameScene(this);
 
     m_pSceneCube->Init();
     m_pSceneWater->Init();
     m_pScenePhysics->Init();
     m_pBoxStackingScene->Init();
     m_pTestScene->Init();
+    m_pSortingGameScene->Init();
 
     m_pScenePhysics->LoadFromFile("Data/Simple.box2dscene");
 
-    m_pCurrentScene = m_pBoxStackingScene;
+    m_pCurrentScene = m_pSortingGameScene;
 
 
     // Create our GameObjects.

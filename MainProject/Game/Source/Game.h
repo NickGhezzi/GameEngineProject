@@ -27,6 +27,8 @@ protected:
     BaseScene* m_pScenePhysics;
     BaseScene* m_pBoxStackingScene;
     BaseScene* m_pTestScene;
+    BaseScene* m_pSortingGameScene;
+
 
     ResourceManager* m_pResourceManager;
 

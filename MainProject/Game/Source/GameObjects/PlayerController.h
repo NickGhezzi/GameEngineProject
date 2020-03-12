@@ -4,6 +4,7 @@
 class PlayerController
 {
     friend class Player;
+    friend class Peg;
 
 protected:
     bool m_Up;

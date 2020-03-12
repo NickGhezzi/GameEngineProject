@@ -12,7 +12,10 @@ namespace fw
 
         virtual void AddBox(Vector3 size, float density, bool isSensor, float friction, float restitution) override;
         virtual void AddCircle(float radius) override;
+
         virtual void AddJoint(PhysicsBody* objectToAttach, Vector2 anchorPos) override;
+        virtual void AddJointWithRestraint(PhysicsBody* objectToAttach, Vector2 anchorPos, float minAngle, float maxAngle) override;
+        virtual void AddJointLocal(PhysicsBody* objectToAttach, Vector2 localanchorPosA, Vector2 localanchorPosB) override;
 
         virtual void ApplyForce(Vector3 force) override;
         virtual void ApplyTorque(float torque) override;
@@ -20,7 +23,9 @@ namespace fw
         virtual Vector3 GetPosition() override;
         virtual float GetRotation() override;
 
+
         virtual void SetPosition(Vector3 pos) override;
+        virtual void SetRotation(float pos) override;
 
         virtual b2Body* GetBody() override;
 

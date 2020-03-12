@@ -52,8 +52,34 @@ namespace fw
     {
         b2RevoluteJointDef jointdef;
         b2Vec2 anchor(anchorPos.x, anchorPos.y);
-     
+
         jointdef.Initialize(m_pBody, objectToAttach->GetBody(), anchor);
+
+        m_pBody->GetWorld()->CreateJoint(&jointdef);
+    }
+
+    void PhysicsBody2D::AddJointWithRestraint(PhysicsBody* objectToAttach, Vector2 anchorPos, float minAngle, float maxAngle)
+    {
+        b2RevoluteJointDef jointdef;
+        b2Vec2 anchor(anchorPos.x, anchorPos.y);
+        jointdef.enableLimit = true;
+        jointdef.lowerAngle = (minAngle * PI / 180);
+        jointdef.upperAngle = (maxAngle * PI / 180);
+        jointdef.Initialize(m_pBody, objectToAttach->GetBody(), anchor);
+
+        m_pBody->GetWorld()->CreateJoint(&jointdef);
+    }
+
+    void PhysicsBody2D::AddJointLocal(PhysicsBody* objectToAttach, Vector2 localanchorPosA, Vector2 localanchorPosB)
+    {
+        b2RevoluteJointDef jointdef;
+        b2Vec2 anchor1(localanchorPosA.x, localanchorPosA.y);
+        b2Vec2 anchor2(localanchorPosB.x, localanchorPosB.y);
+
+        jointdef.bodyA = m_pBody;
+        jointdef.bodyB = objectToAttach->GetBody();
+        jointdef.localAnchorA = anchor1;
+        jointdef.localAnchorB = anchor2;
 
         m_pBody->GetWorld()->CreateJoint(&jointdef);
     }
@@ -82,6 +108,12 @@ namespace fw
     void PhysicsBody2D::SetPosition(Vector3 pos)
     {
         m_pBody->SetTransform(b2Vec2(pos.x, pos.y), 0);
+    }
+
+    void PhysicsBody2D::SetRotation(float pos)
+    {
+        float pos1 = pos * PI / 180;
+        m_pBody->SetTransform(m_pBody->GetPosition(), pos1);
     }
 
     b2Body* PhysicsBody2D::GetBody()

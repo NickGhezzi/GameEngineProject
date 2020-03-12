@@ -14,7 +14,7 @@ protected:
     int m_PlayerNumber;
     bool bPressed;
 public:
-    Player(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec3 scale, vec3 roation, vec3 position, int playerNum, PlayerController* pController);
+    Player(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec3 scale, vec3 rotation, vec3 position, int playerNum, PlayerController* pController);
     ~Player();
 
     virtual void Update(float deltaTime) override;

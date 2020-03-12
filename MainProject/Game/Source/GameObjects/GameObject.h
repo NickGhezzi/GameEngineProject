@@ -6,6 +6,15 @@ class Game;
 class BaseScene;
 class Mesh;
 class Material;
+class Camera;
+
+enum class ColorType
+{
+    Red = 0,
+    Green,
+    Blue
+};
+
 
 class GameObject
 {
@@ -25,17 +34,18 @@ protected:
 
     std::string m_Name;
 public:
-    //swap all vec2 to vec3
-    GameObject(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec3 scale, vec3 rotation, vec3 position);
+    //TODO:: Add std::string tag or name to constructor
+    GameObject(BaseScene* m_pScene,Mesh* pMesh, Material* pMat, vec3 scale, vec3 rotation, vec3 position);
 
     ~GameObject();
 
     vec3 GetPosition() { return m_Position; }
+    float GetRotation() { return m_Rotation.z; }
     float GetRadius() { return m_Radius; }
     std::string GetName();
 
     void SetScale(vec3 scale) { m_Scale = scale; }
-    void SetRotation(vec3 rot) { m_Rotation = rot; }
+    void SetRotation(float rot) { m_pPhysicsBody->SetRotation(rot); }
     void SetPosition(vec3 pos) { m_pPhysicsBody->SetPosition(pos); }
     void SetName(std::string name) { m_Name = name; }
 
@@ -44,6 +54,7 @@ public:
     void AddCircle(float radius);
     void AddBox(vec3 size, float density, bool isSensor, float friction, float restitution);
     void AddJoint(GameObject* thingtoattach, vec2 pos);
+    void AddJointWithRestraint(GameObject* thingtoattach, vec2 pos, float minangle, float maxangle);
 
     virtual void Update(float deltaTime);
     virtual void Draw(Camera* pCamera);

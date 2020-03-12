@@ -34,7 +34,7 @@ std::string GameObject::GetName()
 
 void GameObject::CreateBody(bool isStatic)
 {
-    m_pPhysicsBody = m_pScene->GetPhysicsWorld()->CreateBody(m_Position, 0, isStatic, this);
+    m_pPhysicsBody = m_pScene->GetPhysicsWorld()->CreateBody(m_Position, m_Rotation.z, isStatic, this);
 }
 
 fw::PhysicsBody* GameObject::GetBody()
@@ -55,6 +55,11 @@ void GameObject::AddBox(vec3 size, float density, bool isSensor, float friction,
 void GameObject::AddJoint(GameObject* thingtoattach, vec2 pos)
 {
     m_pPhysicsBody->AddJoint(thingtoattach->GetBody(), pos);
+}
+
+void GameObject::AddJointWithRestraint(GameObject* thingtoattach, vec2 pos, float minangle, float maxangle)
+{
+    m_pPhysicsBody->AddJointWithRestraint(thingtoattach->GetBody(), pos, minangle, maxangle);
 }
 
 void GameObject::Update(float deltaTime)

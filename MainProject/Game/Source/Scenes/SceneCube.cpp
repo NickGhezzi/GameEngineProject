@@ -50,7 +50,7 @@ void SceneCube::Update(float deltaTime)
     m_pPhysicsWorld->Update(deltaTime);
 
     m_Timer += deltaTime * 100;
-    m_pPlayer->SetRotation(vec3(m_Timer, m_Timer, m_Timer));
+   // m_pPlayer->SetRotation(vec3(m_Timer, m_Timer, m_Timer));
     m_pPlayer->Update(deltaTime);
 
     m_pCube->Update(deltaTime);

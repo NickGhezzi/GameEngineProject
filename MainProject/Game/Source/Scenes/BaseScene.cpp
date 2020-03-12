@@ -12,11 +12,11 @@ BaseScene::BaseScene(Game* game)
 
 BaseScene::~BaseScene()
 {
-    //for (auto obj : m_pGameObjects)
-    //{
-    //    delete obj;
-    //}
-    //m_pGameObjects.clear();
+    for (auto obj : m_pGameObjects)
+    {
+        delete obj;
+    }
+    m_pGameObjects.clear();
     delete m_pCamera;
     delete m_pPhysicsWorld;
 }
@@ -24,11 +24,19 @@ BaseScene::~BaseScene()
 void BaseScene::Update(float deltaTime)
 {
     m_pCamera->Update(deltaTime);
+
+    for (auto obj : m_pGameObjects)
+    {
+        obj->Update(deltaTime);
+    }
 }
 
 void BaseScene::Draw()
 {
-    
+    for (auto obj : m_pGameObjects)
+    {
+        obj->Draw(m_pCamera);
+    }
 }
 
 void BaseScene::LoadFromFile(const char* filename)

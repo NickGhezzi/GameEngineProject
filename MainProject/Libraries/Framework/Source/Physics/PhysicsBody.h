@@ -16,6 +16,8 @@ namespace fw
         virtual void AddCircle(float radius) = 0;
 
         virtual void AddJoint(PhysicsBody* objectToAttach, Vector2 anchorPos) = 0;
+        virtual void AddJointWithRestraint(PhysicsBody* objectToAttach, Vector2 anchorPos, float minAngle, float maxAngle) = 0;
+        virtual void AddJointLocal(PhysicsBody* objectToAttach, Vector2 localanchorPosA, Vector2 localanchorPosB) = 0;
 
         virtual Vector3 GetPosition() = 0;
         virtual b2Body* GetBody() = 0;
@@ -25,6 +27,7 @@ namespace fw
         virtual void SetGravity(float scale) = 0;
 
         virtual void SetPosition(Vector3 pos) = 0;
+        virtual void SetRotation(float pos) = 0;
 
         virtual void SetActive(bool isactive) = 0;
 
