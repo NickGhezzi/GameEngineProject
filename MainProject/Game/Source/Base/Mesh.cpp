@@ -165,6 +165,16 @@ void Mesh::CreateBox(vec2 size, vec2 offset)
 void Mesh::CreateFloor()
 {
 }
+void Mesh::GenerateScore(int num)
+{
+
+    VertexFormat attribs[] = { VertexFormat(vec3(0, 0, 0), ColorByte(0,0,0,255), vec2((num * 0.1),0)), 
+                               VertexFormat(vec3(0, 0, 0), ColorByte(0,0,0,255), vec2((num * 0.1),1)), 
+                               VertexFormat(vec3(0, 0, 0), ColorByte(0,0,0,255), vec2((num * 0.1) + 0.1 ,0)), 
+                               VertexFormat(vec3(0, 0, 0), ColorByte(0,0,0,255), vec2((num * 0.1) + 0.1,1)) };
+    Init(attribs, 4, GL_TRIANGLE_STRIP);
+
+}
 void Mesh::CreateCube(vec3 size, vec3 offset)
 {
     assert(m_VBO == 0);
@@ -371,4 +381,6 @@ void Mesh::LoadObjFromFile(const char* filename)
     delete[] vertexAttributes;
     delete[] buffer;
 }
+
+
 ;

@@ -11,3 +11,8 @@ m_Color(type)
 Bin::~Bin()
 {
 }
+
+ColorType Bin::GetType()
+{
+    return m_Color;
+}

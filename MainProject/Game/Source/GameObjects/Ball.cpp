@@ -11,3 +11,8 @@ Ball::Ball(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec3 scale, vec3 ro
 Ball::~Ball()
 {
 }
+
+ColorType Ball::GetType()
+{
+    return m_Color;
+}

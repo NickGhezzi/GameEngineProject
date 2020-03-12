@@ -16,6 +16,7 @@ Player::Player(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec3 scale, vec
 {
     bLockToX = false;
     bPressed = false;
+    m_Name = "Player";
 }
     
 Player::~Player()

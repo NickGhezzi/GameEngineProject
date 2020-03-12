@@ -7,6 +7,7 @@ class GameObject;
 class Camera;
 class Game;
 class ResourceManager;
+class HUDElementsScene;
 
 
 class SortingGameScene : public BaseScene
@@ -27,7 +28,7 @@ private:
    // Camera* m_pCamera;
     ResourceManager* m_pResources;
     ObjectPool<GameObject*> m_ObjectPool;
-
+    HUDElementsScene* m_HUDScene;
     int m_Score;
     float m_BallSpawnTime;
 };

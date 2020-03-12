@@ -69,6 +69,15 @@ void Game::Init()
     m_pResourceManager->AddTexture("Water", new Texture("Data/Textures/Water.png"));
     m_pResourceManager->AddTexture("Box", new Texture("Data/Textures/Box.png"));
 
+    m_pResourceManager->AddTexture("BallRed", new Texture("Data/Textures/BallRed.png"));
+    m_pResourceManager->AddTexture("BallGreen", new Texture("Data/Textures/BallGreen.png"));
+    m_pResourceManager->AddTexture("BallBlue", new Texture("Data/Textures/BallBlue.png"));
+    m_pResourceManager->AddTexture("BinRed", new Texture("Data/Textures/BinRed.png"));
+    m_pResourceManager->AddTexture("BinGreen", new Texture("Data/Textures/BinGreen.png"));
+    m_pResourceManager->AddTexture("BinBlue", new Texture("Data/Textures/BinBlue.png"));
+
+    m_pResourceManager->AddTexture("ScoreFont", new Texture("Data/Textures/Font12.png"));
+
 
     m_pResourceManager->AddShader("Shader_Texture", new ShaderProgram("Data/Shaders/texture.vert", "Data/Shaders/texture.frag"));
     m_pResourceManager->AddShader("Shader_Water", new ShaderProgram("Data/Shaders/Water.vert", "Data/Shaders/Water.frag"));
@@ -78,16 +87,27 @@ void Game::Init()
     m_pResourceManager->AddMaterial("Dice", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("Dice")));
     m_pResourceManager->AddMaterial("Water", new Material(m_pResourceManager->GetShader("Shader_Water"), m_pResourceManager->GetTexture("Water")));
     m_pResourceManager->AddMaterial("Box", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("Box")));
-
+    m_pResourceManager->AddMaterial("BallRed", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("BallRed")));
+    m_pResourceManager->AddMaterial("BallGreen", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("BallGreen")));
+    m_pResourceManager->AddMaterial("BallBlue", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("BallBlue")));
+    m_pResourceManager->AddMaterial("BinRed", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("BinRed")));
+    m_pResourceManager->AddMaterial("BinGreen", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("BinGreen")));
+    m_pResourceManager->AddMaterial("BinBlue", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("BinBlue")));
+    m_pResourceManager->AddMaterial("Score", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("ScoreFont")));
 
     //meshes
     m_pResourceManager->AddMesh("PlayerMesh", new Mesh())->CreateBox(vec2(1, 1), vec2(0, 0));
     m_pResourceManager->AddMesh("CubeMesh", new Mesh())->CreateCube(vec3(1, 1, 1), vec3(0, 0, 0));
     m_pResourceManager->AddMesh("Plane", new Mesh())->CreatePlane(vec2(50, 50), ivec2(100, 100));
     m_pResourceManager->AddMesh("FloorMesh", new Mesh())->CreateCube(vec3(5, 1, 1), vec3(0, 0, 0));
-
     m_pResourceManager->AddMesh("Cube", new Mesh())->LoadObjFromFile("Data/OBJ Files/cube.obj");
+    m_pResourceManager->AddMesh("Sphere", new Mesh())->LoadObjFromFile("Data/OBJ Files/sphere.obj");
+    m_pResourceManager->AddMesh("BinMesh", new Mesh())->CreateBox(vec2(2, 1), vec2(0, 0));
 
+    for (int i = 0; i < 10; i++)
+    {
+        m_pResourceManager->AddMesh("Score" + std::to_string(i), new Mesh())->GenerateScore(i);
+    }
     //Create physics world
 
     m_pSceneCube = new SceneCube(this);
