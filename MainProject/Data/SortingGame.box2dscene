@@ -1,0 +1,828 @@
+{
+	"GameObjects":	[{
+			"Name":	"Floor",
+			"Pos":	[-2.8794717788696289, 4.3325057029724121, -3.814697265625e-006],
+			"Rot":	[0, -0, 6.7141685485839844],
+			"Scale":	[7.9000000953674316, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		},  {
+			"Name":	"Floor1",
+			"Pos":	[3.67922306060791, 3.5067069530487061, 1.9073486328125e-006],
+			"Rot":	[0, -0, 6.7141685485839844],
+			"Scale":	[1.5344876050949097, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Peg",
+			"Pos":	[1.9877731800079346, 3.7031209468841553, 3.814697265625e-006],
+			"Rot":	[0, -0, 6.65360689163208],
+			"Scale":	[1.5, 0.5, 1],
+			"Flags":	["Player"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	1,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Peg",
+					"Texture":	"Data/Textures/Peg.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Floor3",
+			"Pos":	[5.9869565963745117, -0.25510847568511963, 2.86102294921875e-006],
+			"Rot":	[0, -0, 90.1385726928711],
+			"Scale":	[13.133999824523926, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Floor4",
+			"Pos":	[5.2023067474365234, 1.5948011875152588, -3.814697265625e-006],
+			"Rot":	[0, -0, -12.427223205566406],
+			"Scale":	[1.5344876050949097, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Floor5",
+			"Pos":	[3.4296140670776367, 0.056304819881916046, 0],
+			"Rot":	[0, -0, 90.1385726928711],
+			"Scale":	[6.6339998245239258, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Floor6",
+			"Pos":	[4.1822500228881836, -0.12559199333190918, -9.5367431640625e-007],
+			"Rot":	[0, -0, 13.373883247375488],
+			"Scale":	[1.5344876050949097, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Floor2",
+			"Pos":	[0.44117230176925659, 1.7718257904052734, -7.62939453125e-006],
+			"Rot":	[0, -0, -12.474771499633789],
+			"Scale":	[6.0999999046325684, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Peg1",
+			"Pos":	[-2.916886568069458, 2.2999534606933594, 3.814697265625e-006],
+			"Rot":	[0, -0, -91.819374084472656],
+			"Scale":	[1.5, 0.5, 1],
+			"Flags":	["Player"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	1,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Peg",
+					"Texture":	"Data/Textures/Peg.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Floor7",
+			"Pos":	[-2.9625833034515381, 3.7146122455596924, -3.814697265625e-006],
+			"Rot":	[0, -0, -91.272911071777344],
+			"Scale":	[0.93400001525878906, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Floor8",
+			"Pos":	[-4.4698953628540039, 0.20337980985641479, -1.33514404296875e-005],
+			"Rot":	[0, -0, -12.474771499633789],
+			"Scale":	[1.8999999761581421, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Floor9",
+			"Pos":	[-6.6312656402587891, -0.86488616466522217, 5.7220458984375e-006],
+			"Rot":	[0, -0, 90.1385726928711],
+			"Scale":	[11.133999824523926, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Floor10",
+			"Pos":	[-5.6537361145019531, -3.5267763137817383, -1.52587890625e-005],
+			"Rot":	[0, -0, 8.7604961395263672],
+			"Scale":	[1.8999999761581421, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Floor11",
+			"Pos":	[-1.1066806316375732, -0.83150970935821533, -5.7220458984375e-006],
+			"Rot":	[0, -0, 4.3623075485229492],
+			"Scale":	[5.0999999046325684, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Floor12",
+			"Pos":	[-3.81266450881958, -0.29856139421463013, -1.049041748046875e-005],
+			"Rot":	[0, -0, -91.226768493652344],
+			"Scale":	[1.1000000238418579, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Peg2",
+			"Pos":	[2.3433418273925781, -1.0894522666931152, 3.814697265625e-006],
+			"Rot":	[0, -0, 3.5127899646759033],
+			"Scale":	[1.5, 0.5, 1],
+			"Flags":	["Player"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	1,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Peg",
+					"Texture":	"Data/Textures/Peg.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Floor14",
+			"Pos":	[2.4061553478240967, -2.69563364982605, -7.62939453125e-006],
+			"Rot":	[0, -0, -7.7569866180419922],
+			"Scale":	[1.7999999523162842, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Peg3",
+			"Pos":	[-3.8054983615875244, -3.8725945949554443, 5.7220458984375e-006],
+			"Rot":	[0, -0, 8.2547492980957031],
+			"Scale":	[1.5, 0.5, 1],
+			"Flags":	["Player"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	1,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Peg",
+					"Texture":	"Data/Textures/Peg.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Floor15",
+			"Pos":	[-2.3940215110778809, -3.7440989017486572, -1.33514404296875e-005],
+			"Rot":	[0, -0, -25.2115478515625],
+			"Scale":	[0.800000011920929, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Floor13",
+			"Pos":	[-4.9998922348022461, -5.0064716339111328, -2.574920654296875e-005],
+			"Rot":	[0, -0, 91.85028076171875],
+			"Scale":	[2.4000000953674316, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"BinRed",
+			"Pos":	[-3.96195650100708, -5.8083376884460449, -1.9073486328125e-006],
+			"Rot":	[0, 0, 0],
+			"Scale":	[1, 1, 1],
+			"Flags":	["Target"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"new(2)",
+					"Texture":	"Data/Textures/BinRed.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Floor16",
+			"Pos":	[-1.9448256492614746, -5.1042385101318359, -2.47955322265625e-005],
+			"Rot":	[0, -0, 91.85028076171875],
+			"Scale":	[2.4000000953674316, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Floor17",
+			"Pos":	[0.92766517400741577, -5.1829423904418945, -2.574920654296875e-005],
+			"Rot":	[0, -0, 88.922325134277344],
+			"Scale":	[2.4000000953674316, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Floor18",
+			"Pos":	[-0.49472886323928833, -1.5620599985122681, -6.198883056640625e-006],
+			"Rot":	[0, -0, -90.382820129394531],
+			"Scale":	[1.1000000238418579, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"BinBlue",
+			"Pos":	[-0.54926729202270508, -5.8951749801635742, -2.86102294921875e-006],
+			"Rot":	[0, 0, 0],
+			"Scale":	[1, 1, 1],
+			"Flags":	["Target"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"new(2)",
+					"Texture":	"Data/Textures/BinBlue.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Floor19",
+			"Pos":	[0.49944841861724854, -5.4640645980834961, -6.67572021484375e-006],
+			"Rot":	[0, -0, -17.211942672729492],
+			"Scale":	[0.89999997615814209, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Floor20",
+			"Pos":	[-1.6237866878509521, -5.4846420288085937, -4.76837158203125e-006],
+			"Rot":	[0, -0, 15.018916130065918],
+			"Scale":	[0.89999997615814209, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Floor21",
+			"Pos":	[4.1822500228881836, -0.12559199333190918, -9.5367431640625e-007],
+			"Rot":	[0, -0, 13.373883247375488],
+			"Scale":	[1.5344876050949097, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		},  {
+			"Name":	"Floor24",
+			"Pos":	[1.7017338275909424, -4.3842697143554687, -4.76837158203125e-006],
+			"Rot":	[0, -0, 13.373883247375488],
+			"Scale":	[1.534000039100647, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Floor25",
+			"Pos":	[2.2653062343597412, -5.5885200500488281, 2.86102294921875e-006],
+			"Rot":	[0, -0, 87.553108215332031],
+			"Scale":	[1.5344876050949097, 0.40000000596046448, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+		"Name":	"Floor26",
+			"Pos":	[3.8187198638916016, -5.5483188629150391, -1.9073486328125e-006],
+			"Rot":	[0, -0, 87.806838989257813],
+			"Scale":	[1.5344876050949097, 0.40000006556510925, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"BinGreen",
+			"Pos":	[3.0319497585296631, -5.8472871780395508, -3.814697265625e-006],
+			"Rot":	[0, 0, 0],
+			"Scale":	[1, 1, 1],
+			"Flags":	["Target"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"new(2)",
+					"Texture":	"Data/Textures/BinGreen.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}, {
+			"Name":	"Floor27",
+			"Pos":	[4.4712233543396, -2.5520985126495361, -1.9073486328125e-006],
+			"Rot":	[0, -0, 96.35809326171875],
+			"Scale":	[1.5344876050949097, 0.40000006556510925, 1],
+			"Flags":	["5"],
+			"Components":	[{
+					"Type":	"2D Collision Object",
+					"PrefabComponentID":	0,
+					"Offset":	[0, 0],
+					"PrimitiveType":	"Box",
+					"Static":	1,
+					"FixedRotation":	0,
+					"Density":	0,
+					"IsSensor":	0,
+					"Friction":	0.20000000298023224,
+					"Restitution":	0
+				}, {
+					"Type":	"Sprite",
+					"PrefabComponentID":	0,
+					"Material":	"Wood",
+					"Texture":	"Data/Textures/Wood.png",
+					"Shader":	"Shader_Texture",
+					"Color":	[255, 255, 255, 255]
+				}]
+		}]
+}

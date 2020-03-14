@@ -28,9 +28,13 @@ public:
             return nullptr;
         }
 
-        Type obj = m_Objects.back();
-        
-        m_Objects.pop_back();
+        //Type obj = m_Objects.back();
+        //
+        //m_Objects.pop_back();
+
+        Type obj = m_Objects.front();
+
+        m_Objects.erase(m_Objects.begin());
         
         return obj;
     }

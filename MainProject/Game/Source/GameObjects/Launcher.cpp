@@ -23,8 +23,8 @@ void Launcher::Update(float deltaTime)
 
     if (m_IsTouching == true)
     {
-        m_pPhysicsBody->ApplyTorque(100000);
-        m_IsTouching = false;
+        m_pPhysicsBody->ApplyTorque(18999);
     }
 
+        m_IsTouching = false;
 }

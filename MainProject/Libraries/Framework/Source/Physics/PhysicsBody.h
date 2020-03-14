@@ -18,6 +18,7 @@ namespace fw
         virtual void AddJoint(PhysicsBody* objectToAttach, Vector2 anchorPos) = 0;
         virtual void AddJointWithRestraint(PhysicsBody* objectToAttach, Vector2 anchorPos, float minAngle, float maxAngle) = 0;
         virtual void AddJointLocal(PhysicsBody* objectToAttach, Vector2 localanchorPosA, Vector2 localanchorPosB) = 0;
+        virtual void AddJointWithMotor(PhysicsBody* objectToAttach, Vector2 anchorPos, float motorspeed, float maxtorque) = 0;
 
         virtual Vector3 GetPosition() = 0;
         virtual b2Body* GetBody() = 0;

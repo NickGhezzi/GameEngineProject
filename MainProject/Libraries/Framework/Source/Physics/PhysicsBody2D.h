@@ -16,6 +16,7 @@ namespace fw
         virtual void AddJoint(PhysicsBody* objectToAttach, Vector2 anchorPos) override;
         virtual void AddJointWithRestraint(PhysicsBody* objectToAttach, Vector2 anchorPos, float minAngle, float maxAngle) override;
         virtual void AddJointLocal(PhysicsBody* objectToAttach, Vector2 localanchorPosA, Vector2 localanchorPosB) override;
+        virtual void AddJointWithMotor(PhysicsBody* objectToAttach, Vector2 anchorPos, float motorspeed, float maxtorque) override;
 
         virtual void ApplyForce(Vector3 force) override;
         virtual void ApplyTorque(float torque) override;

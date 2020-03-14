@@ -68,6 +68,9 @@ void Game::Init()
     m_pResourceManager->AddTexture("Ground", new Texture("Data/Textures/Ground.png"));
     m_pResourceManager->AddTexture("Water", new Texture("Data/Textures/Water.png"));
     m_pResourceManager->AddTexture("Box", new Texture("Data/Textures/Box.png"));
+    m_pResourceManager->AddTexture("Wood", new Texture("Data/Textures/Wood.png"));
+    m_pResourceManager->AddTexture("Peg", new Texture("Data/Textures/Peg.png"));
+    m_pResourceManager->AddTexture("Circle", new Texture("Data/Textures/Circle.png"));
 
     m_pResourceManager->AddTexture("BallRed", new Texture("Data/Textures/BallRed.png"));
     m_pResourceManager->AddTexture("BallGreen", new Texture("Data/Textures/BallGreen.png"));
@@ -95,6 +98,10 @@ void Game::Init()
     m_pResourceManager->AddMaterial("BinBlue", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("BinBlue")));
 
     m_pResourceManager->AddMaterial("Score", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("ScoreFont")));
+    m_pResourceManager->AddMaterial("Wood", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("Wood")));
+    m_pResourceManager->AddMaterial("Peg", new Material(m_pResourceManager->GetShader("Shader_Texture"), m_pResourceManager->GetTexture("Peg")));
+
+
 
     //meshes
     m_pResourceManager->AddMesh("PlayerMesh", new Mesh())->CreateBox(vec2(1, 1), vec2(0, 0));
@@ -125,6 +132,7 @@ void Game::Init()
     m_pTestScene->Init();
     m_pSortingGameScene->Init();
 
+    m_pSortingGameScene->LoadFromFile("Data/SortingGame.box2dscene");
     m_pScenePhysics->LoadFromFile("Data/Simple.box2dscene");
 
     m_pCurrentScene = m_pSortingGameScene;

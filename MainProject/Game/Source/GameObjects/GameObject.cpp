@@ -66,6 +66,11 @@ void GameObject::AddJointWithRestraint(GameObject* thingtoattach, vec2 pos, floa
     m_pPhysicsBody->AddJointWithRestraint(thingtoattach->GetBody(), pos, minangle, maxangle);
 }
 
+void GameObject::AddJointWithMotor(GameObject* objectToAttach, vec2 anchorPos, float motorspeed, float maxtorque)
+{
+    m_pPhysicsBody->AddJointWithMotor(objectToAttach->GetBody(), anchorPos, motorspeed, maxtorque);
+}
+
 void GameObject::Update(float deltaTime)
 {
     if(m_pPhysicsBody)

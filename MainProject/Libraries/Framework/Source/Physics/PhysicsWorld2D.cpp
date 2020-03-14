@@ -97,9 +97,10 @@ namespace fw
 
     PhysicsBody* PhysicsWorld2D::CreateBody(Vector3 pos, float angle, bool isStatic, void* pUserData)
     {
+        float Angle = angle * PI / 180;
         b2BodyDef bodydef;
         bodydef.position = b2Vec2(pos.x, pos.y);
-        bodydef.angle = angle;
+        bodydef.angle = -Angle;
         bodydef.type = isStatic ? b2_staticBody : b2_dynamicBody;
         bodydef.userData = pUserData;
         

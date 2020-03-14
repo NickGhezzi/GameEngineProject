@@ -55,6 +55,7 @@ public:
     void AddBox(vec3 size, float density, bool isSensor, float friction, float restitution);
     void AddJoint(GameObject* thingtoattach, vec2 pos);
     void AddJointWithRestraint(GameObject* thingtoattach, vec2 pos, float minangle, float maxangle);
+    void AddJointWithMotor(GameObject* objectToAttach, vec2 anchorPos, float motorspeed, float maxtorque);
 
     virtual void Update(float deltaTime);
     virtual void Draw(Camera* pCamera);

@@ -23,12 +23,16 @@ public:
     virtual void OnEvent(fw::Event* pEvent) override;
 
     void SpawnBall();
+    void RemoveBall();
     void Reset();
 private:
    // Camera* m_pCamera;
     ResourceManager* m_pResources;
-    ObjectPool<GameObject*> m_ObjectPool;
+    ObjectPool<GameObject*> m_BallPool;
     HUDElementsScene* m_HUDScene;
+
+    vec3 m_BallSpawnPos;
     int m_Score;
-    float m_BallSpawnTime;
+    float m_BallSpawnTimer;
+    const float m_BallSpawnTime = 5.0f;
 };

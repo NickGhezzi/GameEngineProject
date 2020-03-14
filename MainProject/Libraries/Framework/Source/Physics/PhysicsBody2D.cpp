@@ -54,6 +54,7 @@ namespace fw
         b2Vec2 anchor(anchorPos.x, anchorPos.y);
 
         jointdef.Initialize(m_pBody, objectToAttach->GetBody(), anchor);
+        
 
         m_pBody->GetWorld()->CreateJoint(&jointdef);
     }
@@ -80,6 +81,20 @@ namespace fw
         jointdef.bodyB = objectToAttach->GetBody();
         jointdef.localAnchorA = anchor1;
         jointdef.localAnchorB = anchor2;
+
+        m_pBody->GetWorld()->CreateJoint(&jointdef);
+    }
+
+    void PhysicsBody2D::AddJointWithMotor(PhysicsBody* objectToAttach, Vector2 anchorPos, float motorspeed, float maxtorque)
+    {
+        b2RevoluteJointDef jointdef;
+        b2Vec2 anchor(anchorPos.x, anchorPos.y);
+        jointdef.enableMotor = true;
+        jointdef.motorSpeed = motorspeed;
+        jointdef.maxMotorTorque = maxtorque;
+
+        jointdef.Initialize(m_pBody, objectToAttach->GetBody(), anchor);
+
 
         m_pBody->GetWorld()->CreateJoint(&jointdef);
     }

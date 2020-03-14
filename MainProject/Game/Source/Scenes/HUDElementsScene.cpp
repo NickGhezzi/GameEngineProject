@@ -30,8 +30,8 @@ void HUDElementsScene::Init()
     m_pHUDCamera->GetProjectionMatrix().CreateOrtho(0, 100, 0, 100, -1, 1);
     for (int i = 0; i < 10; i++)
     {
-        m_pScore[i] = new GameObject(this, m_pResources->GetMesh("Score" + std::to_string(i)), m_pResources->GetMaterial("Score"), vec3(1, 1, 1), vec3(0, 0, 0), vec3(-3, 4, 0));
-        m_pScore2[i] = new GameObject(this, m_pResources->GetMesh("Score" + std::to_string(i)), m_pResources->GetMaterial("Score"), vec3(1, 1, 1), vec3(0, 0, 0), vec3(-4, 4, 0));
+        m_pScore[i] = new GameObject(this, m_pResources->GetMesh("Score" + std::to_string(i)), m_pResources->GetMaterial("Score"), vec3(1, 1, 1), vec3(0, 0, 0), vec3(-5, 3, 0));
+        m_pScore2[i] = new GameObject(this, m_pResources->GetMesh("Score" + std::to_string(i)), m_pResources->GetMaterial("Score"), vec3(1, 1, 1), vec3(0, 0, 0), vec3(-6, 3, 0));
     }
 }
 
