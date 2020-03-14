@@ -111,11 +111,11 @@ void SortingGameScene::Init()
     AddObjectToScene(peg3);
     AddObjectToScene(anchor3);
 
-    GameObject* platform = new Launcher(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("Wood"), vec3(1.5, 0.5, 1), vec3(0, 0, 0), vec3(4.95, -5, 0));
+    GameObject* platform = new Launcher(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("Wood"), vec3(1.5, 0.5, 1), vec3(0, 0, 0), vec3(4.97, -5, 0));
     platform->CreateBody(false);
     platform->AddBox(vec3(1.5, 0.5, 1), 1, false, 0.2, 0);
 
-    GameObject* anchor4 = new GameObject(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("Peg"), anchorscale, vec3(0, -0, 0), vec3(3.83, -5.1, 0));
+    GameObject* anchor4 = new GameObject(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("Peg"), anchorscale, vec3(0, -0, -0.3), vec3(3.83, -5, 0));
     anchor4->CreateBody(true);
     anchor4->AddBox(anchorscale, 1, false, 0.2, 0);
 

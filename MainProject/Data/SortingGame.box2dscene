@@ -799,30 +799,5 @@
 					"Shader":	"Shader_Texture",
 					"Color":	[255, 255, 255, 255]
 				}]
-		}, {
-			"Name":	"Floor27",
-			"Pos":	[4.4712233543396, -2.5520985126495361, -1.9073486328125e-006],
-			"Rot":	[0, -0, 96.35809326171875],
-			"Scale":	[1.5344876050949097, 0.40000006556510925, 1],
-			"Flags":	["5"],
-			"Components":	[{
-					"Type":	"2D Collision Object",
-					"PrefabComponentID":	0,
-					"Offset":	[0, 0],
-					"PrimitiveType":	"Box",
-					"Static":	1,
-					"FixedRotation":	0,
-					"Density":	0,
-					"IsSensor":	0,
-					"Friction":	0.20000000298023224,
-					"Restitution":	0
-				}, {
-					"Type":	"Sprite",
-					"PrefabComponentID":	0,
-					"Material":	"Wood",
-					"Texture":	"Data/Textures/Wood.png",
-					"Shader":	"Shader_Texture",
-					"Color":	[255, 255, 255, 255]
-				}]
 		}]
 }
