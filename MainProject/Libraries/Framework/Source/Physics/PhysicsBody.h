@@ -13,7 +13,9 @@ namespace fw
         virtual void ApplyTorque(float torque) = 0;
 
         virtual void AddBox(Vector3 size, float density, bool isSensor, float friction, float restitution) = 0;
+        virtual void AddBoxWithFilter(Vector3 size, float density, bool isSensor, float friction, float restitution, uint16 categorybits, uint16 maskbits) = 0;
         virtual void AddCircle(float radius) = 0;
+        virtual void AddCircleWithFilter(float radius, uint16 categorybits, uint16 maskbits) = 0;
 
         virtual void AddJoint(PhysicsBody* objectToAttach, Vector2 anchorPos) = 0;
         virtual void AddJointWithRestraint(PhysicsBody* objectToAttach, Vector2 anchorPos, float minAngle, float maxAngle) = 0;

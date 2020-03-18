@@ -56,7 +56,7 @@ void SortingGameScene::Init()
         }
 
         ball->CreateBody(false);
-        ball->AddCircle(0.2);
+        ball->AddCircleWithFilter(0.2, PhysicsCategory_Player, PhysicsCategory_Environment);
         ball->GetBody()->SetActive(false);
         m_BallPool.AddObjectToPool(ball);
         ball->SetPoolWhereWeCameFrom(&m_BallPool);
@@ -68,7 +68,7 @@ void SortingGameScene::Init()
 
     GameObject* peg = new Peg(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("Peg"), vec3(1.5, 0.5, 1), vec3(0, -0, 6.65360689163208), vec3(1.9877731800079346, 3.7031209468841553, 3.814697265625e-006), m_pGame->m_pController);
     peg->CreateBody(false);
-    peg->AddBox(vec3(1.5, 0.5, 1), 1, false, 0.2, 0);
+    peg->AddBoxWithFilter(vec3(1.5, 0.5, 1), 1, false, 0.2, 0, PhysicsCategory_Environment, PhysicsCategory_Player);
     peg->GetBody()->SetGravity(0);
     GameObject* anchor = new GameObject(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("Peg"), anchorscale, vec3(0, -0, 6.65360689163208), vec3(2.9877731800079346, 3.5, 0));
     anchor->CreateBody(true);
@@ -80,7 +80,7 @@ void SortingGameScene::Init()
 
     GameObject* peg1 = new Peg(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("Peg"), vec3(1.5, 0.5, 1), vec3(0, -0, -91.819374084472656), vec3(-3.916886568069458, 1.7999534606933594, 0), m_pGame->m_pController);
     peg1->CreateBody(false);
-    peg1->AddBox(vec3(1.5, 0.5, 1), 1, false, 0.2, 0);
+    peg1->AddBoxWithFilter(vec3(1.5, 0.5, 1), 1, false, 0.2, 0, PhysicsCategory_Environment, PhysicsCategory_Player);
     peg1->GetBody()->SetGravity(0);
     GameObject* anchor1 = new GameObject(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("Peg"), anchorscale, vec3(0, -0, -91.819374084472656), vec3(-3.916886568069458,2.5, 0));
     anchor1->CreateBody(true);
@@ -91,7 +91,7 @@ void SortingGameScene::Init()
 
     GameObject* peg2 = new Peg(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("Peg"), vec3(1.5, 0.5, 1), vec3(0, -0, 3.5127899646759033), vec3(2.3433418273925781, -1.0894522666931152, 0), m_pGame->m_pController);
     peg2->CreateBody(false);
-    peg2->AddBox(vec3(1.5, 0.5, 1), 1, false, 0.2, 0);
+    peg2->AddBoxWithFilter(vec3(1.5, 0.5, 1), 1, false, 0.2, 0, PhysicsCategory_Environment, PhysicsCategory_Player);
     peg2->GetBody()->SetGravity(0);
     GameObject* anchor2 = new GameObject(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("Peg"), anchorscale, vec3(0, -0, -91.819374084472656), vec3(3.3433418273925781, -1.0894522666931152, 0));
     anchor2->CreateBody(true);
@@ -102,7 +102,7 @@ void SortingGameScene::Init()
 
     GameObject* peg3 = new Peg(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("Peg"), vec3(1.5, 0.5, 1), vec3(0, -0, 8.2547492980957031), vec3(-3.8054983615875244, -3.8725945949554443, 0), m_pGame->m_pController);
     peg3->CreateBody(false);
-    peg3->AddBox(vec3(1.5, 0.5, 1), 1, false, 0.2, 0);
+    peg3->AddBoxWithFilter(vec3(1.5, 0.5, 1), 1, false, 0.2, 0, PhysicsCategory_Environment, PhysicsCategory_Player);
     peg3->GetBody()->SetGravity(0);
     GameObject* anchor3 = new GameObject(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("Peg"), anchorscale, vec3(0, -0, -91.819374084472656), vec3(-2.8054983615875244, -3.8725945949554443, 0));
     anchor3->CreateBody(true);
@@ -113,7 +113,7 @@ void SortingGameScene::Init()
 
     GameObject* platform = new Launcher(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("Wood"), vec3(1.5, 0.5, 1), vec3(0, 0, 0), vec3(4.97, -5, 0));
     platform->CreateBody(false);
-    platform->AddBox(vec3(1.5, 0.5, 1), 1, false, 0.2, 0);
+    platform->AddBoxWithFilter(vec3(1.5, 0.5, 1), 1, false, 0.2, 0, PhysicsCategory_Environment, PhysicsCategory_Player);
 
     GameObject* anchor4 = new GameObject(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("Peg"), anchorscale, vec3(0, -0, -0.3), vec3(3.83, -5, 0));
     anchor4->CreateBody(true);
@@ -124,14 +124,14 @@ void SortingGameScene::Init()
 
     GameObject* trigger = new TriggerBox(this, vec3(0.5, 0.5, 0.5), vec3(0, 0, 0), vec3(5.25, -4.85, 0));
     trigger->CreateBody(true);
-    trigger->AddBox(vec3(0.5, 0.5, 0.5), 1, true, 0.2, 0);
+    trigger->AddBoxWithFilter(vec3(0.5, 0.5, 0.5), 1, true, 0.2, 0, PhysicsCategory_Environment, PhysicsCategory_Player);
     AddObjectToScene(platform);
     AddObjectToScene(trigger);
     AddObjectToScene(anchor4);
 
     GameObject* spinner = new GameObject(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("Wood"), vec3(1.1,1.1,1.1), vec3(0, 0, 0), vec3(-.5, -3.75, 0));
     spinner->CreateBody(false);
-    spinner->AddBox(vec3(1.1, 1.1, 1.1), 1, false, 0.2, 0);
+    spinner->AddBoxWithFilter(vec3(1.1, 1.1, 1.1), 1, false, 0.2, 0, PhysicsCategory_Environment, PhysicsCategory_Player);
 
     GameObject* anchor5 = new GameObject(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial("Peg"), anchorscale, vec3(0, -0, 0), vec3(-.5, -2, 0));
     anchor5->CreateBody(true);
@@ -277,7 +277,7 @@ void SortingGameScene::LoadFromFile(const char* filename)
 
             GameObject* pGround = new GameObject(this, m_pResources->GetMesh("PlayerMesh"), m_pResources->GetMaterial(material), vscale, vrot, vpos);
             pGround->CreateBody(isStatic);
-            pGround->AddBox(vscale, density, issensor, friction, restitution);
+            pGround->AddBoxWithFilter(vscale, density, issensor, friction, restitution, PhysicsCategory_Environment, PhysicsCategory_Player);
             m_pGameObjects.push_back(pGround);
         }
         if (name == "BinRed")
@@ -301,7 +301,7 @@ void SortingGameScene::LoadFromFile(const char* filename)
             vscale -= 0.3;
             GameObject* bin = new Bin(this, m_pResources->GetMesh("BinMesh"), m_pResources->GetMaterial("BinRed"), vscale, vrot, vpos, ColorType::Red);
             bin->CreateBody(isStatic);
-            bin->AddBox(vscale, density, issensor, friction, restitution);
+            bin->AddBoxWithFilter(vscale, density, issensor, friction, restitution, PhysicsCategory_Environment, PhysicsCategory_Player);
             m_pGameObjects.push_back(bin);
         }
         if (name == "BinGreen")
@@ -324,7 +324,7 @@ void SortingGameScene::LoadFromFile(const char* filename)
             vscale -= 0.3;
             GameObject* bin = new Bin(this, m_pResources->GetMesh("BinMesh"), m_pResources->GetMaterial("BinGreen"), vscale, vrot, vpos, ColorType::Green);
             bin->CreateBody(isStatic);
-            bin->AddBox(vscale, density, issensor, friction, restitution);
+            bin->AddBoxWithFilter(vscale, density, issensor, friction, restitution, PhysicsCategory_Environment, PhysicsCategory_Player);
             m_pGameObjects.push_back(bin);
         }
         if (name == "BinBlue")
@@ -347,7 +347,7 @@ void SortingGameScene::LoadFromFile(const char* filename)
             vscale -= 0.3;
             GameObject* bin = new Bin(this, m_pResources->GetMesh("BinMesh"), m_pResources->GetMaterial("BinBlue"), vscale, vrot, vpos, ColorType::Blue);
             bin->CreateBody(isStatic);
-            bin->AddBox(vscale, density, issensor, friction, restitution);
+            bin->AddBoxWithFilter(vscale, density, issensor, friction, restitution, PhysicsCategory_Environment, PhysicsCategory_Player);
             m_pGameObjects.push_back(bin);
         }
     }

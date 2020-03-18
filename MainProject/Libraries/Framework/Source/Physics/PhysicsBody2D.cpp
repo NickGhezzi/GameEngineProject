@@ -32,6 +32,25 @@ namespace fw
         m_pBody->CreateFixture(&fixtureDef);
     }
 
+    void PhysicsBody2D::AddBoxWithFilter(Vector3 size, float density, bool isSensor, float friction, float restitution, uint16 categorybits, uint16 maskbits)
+    {
+        b2PolygonShape boxShape;
+        boxShape.SetAsBox(size.x / 2, size.y / 2);
+
+        b2FixtureDef fixtureDef;
+        fixtureDef.shape = &boxShape;
+        fixtureDef.density = density;
+        fixtureDef.isSensor = isSensor;
+        fixtureDef.friction = friction;
+        fixtureDef.restitution = restitution;
+
+        fixtureDef.filter.categoryBits = categorybits;
+        fixtureDef.filter.maskBits = maskbits;
+
+
+        m_pBody->CreateFixture(&fixtureDef);
+    }
+
     void PhysicsBody2D::AddCircle(float radius)
     {
         b2CircleShape circleShape;
@@ -44,6 +63,25 @@ namespace fw
         fixtureDef.isSensor = false;
         fixtureDef.friction = 0.2f;
         fixtureDef.restitution = 0.0f;
+
+        m_pBody->CreateFixture(&fixtureDef);
+    }
+
+    void PhysicsBody2D::AddCircleWithFilter(float radius, uint16 categorybits, uint16 maskbits)
+    {
+        b2CircleShape circleShape;
+        circleShape.m_p.Set(0.0f, 0.0f);
+        circleShape.m_radius = radius;
+
+        b2FixtureDef fixtureDef;
+        fixtureDef.shape = &circleShape;
+        fixtureDef.density = 1;
+        fixtureDef.isSensor = false;
+        fixtureDef.friction = 0.2f;
+        fixtureDef.restitution = 0.0f;
+
+        fixtureDef.filter.categoryBits = categorybits;
+        fixtureDef.filter.maskBits = maskbits;
 
         m_pBody->CreateFixture(&fixtureDef);
     }

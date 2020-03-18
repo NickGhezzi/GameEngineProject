@@ -15,6 +15,12 @@ enum class ColorType
     Blue
 };
 
+enum PhysicsCategories 
+{
+    PhysicsCategory_Default = 0x0001, 
+    PhysicsCategory_Environment = 0x0002, 
+    PhysicsCategory_Player = 0x0004, 
+};
 
 class GameObject
 {
@@ -35,7 +41,7 @@ protected:
     std::string m_Name;
 public:
     //TODO:: Add std::string tag or name to constructor
-    GameObject(BaseScene* m_pScene,Mesh* pMesh, Material* pMat, vec3 scale, vec3 rotation, vec3 position);
+    GameObject(BaseScene* m_pScene, Mesh* pMesh, Material* pMat, vec3 scale, vec3 rotation, vec3 position);
 
     ~GameObject();
 
@@ -52,7 +58,9 @@ public:
     void CreateBody(bool isStatic);
     fw::PhysicsBody* GetBody();
     void AddCircle(float radius);
+    void AddCircleWithFilter(float radius, uint16 categorybits, uint16 maskbits);
     void AddBox(vec3 size, float density, bool isSensor, float friction, float restitution);
+    void AddBoxWithFilter(vec3 size, float density, bool isSensor, float friction, float restitution, uint16 categorybits, uint16 maskbits);
     void AddJoint(GameObject* thingtoattach, vec2 pos);
     void AddJointWithRestraint(GameObject* thingtoattach, vec2 pos, float minangle, float maxangle);
     void AddJointWithMotor(GameObject* objectToAttach, vec2 anchorPos, float motorspeed, float maxtorque);

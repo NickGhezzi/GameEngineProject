@@ -11,7 +11,9 @@ namespace fw
         virtual ~PhysicsBody2D();
 
         virtual void AddBox(Vector3 size, float density, bool isSensor, float friction, float restitution) override;
+        virtual void AddBoxWithFilter(Vector3 size, float density, bool isSensor, float friction, float restitution, uint16 categorybits, uint16 maskbits) override;
         virtual void AddCircle(float radius) override;
+        virtual void AddCircleWithFilter(float radius, uint16 categorybits, uint16 maskbits) override;
 
         virtual void AddJoint(PhysicsBody* objectToAttach, Vector2 anchorPos) override;
         virtual void AddJointWithRestraint(PhysicsBody* objectToAttach, Vector2 anchorPos, float minAngle, float maxAngle) override;

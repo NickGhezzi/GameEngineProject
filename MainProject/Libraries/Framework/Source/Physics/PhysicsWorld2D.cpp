@@ -22,17 +22,25 @@ namespace fw
 
     void Box2DContactListener::BeginContact(b2Contact* contact)
     {
-        void* pUserDataA = contact->GetFixtureA()->GetBody()->GetUserData();
-        void* pUserDataB = contact->GetFixtureB()->GetBody()->GetUserData();
+        uint16 catA = contact->GetFixtureA()->GetBody()->GetFixtureList()->GetFilterData().categoryBits;
+        uint16 maskA = contact->GetFixtureA()->GetBody()->GetFixtureList()->GetFilterData().maskBits;
+        uint16 catB = contact->GetFixtureB()->GetBody()->GetFixtureList()->GetFilterData().categoryBits;
+        uint16 maskB = contact->GetFixtureB()->GetBody()->GetFixtureList()->GetFilterData().maskBits;
 
-        b2WorldManifold world;
+        if ((catA & maskB) != 0 && (catB & maskA) != 0)
+        {
+            void* pUserDataA = contact->GetFixtureA()->GetBody()->GetUserData();
+            void* pUserDataB = contact->GetFixtureB()->GetBody()->GetUserData();
 
-        contact->GetWorldManifold(&world);
+            b2WorldManifold world;
 
-        Vector2 normal(world.normal.x, world.normal.y);
+            contact->GetWorldManifold(&world);
 
-        CollisionEvent* pEvent = new CollisionEvent(CollisionEventType::OnHit, pUserDataA, pUserDataB, normal);
-        m_pFramework->GetEventManager()->AddEventToQueue(pEvent);
+            Vector2 normal(world.normal.x, world.normal.y);
+
+            CollisionEvent* pEvent = new CollisionEvent(CollisionEventType::OnHit, pUserDataA, pUserDataB, normal);
+            m_pFramework->GetEventManager()->AddEventToQueue(pEvent);
+        }
     }
 
     void Box2DContactListener::EndContact(b2Contact* contact)
@@ -46,7 +54,7 @@ namespace fw
 
     PhysicsWorld2D::PhysicsWorld2D(Framework* pFramework)
     {
-       m_pWorld = new b2World(b2Vec2(0, -9.8));
+        m_pWorld = new b2World(b2Vec2(0, -9.8));
         //m_pWorld = new b2World(b2Vec2(0, 0));
 
         m_pShader = new ShaderProgram("Data/Shaders/Box2DDebug.vert", "Data/Shaders/Box2DDebug.frag");
@@ -71,9 +79,9 @@ namespace fw
     void PhysicsWorld2D::Update(float deltaTime)
     {
         m_UnusedTime += deltaTime;
-        float timeStep = 1 / 60.0;  
-        int velocityIterations = 8;  
-        int positionIterations = 3;  
+        float timeStep = 1 / 60.0;
+        int velocityIterations = 8;
+        int positionIterations = 3;
         while (m_UnusedTime > 1 / 60.0f)
         {
             m_pWorld->Step(timeStep, velocityIterations, positionIterations);
@@ -86,10 +94,10 @@ namespace fw
         m_pDebugDraw->SetViewProjMatrices(view, proj);
         m_pWorld->DrawDebugData();
 
-        int32 flags = b2Draw::e_shapeBit; 
-        flags |= b2Draw::e_jointBit; 
-        flags |= b2Draw::e_centerOfMassBit; 
-        flags |= b2Draw::e_aabbBit; 
+        int32 flags = b2Draw::e_shapeBit;
+        flags |= b2Draw::e_jointBit;
+        flags |= b2Draw::e_centerOfMassBit;
+        flags |= b2Draw::e_aabbBit;
         flags |= b2Draw::e_pairBit;
 
         m_pDebugDraw->SetFlags(flags);
@@ -103,7 +111,7 @@ namespace fw
         bodydef.angle = -Angle;
         bodydef.type = isStatic ? b2_staticBody : b2_dynamicBody;
         bodydef.userData = pUserData;
-        
+
 
         b2Body* pBody = m_pWorld->CreateBody(&bodydef);
         PhysicsBody* pPhysicsBody = new PhysicsBody2D(pBody);

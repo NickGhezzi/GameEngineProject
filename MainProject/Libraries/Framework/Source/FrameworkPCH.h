@@ -38,7 +38,9 @@
 
 #include "Math/Vector.h"
 #include "Math/MyMatrix.h"
+
 typedef fw::MyMatrix mat4;
+typedef unsigned short uint16;
 
 #include "Physics/PhysicsBody.h"
 #include "Physics/PhysicsBody2D.h"

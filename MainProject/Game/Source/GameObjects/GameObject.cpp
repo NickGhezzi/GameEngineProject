@@ -51,9 +51,19 @@ void GameObject::AddCircle(float radius)
     m_pPhysicsBody->AddCircle(radius);
 }
 
+void GameObject::AddCircleWithFilter(float radius, uint16 categorybits, uint16 maskbits)
+{
+    m_pPhysicsBody->AddCircleWithFilter(radius, categorybits, maskbits);
+}
+
 void GameObject::AddBox(vec3 size, float density, bool isSensor, float friction, float restitution)
 {
     m_pPhysicsBody->AddBox(size, density, isSensor, friction, restitution);
+}
+
+void GameObject::AddBoxWithFilter(vec3 size, float density, bool isSensor, float friction, float restitution, uint16 categorybits, uint16 maskbits)
+{
+    m_pPhysicsBody->AddBoxWithFilter(size, density, isSensor, friction, restitution, categorybits, maskbits);
 }
 
 void GameObject::AddJoint(GameObject* thingtoattach, vec2 pos)
