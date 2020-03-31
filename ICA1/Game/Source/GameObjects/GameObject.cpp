@@ -39,14 +39,14 @@ void GameObject::Update(float deltaTime)
     }
 }
 
-void GameObject::Draw(Camera* pCamera)
+void GameObject::Draw(Camera* pCamera, vec3 lightcolor)
 {
     if( m_pMesh != nullptr )
     {
         mat4 worldMat;
         worldMat.CreateSRT( m_Scale, m_Rotation, m_Position );
 
-        m_pMesh->Draw(pCamera, m_pShader, &worldMat, m_pTexture);
+        m_pMesh->Draw(pCamera, m_pShader, &worldMat, m_pTexture, lightcolor);
     }
 }
 

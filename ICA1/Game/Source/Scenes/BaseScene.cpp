@@ -12,6 +12,7 @@ BaseScene::BaseScene(Game* pGame)
 , m_pPhysicsWorld( nullptr )
 , m_pCamera( nullptr )
 {
+    m_LightColor.Set(1, 1, 1);
 }
 
 BaseScene::~BaseScene()
@@ -72,13 +73,19 @@ void BaseScene::Update(float deltaTime)
     }
 
     m_pCamera->Update( deltaTime );
+
+    ImGui::Begin("Lights");
+    ImGui::ColorEdit3("Red", &m_LightColor.x);
+    ImGui::End();
+
 }
 
 void BaseScene::Draw()
 {
+   
     for( GameObject* object : m_Objects )
     {
-        object->Draw( m_pCamera );
+        object->Draw( m_pCamera, m_LightColor);
     }
 }
 

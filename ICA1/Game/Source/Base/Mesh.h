@@ -23,7 +23,7 @@ public:
 
     void Init(VertexFormat* pVerts, int numVerts, unsigned int* pIndices, int numIndices, GLenum primitiveType, GLenum usage);
     void Init(VertexFormat* pVerts, unsigned int numVerts, GLenum primitiveType);
-    void Draw(Camera* pCamera, fw::ShaderProgram* pShader, mat4* worldMat, fw::Texture* pTexture);
+    void Draw(Camera* pCamera, fw::ShaderProgram* pShader, mat4* worldMat, fw::Texture* pTexture, vec3 lightcolor);
 
     void CreateBox(vec2 size, vec2 offset);
     void CreateCube(vec3 size, vec3 offset);

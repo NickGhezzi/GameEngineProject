@@ -12,17 +12,20 @@ uniform mat4 u_ProjMat;
 varying vec2 v_UV;
 varying vec4 v_Color;
 varying vec3 v_Normal;
+varying vec3 v_WorldSpacePosition;
 
 void main()
 {
-    vec4 pos = vec4( a_Position, 1 );
-    pos = u_WorldMat * pos;
-    pos = u_ViewMat * pos;
-    pos = u_ProjMat * pos;
+    vec4 objectSpacePos = vec4( a_Position, 1 );
+    vec4 worldSpacePos = u_WorldMat * objectSpacePos;
+    vec4 viewSpacePos = u_ViewMat * worldSpacePos;
+    vec4 clipSpacePos = u_ProjMat * viewSpacePos;
 
-    gl_Position = pos;
+    gl_Position = clipSpacePos;
 
     v_UV = a_UV;
 	v_Color = a_Color;
-	v_Normal = a_Normal;
+	v_Normal = (u_WorldMat * vec4(a_Normal, 0)).xyz;
+    //v_Normal = (u_NormalMat * vec4(a_Normal, 0)).xyz;
+    v_WorldSpacePosition = worldSpacePos.xyz;
 }

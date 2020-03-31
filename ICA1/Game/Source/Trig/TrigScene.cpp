@@ -40,6 +40,9 @@ void TrigScene::Init()
     {
         // Ground
         AddObjectToScene( new GameObject( this, "Ground", vec3(0,-0.5f,0), vec3(-90,0,0), vec3(15,15,1), pResources->GetMesh( "Box" ), pResources->GetShader( "Texture" ), pResources->GetTexture( "Trig_Ground" ) ) );
+        AddObjectToScene(new GameObject(this, "Back", vec3(0, 0, 5), vec3(0, 0, 0), vec3(15, 15, 1), pResources->GetMesh("Box"), pResources->GetShader("Texture"), pResources->GetTexture("Trig_Ground")));
+        AddObjectToScene(new GameObject(this, "Left", vec3(-5, 0, 0), vec3(0, 90, 0), vec3(15, 15, 1), pResources->GetMesh("Box"), pResources->GetShader("Texture"), pResources->GetTexture("Trig_Ground")));
+        AddObjectToScene(new GameObject(this, "Right", vec3(5,0, 0), vec3(0, -90, 0), vec3(15, 15, 1), pResources->GetMesh("Box"), pResources->GetShader("Texture"), pResources->GetTexture("Trig_Ground")));
 
         // Player
         TrigPlayer* pPlayer = new TrigPlayer( this, "Player", vec3(0,0,0), vec3(0,0,0), vec3(1,1,1), pResources->GetMesh( "Cube" ), pResources->GetShader( "Texture" ), pResources->GetTexture( "Trig_Player" ) );
@@ -79,5 +82,5 @@ void TrigScene::Draw()
     //dont do this make hudcamera class
     m_pHUDCamera->GetView()->SetIdentity();
     m_pHUDCamera->GetProj()->CreateOrtho(0, 100, 0, 100, -1, 1);
-    m_pHUDObject->Draw(m_pHUDCamera);
+    m_pHUDObject->Draw(m_pHUDCamera, vec3(1,1,1));
 }

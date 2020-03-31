@@ -23,6 +23,13 @@ struct VertexFormat
         uv = nuv;
         normal.Set(0, 1, 0);
     }
+    VertexFormat(vec3 npos, ColorByte ncolor, vec2 nuv, vec3 nnor)
+    {
+        pos = npos;
+        color = ncolor;
+        uv = nuv;
+        normal = nnor;
+    }
 };
 
 #endif //__VertexFormat_H__

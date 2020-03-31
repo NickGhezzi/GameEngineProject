@@ -41,7 +41,7 @@ public:
     void SetScale(vec3 scale) { m_Scale = scale; }
 
     virtual void Update(float deltaTime);
-    virtual void Draw(Camera* pCamera);
+    virtual void Draw(Camera* pCamera, vec3 lightcolor);
 
     virtual void Reset();
     void RemoveFromSceneAndReturnToPool();

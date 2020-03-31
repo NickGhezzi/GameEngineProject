@@ -14,7 +14,7 @@ protected:
     Camera* m_pCamera;
 
     std::vector<GameObject*> m_Objects;
-
+    vec3 m_LightColor;
 public:
     BaseScene(Game* pGame);
     virtual ~BaseScene();

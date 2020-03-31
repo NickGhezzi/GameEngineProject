@@ -54,7 +54,7 @@ void SetUniformMatrix(ShaderProgram* pShader, char* name, mat4* pMat)
     }
 }
 
-void Mesh::Draw(Camera* pCamera, ShaderProgram* pShader, mat4* worldMat, fw::Texture* pTexture)
+void Mesh::Draw(Camera* pCamera, ShaderProgram* pShader, mat4* worldMat, fw::Texture* pTexture, vec3 lightcolor)
 {
     assert( m_PrimitiveType != -1 );
     assert( m_NumVerts != 0 );
@@ -91,6 +91,7 @@ void Mesh::Draw(Camera* pCamera, ShaderProgram* pShader, mat4* worldMat, fw::Tex
         glEnableVertexAttribArray(locNormal);
     }
 
+
     // Enable shader and setup uniforms.
     glUseProgram( pShader->GetProgram() );
 
@@ -116,6 +117,24 @@ void Mesh::Draw(Camera* pCamera, ShaderProgram* pShader, mat4* worldMat, fw::Tex
         glUniform1i( uTexture, textureUnit );
     }
 
+    GLint locLight = glGetUniformLocation(pShader->GetProgram(), "u_LightColor");
+    if (locLight != -1)
+    {
+        glUniform3f(locLight, lightcolor.x, lightcolor.y, lightcolor.x);
+    }
+
+    GLint locLightPos = glGetUniformLocation(pShader->GetProgram(), "u_LightPos");
+    if (locLightPos != -1)
+    {
+        glUniform3f(locLightPos, 0.0f, 2.0f, 0.0f);
+    }
+
+    GLint locCamerapos = glGetUniformLocation(pShader->GetProgram(), "u_CameraPos");
+    if (locCamerapos != -1)
+    {
+        glUniform3f(locCamerapos, pCamera->GetPosition().x, pCamera->GetPosition().y, pCamera->GetPosition().z);
+    }
+
     // Draw.
     if( m_NumIndices == 0 )
     {
@@ -134,10 +153,10 @@ void Mesh::CreateBox(vec2 size, vec2 offset)
 
     VertexFormat vertexAttributes[] =
     {
-        VertexFormat( vec2( -size.x/2, -size.y/2 ) + offset, ColorByte( 255, 0, 0, 255 ), vec2( 0.0f, 0.0f ) ),
-        VertexFormat( vec2( -size.x/2,  size.y/2 ) + offset, ColorByte( 0, 255, 0, 255 ), vec2( 0.0f, 1.0f ) ),
-        VertexFormat( vec2(  size.x/2,  size.y/2 ) + offset, ColorByte( 0, 0, 255, 255 ), vec2( 1.0f, 1.0f ) ),
-        VertexFormat( vec2(  size.x/2, -size.y/2 ) + offset, ColorByte( 255, 255, 255, 255 ), vec2( 1.0f, 0.0f ) ),
+        VertexFormat( vec2( -size.x/2, -size.y/2 ) + offset, ColorByte( 255, 0, 0, 255 ), vec2( 0.0f, 0.0f ), vec3(0,0, -1) ),
+        VertexFormat( vec2( -size.x/2,  size.y/2 ) + offset, ColorByte( 0, 255, 0, 255 ), vec2( 0.0f, 1.0f ), vec3(0,0, -1)),
+        VertexFormat( vec2(  size.x/2,  size.y/2 ) + offset, ColorByte( 0, 0, 255, 255 ), vec2( 1.0f, 1.0f ) , vec3(0,0, -1)),
+        VertexFormat( vec2(  size.x/2, -size.y/2 ) + offset, ColorByte( 255, 255, 255, 255 ), vec2( 1.0f, 0.0f ), vec3(0,0, -1)),
     };
 
     unsigned int indices[6] = { 0,2,1, 0,3,2 };
