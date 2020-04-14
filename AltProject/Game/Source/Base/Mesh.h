@@ -28,6 +28,7 @@ public:
     
     void SetupAttributes(Material* pMaterial);
     void SetupUniforms(Material* pMaterial, mat4* worldMatrix, Camera* pCamera, vec2 uvScale, vec2 uvOffset);
+    void SetupUniforms(Material* pMaterial, mat4* worldMatrix, Camera* pCamera, vec2 uvScale, vec2 uvOffset, vec3 color);
     void Draw(Material* pMaterial);
 
     void CreateBox(vec2 size, vec2 offset);

@@ -23,6 +23,11 @@ void GameObjectTargetBonus::Update(float deltaTime)
 
     float speed = 90;
 
+    if (m_Rotation.y >= 360 || m_Rotation.y <= -360)
+    {
+        m_Rotation.y = 0.0f;
+    }
+
     GameObject* pPlayer = m_pScene->GetGameObjectByName( "Player" );
     if( pPlayer )
     {

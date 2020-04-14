@@ -157,6 +157,45 @@ void Mesh::SetupUniforms(Material* pMaterial, mat4* worldMatrix, Camera* pCamera
     }
 }
 
+void Mesh::SetupUniforms(Material* pMaterial, mat4* worldMatrix, Camera* pCamera, vec2 uvScale, vec2 uvOffset, vec3 color)
+{
+    assert(pMaterial != nullptr);
+    assert(pMaterial->GetShader() != nullptr);
+    assert(pMaterial->GetShader()->GetProgram() != 0);
+    assert(pCamera != nullptr);
+
+    GLuint shader = pMaterial->GetShader()->GetProgram();
+
+    // Set up shader.
+    glUseProgram(shader);
+
+    // Set up uniforms.
+    SetUniformMatrix(shader, "u_WorldMatrix", worldMatrix);
+    SetUniformMatrix(shader, "u_ViewMatrix", pCamera->GetView());
+    SetUniformMatrix(shader, "u_ProjectionMatrix", pCamera->GetProj());
+
+    if (uvScale.x < 1)
+        int bp = 1;
+    SetUniform2f(shader, "u_UVScale", uvScale);
+    SetUniform2f(shader, "u_UVOffset", uvOffset);
+
+    SetUniform1f(shader, "u_Time", (float)GetSystemTimeSinceGameStart());
+    SetUniform3f(shader, "u_Color", color);
+    // Setup our texture.
+    Texture* pTexture = pMaterial->GetTexture();
+    if (pTexture != nullptr)
+    {
+        int textureUnitIndex = 0;
+        glActiveTexture(GL_TEXTURE0 + textureUnitIndex);
+        glBindTexture(GL_TEXTURE_2D, pTexture->GetTextureID());
+        GLint loc = glGetUniformLocation(shader, "u_TextureSampler");
+        if (loc != -1)
+        {
+            glUniform1i(loc, textureUnitIndex);
+        }
+    }
+}
+
 void Mesh::Draw(Material* pMaterial)
 {
     assert( m_PrimitiveType != -1 );

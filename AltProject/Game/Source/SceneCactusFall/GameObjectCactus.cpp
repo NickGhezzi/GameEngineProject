@@ -61,6 +61,11 @@ void GameObjectCactus::Update(float deltaTime)
                 if (dis > min&& dis < max)
                 {
                     static_cast<SceneCactusFall*>(m_pScene)->SetScore(ringValues[i]);
+                    GameObjectTarget* bonus = (GameObjectTarget*)static_cast<SceneCactusFall*>(m_pScene)->GetGameObjectByName("Ring" + std::to_string(i + 1));
+                    if (bonus)
+                    {
+                        bonus->SetColor(vec3(1, 1, 1));
+                    }
                 }
                 else if (dis > 10)
                 {
@@ -73,15 +78,28 @@ void GameObjectCactus::Update(float deltaTime)
             float playerAngle = (atan2(playerDir.y, playerDir.x)) * 180/PI;
             GameObjectTargetBonus* bonus = (GameObjectTargetBonus*)static_cast<SceneCactusFall*>(m_pScene)->GetGameObjectByName("BonusArc");
             m_angle = playerAngle;
+            if (m_angle < 0)
+            {
+                m_angle += 360;
+            }
             m_angle2 = bonus->GetRotation().y;
-            if(playerAngle > (bonus->GetRotation().y - 30.0f) && playerAngle < (bonus->GetRotation().y + 30.0f))
+            if (m_angle2 < 0)
+            {
+                m_angle2 += 360;
+            }
+            if(m_angle > (m_angle2 - 30.0f) && m_angle < (m_angle2 + 30.0f))
             {
                 // TODO_CactusFall: Figure out if the player landed in the "BonusArc" and award an additional 4000 points.
                 //         The "BonusArc" is a 60 degree arc.
                 //         It starts at 0 degrees and goes from +30 to -30 degrees.
                 //         Ensure the Bonus Arc works in all conditions. Rotate it both clockwise and counter-clockwise multiple times.
                 //         Use the debug keys (Q,E,Z,C) to rotate the arc.
-                static_cast<SceneCactusFall*>(m_pScene)->SetScore(4000);
+                
+                if (m_dis <= 10)
+                {
+                    static_cast<SceneCactusFall*>(m_pScene)->SetScore(4000);
+                }
+
             }
 
             {

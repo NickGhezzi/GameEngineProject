@@ -19,7 +19,7 @@ inline float randFromNegativeOneToOne()
 SceneCactusFall::SceneCactusFall(Game* pGame)
 : BaseScene( pGame )
 {
-    m_Score = 2975;
+    m_Score = 0;
     m_TestMode = false;
 }
 
@@ -40,7 +40,7 @@ void SceneCactusFall::Init()
 
     // Create meshes.
     pResources->AddMesh( "Sphere",     new Mesh() )->CreateOBJ( "Data/SceneCactusFall/sphere.obj", 1.0f );
-    pResources->AddMesh( "Cactus",     new Mesh() )->CreateOBJ( "Data/SceneCactusFall/sphere.obj", 0.4f );
+    pResources->AddMesh( "Cactus",     new Mesh() )->CreateOBJ( "Data/SceneCactusFall/cactus.obj", 0.4f );
 
     pResources->AddMesh( "Ground",     new Mesh() )->CreatePlane( vec2(800,800), ivec2(2,2), vec2(400,400), 5 );
     pResources->AddMesh( "NumberQuad", new Mesh() )->CreatePlane( vec2(1,1), ivec2(2,2), vec2(0,0), 1 );
